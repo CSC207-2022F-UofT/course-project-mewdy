@@ -13,4 +13,27 @@ public class Metric {
         this.upperBound = upperBound;
         this.lowerBound = lowerBound;
     }
+
+    public ArrayList<DataPoint> getDataPoints() {
+        return this.dataPointList;
+    }
+
+    public void addDataPoint(DataPoint entry) {
+        this.dataPointList.add(entry);
+    }
+    public void popDataPoint() {
+        this.dataPointList.remove(-1);
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public double getUpperBound() {
+        return this.upperBound;
+    }
+
+    public double getLowerBound() {
+        return this.lowerBound;
+    }
 }
