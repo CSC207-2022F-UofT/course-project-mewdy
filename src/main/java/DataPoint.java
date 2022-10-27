@@ -16,18 +16,22 @@ public class DataPoint {
     }
 
     public double getValue() {
+        //returns the value of the DataPoint
         return this.value;
     }
 
     public Date getDate() {
+        //returns the date of the DataPoint
         return this.date;
     }
 
     public String getMetricName() {
+        //returns the name of the Metric containing this dataPoint
         return this.metricName;
     }
 
     public String getTextEntry() {
+        //returns the textEntry of this DataPoint
         return this.textEntry;
     }
 }
