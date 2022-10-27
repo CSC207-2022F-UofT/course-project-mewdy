@@ -32,5 +32,22 @@ public class MetricStorage {
         }
     }
 
+    public ArrayList<Metric> getMetricList() {
+        //getter method for returning a list of Metrics
+        return this.metricList;
+    }
+
+    public ArrayList<DataPoint> getDataPointList(String metricName) {
+        //getter method that returns a list of DataPoints from a Metric in metricList
+        ArrayList<DataPoint> returnValue = null;
+        for (Metric metric : this.metricList) {
+            if (Objects.equals(metric.getName(), metricName)) {
+                returnValue = metric.getDataPoints();
+                break;
+            }
+        }
+        return returnValue;
+    }
+
 
 }
