@@ -10,6 +10,13 @@ public class Metric {
     public Metric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound) {
         //this is a Metric constructor that takes in an ArrayList of DataPoints in addition to the other
         //instance variables
+        if (name.equalsIgnoreCase("sleep")) {
+            upperBound = 24;
+            lowerBound = 0;
+        } else if (name.equalsIgnoreCase("mood")) {
+            upperBound = 10;
+            lowerBound = 0;
+        }
         this.name = name;
         this.dataPointList = dataPointList;
         this.upperBound = upperBound;
@@ -18,6 +25,13 @@ public class Metric {
 
     public Metric(String name, double upperBound, double lowerBound) {
         //this is an overloaded Metric constructor for when we want to initialize a new empty Metric
+        if (name.equalsIgnoreCase("sleep")) {
+            upperBound = 24;
+            lowerBound = 0;
+        } else if (name.equalsIgnoreCase("mood")) {
+            upperBound = 10;
+            lowerBound = 0;
+        }
         this.name = name;
         this.dataPointList = new ArrayList<DataPoint>();
         this.upperBound = upperBound;

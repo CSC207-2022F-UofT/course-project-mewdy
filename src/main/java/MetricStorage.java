@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MetricStorage {
+public class MetricStorage implements MetricStorageInterface{
 
     private ArrayList<Metric> metricList;
 
