@@ -1,3 +1,5 @@
+package Entities;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -15,7 +17,7 @@ public class DataPoint {
         this.textEntry = textEntry;
     }
 
-    //overload constructor for creating DataPoint at current date time
+    //overload constructor for creating Entities.DataPoint at current date time
     public DataPoint(double value, String metricName, String textEntry) {
         this.value = value;
         this.date = new Date();
@@ -24,22 +26,22 @@ public class DataPoint {
     }
 
     public double getValue() {
-        //returns the value of the DataPoint
+        //returns the value of the Entities.DataPoint
         return this.value;
     }
 
     public Date getDate() {
-        //returns the date of the DataPoint
+        //returns the date of the Entities.DataPoint
         return this.date;
     }
 
     public String getMetricName() {
-        //returns the name of the Metric containing this dataPoint
+        //returns the name of the Entities.Metric containing this dataPoint
         return this.metricName;
     }
 
     public String getTextEntry() {
-        //returns the textEntry of this DataPoint
+        //returns the textEntry of this Entities.DataPoint
         return this.textEntry;
     }
 }

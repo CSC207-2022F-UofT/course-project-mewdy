@@ -1,3 +1,5 @@
+package Entities;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,7 +11,7 @@ public class Metric {
     private double lowerBound;
 
     public Metric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound) {
-        //this is a Metric constructor that takes in an ArrayList of DataPoints in addition to the other
+        //this is a Entities.Metric constructor that takes in an ArrayList of DataPoints in addition to the other
         //instance variables
         if (name.equalsIgnoreCase("sleep")) {
             upperBound = 24;
@@ -25,7 +27,7 @@ public class Metric {
     }
 
     public Metric(String name, double upperBound, double lowerBound) {
-        //this is an overloaded Metric constructor for when we want to initialize a new empty Metric
+        //this is an overloaded Entities.Metric constructor for when we want to initialize a new empty Entities.Metric
         if (name.equalsIgnoreCase("sleep")) {
             upperBound = 24;
             lowerBound = 0;
@@ -40,7 +42,7 @@ public class Metric {
     }
 
     public ArrayList<DataPoint> getDataPoints() {
-        //this is a method for getting the list of DataPoints from a Metric
+        //this is a method for getting the list of DataPoints from a Entities.Metric
         return this.dataPointList;
     }
 
@@ -55,26 +57,26 @@ public class Metric {
     }
 
     public void addDataPoint(DataPoint entry) {
-        //this is a method for adding a DataPoint to the end of a Metric's dataPointList
+        //this is a method for adding a Entities.DataPoint to the end of a Entities.Metric's dataPointList
         this.dataPointList.add(entry);
     }
     public void popDataPoint() {
-        //this is a method for removing the most recently added DataPoint from the Metric
+        //this is a method for removing the most recently added Entities.DataPoint from the Entities.Metric
         this.dataPointList.remove(-1);
     }
 
     public String getName() {
-        //this is a getter method for the name variable from this Metric
+        //this is a getter method for the name variable from this Entities.Metric
         return this.name;
     }
 
     public double getUpperBound() {
-        //this is a getter method for the upperBound variable from this Metric
+        //this is a getter method for the upperBound variable from this Entities.Metric
         return this.upperBound;
     }
 
     public double getLowerBound() {
-        //this is a getter method for the lowerBound variable from this Metric
+        //this is a getter method for the lowerBound variable from this Entities.Metric
         return this.lowerBound;
     }
 }
