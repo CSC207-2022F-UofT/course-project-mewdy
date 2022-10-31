@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Metric {
 
@@ -41,6 +42,16 @@ public class Metric {
     public ArrayList<DataPoint> getDataPoints() {
         //this is a method for getting the list of DataPoints from a Metric
         return this.dataPointList;
+    }
+
+    public boolean preexistingDataPoint(Date date) {
+        //checks every DataPoint in this Metric to see if there already exists a DataPoint with this Date
+        for (DataPoint point:this.dataPointList) {
+            if (point.getDate().equals(date)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addDataPoint(DataPoint entry) {

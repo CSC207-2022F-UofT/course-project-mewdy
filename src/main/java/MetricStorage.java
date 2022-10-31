@@ -37,6 +37,16 @@ public class MetricStorage implements MetricStorageInterface{
         return this.metricList;
     }
 
+    public Metric getMetric(String metricName) throws Exception {
+        for (Metric metric:this.metricList) {
+            if (metric.getName().equalsIgnoreCase(metricName)) {
+                return metric;
+            }
+
+        }
+        throw new Exception("No Metric found with name: " + metricName);
+    }
+
     public ArrayList<DataPoint> getDataPointList(String metricName) {
         //getter method that returns a list of DataPoints from a Metric in metricList
         ArrayList<DataPoint> returnValue = null;
