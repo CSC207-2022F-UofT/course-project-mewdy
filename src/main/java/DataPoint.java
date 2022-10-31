@@ -15,6 +15,14 @@ public class DataPoint {
         this.textEntry = textEntry;
     }
 
+    //overload constructor for creating DataPoint at current date time
+    public DataPoint(double value, String metricName, String textEntry) {
+        this.value = value;
+        this.date = new Date();
+        this.metricName = metricName;
+        this.textEntry = textEntry;
+    }
+
     public double getValue() {
         //returns the value of the DataPoint
         return this.value;
