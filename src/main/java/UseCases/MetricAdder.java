@@ -12,6 +12,11 @@ public class MetricAdder {
         //
         return new Metric(name, dataPointList, upperBound, lowerBound);
     }
+
+    public Metric createMetric(String name, double upperBound, double lowerBound) {
+        //
+        return new Metric(name, upperBound, lowerBound);
+    }
     public MetricStorage addMetric(Metric metric, MetricStorage storage) throws Exception {
         //
         String name = metric.getName().toLowerCase();
