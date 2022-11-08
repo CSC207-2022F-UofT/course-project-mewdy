@@ -7,6 +7,10 @@ public class MetricStorage implements MetricStorageInterface{
 
     private ArrayList<Metric> metricList;
 
+    public MetricStorage() {
+        this.metricList = new ArrayList<Metric>();
+    }
+
     public void addMetric(Metric metric) {
         //this method adds a Entities.Metric to the end of the metricList
         this.metricList.add(metric);

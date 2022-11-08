@@ -1,5 +1,6 @@
 package Controllers;
 
+import Entities.Metric;
 import Entities.MetricStorage;
 import UseCases.DataLogger;
 public class DataLoggerController{
