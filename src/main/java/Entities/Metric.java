@@ -62,7 +62,7 @@ public class Metric {
     }
     public void popDataPoint() {
         //this is a method for removing the most recently added Entities.DataPoint from the Entities.Metric
-        this.dataPointList.remove(-1);
+        this.dataPointList.remove(dataPointList.size() - 1);
     }
 
     public String getName() {
