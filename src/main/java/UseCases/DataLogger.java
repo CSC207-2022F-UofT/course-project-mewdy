@@ -2,18 +2,24 @@ package UseCases;
 
 import Entities.DataPoint;
 import Entities.Metric;
-import Entities.MetricStorage;
+import Entities.MetricStorageInterface;
 
 import java.util.ArrayList;
 
-public class DataLogger {
-    public void logDataPoint(String metricName, double value, String textEntry, MetricStorage storage) throws Exception {
+public class DataLogger implements DataLoggerInputBoundary{
+
+    final MetricStorageInterface metricStorage;
+
+    public DataLogger(MetricStorageInterface metricStorage) {
+        this.metricStorage = metricStorage;
+    }
+
+    public void logDataPoint(String metricName, double value, String textEntry) throws Exception {
         //this is the DataLogger.DataLogger use case interactor which takes a metricName, value for the DataPoint,
         //a text entry, and the metricStorage object that we are adding to.
         //this throws an exception whenever the metric name is invalid or whenever the
         //input value is beyond the range of the metric.
-
-        Metric metric = storage.getMetric(metricName);
+        Metric metric = metricStorage.getMetric(metricName);
         double upperBound = metric.getUpperBound();
         double lowerBound = metric.getLowerBound();
 

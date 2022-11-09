@@ -17,6 +17,9 @@ public class Main {
         logController.logDataPoint(3, "mood", "today I am sad", storage);
         logController.logDataPoint(8, "mood", "today I am sad", storage);
         System.out.println(newMetric.getDataPoints().get(0).getDate());
+        System.out.println(newMetric.getDataPoints().get(0).getValue());
+        System.out.println(newMetric.getDataPoints().get(0).getMetricName());
+        System.out.println(newMetric.getDataPoints().get(0).getTextEntry());
 
 
     }
