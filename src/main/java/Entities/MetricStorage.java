@@ -7,11 +7,17 @@ public class MetricStorage implements MetricStorageInterface{
 
     private ArrayList<Metric> metricList;
 
+    public MetricStorage(){
+        this.metricList = new ArrayList<Metric>();
+    }
+
+    @Override
     public void addMetric(Metric metric) {
         //this method adds a Entities.Metric to the end of the metricList
         this.metricList.add(metric);
     }
 
+    @Override
     public void addDataPoint(String metricName, DataPoint dataPoint) {
         //this method inserts a Entities.DataPoint into a Entities.Metric specified by name
         //this method will not rename the metricName contained in the dataPoint class, that responsibility
@@ -24,6 +30,7 @@ public class MetricStorage implements MetricStorageInterface{
         }
     }
 
+    @Override
     public void removeDataPoint(String metricName) {
         //this method removes the most recent Entities.DataPoint from a chosen Entities.Metric based on its given name
         for (Metric metric: this.metricList) {
@@ -34,11 +41,13 @@ public class MetricStorage implements MetricStorageInterface{
         }
     }
 
+    @Override
     public ArrayList<Metric> getMetricList() {
         //getter method for returning a list of Metrics
         return this.metricList;
     }
 
+    @Override
     public Metric getMetric(String metricName) throws Exception {
         for (Metric metric:this.metricList) {
             if (metric.getName().equalsIgnoreCase(metricName)) {
@@ -49,6 +58,7 @@ public class MetricStorage implements MetricStorageInterface{
         throw new Exception("No Metric found with name: " + metricName);
     }
 
+    @Override
     public ArrayList<DataPoint> getDataPointList(String metricName) {
         //getter method that returns a list of DataPoints from a Entities.Metric in metricList
         ArrayList<DataPoint> returnValue = null;
