@@ -8,5 +8,6 @@ public interface MetricStorageInterface {
     void removeDataPoint(String metricName);
     ArrayList<Metric> getMetricList();
     ArrayList<DataPoint> getDataPointList(String metricName);
+    Metric getMetric(String metricName) throws Exception;
 
 }
