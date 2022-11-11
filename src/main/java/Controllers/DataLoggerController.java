@@ -2,21 +2,32 @@ package Controllers;
 
 import Entities.Metric;
 import Entities.MetricStorage;
+import Entities.MetricStorageInterface;
+import Presenters.DataLoggerPresenter;
+import Presenters.DataLoggerResponseModel;
 import UseCases.DataLogger;
 import UseCases.DataLoggerInputBoundary;
+import UseCases.DataLoggerOutputBoundary;
 
 import javax.xml.crypto.Data;
 
 public class DataLoggerController{
 
-    final DataLoggerInputBoundary dataLogger;
+    final MetricStorageInterface storage;
 
-    public DataLoggerController(DataLoggerInputBoundary dataLogger){
-        this.dataLogger = dataLogger;
+    public DataLoggerController(MetricStorageInterface storage){
+        this.storage = storage;
     }
-    public void logDataPoint(double value, String metricName, String textEntry, MetricStorage storage) throws Exception {
-        DataLogger dataLogger = new DataLogger(storage);
-        dataLogger.logDataPoint(metricName, value, textEntry);
+    public DataLoggerResponseModel logDataPoint(double value, String metricName, String textEntry) {
+        DataLoggerInputBoundary dataLogger = new DataLogger(this.storage);
+        try {
+            return dataLogger.logDataPoint(metricName, value, textEntry);
+
+        }
+        catch (Exception e) {
+            DataLoggerResponseModel responseModel = new DataLoggerResponseModel(false, "Invalid Metric or Datapoint value");
+            return responseModel;
+        }
     }
 
 }
