@@ -1,27 +1,26 @@
 package Entities;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DataPoint {
 
+    private final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
     private double value;
-    private Date date;
-    private String metricName;
-    private String textEntry;
+    private LocalDateTime date;
 
-    public DataPoint(double value, Date date, String metricName, String textEntry) {
+    public DataPoint(String date, double value) throws ParseException {
+        LocalDateTime d = formatDate(date);
         this.value = value;
-        this.date = date;
-        this.metricName = metricName;
-        this.textEntry = textEntry;
+        this.date = d;
     }
 
     //overload constructor for creating Entities.DataPoint at current date time
-    public DataPoint(double value, String metricName, String textEntry) {
+    public DataPoint(double value) {
+        LocalDateTime date = formatDate(LocalDateTime.now().toString());
         this.value = value;
-        this.date = new Date();
-        this.metricName = metricName;
-        this.textEntry = textEntry;
+        this.date = date;
     }
 
     public double getValue() {
@@ -29,18 +28,11 @@ public class DataPoint {
         return this.value;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         //returns the date of the Entities.DataPoint
         return this.date;
     }
-
-    public String getMetricName() {
-        //returns the name of the Entities.Metric containing this dataPoint
-        return this.metricName;
-    }
-
-    public String getTextEntry() {
-        //returns the textEntry of this Entities.DataPoint
-        return this.textEntry;
+    private LocalDateTime formatDate(String date) {
+        return LocalDateTime.parse(date, FORMAT);
     }
 }
