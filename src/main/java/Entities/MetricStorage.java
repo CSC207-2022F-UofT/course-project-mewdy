@@ -1,14 +1,22 @@
 package Entities;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class MetricStorage implements MetricStorageInterface{
 
     private ArrayList<Metric> metricList;
+    private File location;
 
     public MetricStorage(){
         this.metricList = new ArrayList<Metric>();
+        this.location = new File("./");
+    }
+
+    @Override
+    public void setPath(File path) {
+        this.location = path;
     }
 
     @Override
@@ -56,6 +64,11 @@ public class MetricStorage implements MetricStorageInterface{
 
         }
         throw new Exception("No Metric found with name: " + metricName);
+    }
+
+    @Override
+    public File getPath() {
+        return this.location;
     }
 
     @Override
