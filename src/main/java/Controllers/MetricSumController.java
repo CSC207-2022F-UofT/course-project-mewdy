@@ -1,8 +1,8 @@
-package MetricSummaryUseCase.Controllers;
+package Controllers;
 
-import MetricSummaryUseCase.Models.MetricSumRequestModel;
-import MetricSummaryUseCase.Presenters.MetricSumViewModel;
-import MetricSummaryUseCase.UseCases.MetricSumInputBoundary;
+import Models.MetricSumRequestModel;
+import Presenters.MetricSumViewModel;
+import UseCases.MetricSumInputBoundary;
 
 public class MetricSumController {
 

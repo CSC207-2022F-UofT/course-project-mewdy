@@ -1,11 +1,11 @@
-package MetricSummaryUseCase.UseCases;
+package UseCases;
 
 import Entities.DataPoint;
 import Entities.Metric;
 import Entities.MetricStorageInterface;
-import MetricSummaryUseCase.Models.MetricSumRequestModel;
-import MetricSummaryUseCase.Models.MetricSumResponseModel;
-import MetricSummaryUseCase.Presenters.MetricSumViewModel;
+import Models.MetricSumRequestModel;
+import Models.MetricSumResponseModel;
+import Presenters.MetricSumViewModel;
 
 import java.util.ArrayList;
 import java.util.Date;

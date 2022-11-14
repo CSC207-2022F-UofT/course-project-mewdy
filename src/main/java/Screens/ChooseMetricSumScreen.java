@@ -1,17 +1,18 @@
-package MetricSummaryUseCase.Screens;
+package Screens;
 
 import Entities.Metric;
-import MetricSummaryUseCase.Models.MetricSumRequestModel;
 import Entities.MetricStorageInterface;
-import MetricSummaryUseCase.Controllers.MetricSumController;
-import MetricSummaryUseCase.Models.MetricSumResponseModel;
-import MetricSummaryUseCase.Presenters.MetricSumViewModel;
+import Controllers.MetricSumController;
+import Presenters.MetricSumViewModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import java.util.ArrayList;
+
+//import org.jfree.chart
 
 public class ChooseMetricSumScreen extends JPanel implements ActionListener{
 

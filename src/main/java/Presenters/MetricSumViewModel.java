@@ -1,4 +1,4 @@
-package MetricSummaryUseCase.Presenters;
+package Presenters;
 
 import java.util.ArrayList;
 import java.util.Date;

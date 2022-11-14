@@ -1,8 +1,8 @@
-package MetricSummaryUseCase.Presenters;
+package Presenters;
 
-import MetricSummaryUseCase.Models.MetricSumResponseModel;
-import MetricSummaryUseCase.Screens.DataSummaryFailed;
-import MetricSummaryUseCase.UseCases.MetricSumOutputBoundary;
+import Models.MetricSumResponseModel;
+import Screens.DataSummaryFailed;
+import UseCases.MetricSumOutputBoundary;
 
 public class MetricSumPresenter implements MetricSumOutputBoundary {
 
