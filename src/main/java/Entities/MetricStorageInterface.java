@@ -9,6 +9,5 @@ public interface MetricStorageInterface {
     ArrayList<Metric> getMetricList();
     Metric getMetric(String metricName) throws Exception;
     ArrayList<DataPoint> getDataPointList(String metricName);
-    Metric getMetric(String metricName) throws Exception;
 
 }
