@@ -7,6 +7,7 @@ import Models.EntryUndoRequestModel;
 import Models.EntryUndoResponseModel;
 import Presenters.EntryUndoPresenter;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
@@ -32,9 +33,9 @@ public class EntryUndo {
                         + " contains fewer than 1 data point");
             }
             double value = deletedData.getValue();
-            Date date = deletedData.getDate();
-            String metric = deletedData.getMetricName();
-            String responseModel = value + ", " + new SimpleDateFormat("dd/MM/yyyy").format(date) + ", " + metric;
+            LocalDateTime date = deletedData.getDate();
+            String responseModel = value + ", " + new SimpleDateFormat("dd/MM/yyyy").format(date) + ", "
+                    + metricName;
             return presenter.prepareSuccessView(responseModel);
             } catch (Exception e) {
             return presenter.prepareFailView("Unknown Error");
