@@ -1,7 +1,7 @@
-package UseCases;
+package MetricSummaryUseCase.UseCases;
 
-import Models.MetricSumResponseModel;
-import Presenters.MetricSumViewModel;
+import MetricSummaryUseCase.Models.MetricSumResponseModel;
+import MetricSummaryUseCase.Presenters.MetricSumViewModel;
 
 public interface MetricSumOutputBoundary {
     MetricSumViewModel prepareSuccessView(MetricSumResponseModel responseModel);

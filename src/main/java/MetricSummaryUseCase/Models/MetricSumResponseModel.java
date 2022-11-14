@@ -1,4 +1,4 @@
-package Models;
+package MetricSummaryUseCase.Models;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,14 +8,14 @@ public class MetricSumResponseModel {
     ArrayList<Date> timePoints;
     ArrayList<Double> datalist;
     double metricAverage;
-    double metricTrend;
+    int metricSize;
 
     public MetricSumResponseModel(ArrayList<Date> timePoints, ArrayList<Double> datalist, double metricAverage,
-                                  double metricTrend){
+                                  int metricSize){
         this.timePoints = timePoints;
         this.datalist = datalist;
         this.metricAverage = metricAverage;
-        this.metricTrend = metricTrend;
+        this.metricSize = metricSize;
     }
 
     public ArrayList<Date> getTimePoints(){return this.timePoints;}
@@ -24,5 +24,5 @@ public class MetricSumResponseModel {
 
     public double getMetricAverage(){return this.metricAverage;}
 
-    public double getMetricTrend(){return this.metricTrend;}
+    public double getMetricSize(){return this.metricSize;}
 }

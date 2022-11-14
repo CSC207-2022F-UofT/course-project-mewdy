@@ -1,8 +1,8 @@
-package Controllers;
+package MetricSummaryUseCase.Controllers;
 
-import Models.MetricSumRequestModel;
-import Presenters.MetricSumViewModel;
-import UseCases.MetricSumInputBoundary;
+import MetricSummaryUseCase.Models.MetricSumRequestModel;
+import MetricSummaryUseCase.Presenters.MetricSumViewModel;
+import MetricSummaryUseCase.UseCases.MetricSumInputBoundary;
 
 public class MetricSumController {
 
@@ -12,7 +12,7 @@ public class MetricSumController {
         this.metricSummarizer = metricSummarizer;
     }
 
-    MetricSumViewModel getMetricSummary(String metricName){
+    public MetricSumViewModel getMetricSummary(String metricName){
         MetricSumRequestModel requestModel = new MetricSumRequestModel(metricName);
 
         return this.metricSummarizer.getMetricSummary(requestModel);

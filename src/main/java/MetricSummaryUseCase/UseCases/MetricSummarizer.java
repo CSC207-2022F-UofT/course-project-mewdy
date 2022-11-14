@@ -1,11 +1,11 @@
-package UseCases;
+package MetricSummaryUseCase.UseCases;
 
 import Entities.DataPoint;
 import Entities.Metric;
 import Entities.MetricStorageInterface;
-import Models.MetricSumRequestModel;
-import Models.MetricSumResponseModel;
-import Presenters.MetricSumViewModel;
+import MetricSummaryUseCase.Models.MetricSumRequestModel;
+import MetricSummaryUseCase.Models.MetricSumResponseModel;
+import MetricSummaryUseCase.Presenters.MetricSumViewModel;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -36,10 +36,10 @@ public class MetricSummarizer implements MetricSumInputBoundary {
                 dataList.add(d.getValue());
             }
             double metricAverage = calculateMetricAverage(dataList);
-            double metricTrend = calculateMetricTrend(dataList);
+            int metricSize = calculateMetricSize(dataList);
 
             MetricSumResponseModel responseModel = new MetricSumResponseModel(timePoints, dataList, metricAverage,
-                    metricTrend);
+                    metricSize);
             return presenter.prepareSuccessView(responseModel);
         } catch (Exception e) {
             return presenter.prepareDataSumFail(metricName + " not found in metric storage!");
@@ -57,7 +57,7 @@ public class MetricSummarizer implements MetricSumInputBoundary {
     }
 
     //helper method to calculate simple trend across datapoints in metric
-    private double calculateMetricTrend(ArrayList<Double> dataList){
-        return dataList.get(dataList.size() - 1) - dataList.get(0);
+    private int calculateMetricSize(ArrayList<Double> dataList){
+        return dataList.size();
     }
 }

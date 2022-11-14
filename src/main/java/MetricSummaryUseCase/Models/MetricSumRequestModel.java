@@ -1,4 +1,4 @@
-package Models;
+package MetricSummaryUseCase.Models;
 
 public class MetricSumRequestModel {
 
