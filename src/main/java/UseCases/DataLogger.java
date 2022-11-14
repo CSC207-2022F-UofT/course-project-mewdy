@@ -24,6 +24,7 @@ public class DataLogger implements DataLoggerInputBoundary{
         double value = requestModel.getValue();
         DataLoggerResponseModel responseModel = new DataLoggerResponseModel("Successfully added datapoint",
                 metricName, value);
+        MetricStorageInterface metricStorage = requestModel.getStorage();
         try {
             Metric metric = metricStorage.getMetric(metricName);
             double upperBound = metric.getUpperBound();

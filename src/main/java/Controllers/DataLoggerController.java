@@ -25,7 +25,7 @@ public class DataLoggerController{
     public DataLoggerResponseModel logDataPoint(double value, String metricName) {
         DataLoggerInputBoundary dataLogger = new DataLogger(this.storage, this.presenter);
         try {
-            DataLoggerRequestModel requestModel = new DataLoggerRequestModel(metricName, value);
+            DataLoggerRequestModel requestModel = new DataLoggerRequestModel(metricName, value, this.storage);
             return dataLogger.logDataPoint(requestModel);
 
         } catch (Exception e) {

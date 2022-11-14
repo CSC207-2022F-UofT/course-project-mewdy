@@ -1,4 +1,5 @@
 import Controllers.DataLoggerController;
+import Entities.DataPoint;
 import Entities.Metric;
 import Entities.MetricStorage;
 import Entities.MetricStorageInterface;
@@ -13,5 +14,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
         MetricStorageInterface storage = new MetricStorage();
+        DataPoint datapoint = new DataPoint(5);
     }
 }

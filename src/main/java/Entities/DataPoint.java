@@ -18,7 +18,7 @@ public class DataPoint {
 
     //overload constructor for creating Entities.DataPoint at current date time
     public DataPoint(double value) {
-        LocalDateTime date = formatDate(LocalDateTime.now().toString());
+        LocalDateTime date = formatDate(LocalDateTime.now().format(FORMAT));
         this.value = value;
         this.date = date;
     }
