@@ -1,28 +1,44 @@
 package UseCases;
 
 import Entities.DataPoint;
-import Entities.MetricStorage;
 import Entities.Metric;
+import Entities.MetricStorageInterface;
+import Models.AddMetricResponseModel;
+import Presenters.AddMetricPresenter;
 
 import java.util.ArrayList;
 
-public class MetricAdder {
+public class MetricAdder implements AddMetricInputBoundary{
 
-    public Metric createMetric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound) {
-        //
+    final AddMetricOutputBoundary presenter;
+
+    public MetricAdder(AddMetricOutputBoundary presenter) {
+        this.presenter = presenter;
+    }
+    /**
+     * @param name name of the metric
+     * @param dataPointList list of existing datapoints to import
+     * @param upperBound upperbound of the metric
+     * @param lowerBound lowerbound of the metric
+     * Creates a new Metric with existing datapoints
+     */
+    public static Metric createMetric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound) {
         return new Metric(name, dataPointList, upperBound, lowerBound);
     }
-    public MetricStorage addMetric(Metric metric, MetricStorage storage) throws Exception {
-        //
+    /**
+    *
+     */
+    @Override
+    public AddMetricPresenter addMetric(Metric metric, MetricStorageInterface storage) {
         String name = metric.getName().toLowerCase();
         ArrayList<Metric> metricList = storage.getMetricList();
         for (Metric present: metricList){
             if (present.getName().toLowerCase().equals(name)) {
-                throw new Exception("That metric already exists.");
+                return false;
             }
         }
         storage.addMetric(metric);
-        return storage;
+        return true;
     }
 }
 
