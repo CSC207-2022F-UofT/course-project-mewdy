@@ -16,14 +16,13 @@ import javax.xml.crypto.Data;
 public class DataLoggerController{
 
     private final MetricStorageInterface storage;
-    private final DataLoggerPresenter presenter;
 
-    public DataLoggerController(MetricStorageInterface storage, DataLoggerPresenter presenter){
+    public DataLoggerController(MetricStorageInterface storage){
         this.storage = storage;
-        this.presenter = presenter;
     }
     public DataLoggerResponseModel logDataPoint(double value, String metricName) {
-        DataLoggerInputBoundary dataLogger = new DataLogger(this.storage, this.presenter);
+        DataLoggerPresenter presenter = new DataLoggerPresenter();
+        DataLoggerInputBoundary dataLogger = new DataLogger(this.storage, presenter);
         try {
             DataLoggerRequestModel requestModel = new DataLoggerRequestModel(metricName, value, this.storage);
             return dataLogger.logDataPoint(requestModel);
