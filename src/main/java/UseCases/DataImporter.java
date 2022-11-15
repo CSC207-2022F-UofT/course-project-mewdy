@@ -13,28 +13,28 @@ import java.util.*;
 
 public class DataImporter implements DataImportInputBoundary {
 
-    private File metricFolder;
+    private File folder;
     private MetricStorage storage;
     private final DataImportPresenterOutputBoundary presenter;
 
     public DataImporter(ImportRequestModel req, DataImportPresenterOutputBoundary presenter) throws IOException {
-        this.metricFolder = new File(req.getPath());
+        this.folder = new File(req.getPath());
         this.storage = req.getStore();
         this.presenter = presenter;
-        this.storage.setPath(this.metricFolder);
+        this.storage.setPath(this.folder);
     }
 
     @Override
     public ImportResponseModel readFromNewFile(ImportRequestModel req){
-        this.metricFolder = new File(req.getPath());
+        this.folder = new File(req.getPath());
         this.storage = req.getStore();
-        this.storage.setPath(this.metricFolder);
+        this.storage.setPath(this.folder);
         return read();
     }
     @Override
     public ImportResponseModel read() {
         try {
-            for (File file : Objects.requireNonNull(this.metricFolder.listFiles())) {
+            for (File file : Objects.requireNonNull(this.folder.listFiles())) {
                 ArrayList<String> dates = new ArrayList<String>();
                 ArrayList<Double> data = new ArrayList<Double>();
                 double upperBound = 0, lowerBound = 0;
@@ -61,6 +61,7 @@ public class DataImporter implements DataImportInputBoundary {
                     r.close();
                 }
                 createMetric(dates, data, upperBound, lowerBound, filename);
+                storage.save(); //State is replicated from storage
             }
         } catch (RuntimeException | IOException e) {
             System.out.println(e.getMessage());//DEBUG

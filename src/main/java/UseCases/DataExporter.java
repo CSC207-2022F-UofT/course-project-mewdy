@@ -14,8 +14,8 @@ import java.io.IOException;
 
 public class DataExporter implements DataExportInputBoundary {
 
-    private final MetricStorage storage;
-    private final File folder;
+    private MetricStorage storage;
+    private File folder;
     private final DataExportPresenterOutputBoundary presenter;
 
 
@@ -23,6 +23,15 @@ public class DataExporter implements DataExportInputBoundary {
         this.folder = new File(req.getPath());
         this.storage = req.getStore();
         this.presenter = presenter;
+        this.storage.setPath(this.folder);
+    }
+
+    @Override
+    public ExportResponseModel writeToNewFile(ExportRequestModel req){
+        this.folder = new File(req.getPath());
+        this.storage = req.getStore();
+        this.storage.setPath(this.folder);
+        return write();
     }
 
     @Override
@@ -32,15 +41,14 @@ public class DataExporter implements DataExportInputBoundary {
         for (Metric metric :
                 storage.getMetricList()) {
             try {
-
-                String currentFIle = folder.getPath() + metric.getName();
+                String currentFIle = folder.getPath() + "\\" + metric.getName();
                 writer = new BufferedWriter(new FileWriter(currentFIle));
-                String header = "Date,Datapoint,%s,%s".formatted(metric.getUpperBound(), metric.getLowerBound());
+                String header = String.format("Date,Datapoint,%s,%s",metric.getUpperBound(), metric.getLowerBound());
                 writer.write(header);
                 writer.newLine();
                 for (DataPoint dp :
                         metric.getDataPoints()) {
-                    String line = "%s,%s,,".formatted(dp.getDate(), dp.getValue());
+                    String line = String.format("%s,%s,,",dp.getDate(), dp.getValue());
                     writer.write(line);
                     writer.newLine();
                 }
@@ -49,6 +57,18 @@ public class DataExporter implements DataExportInputBoundary {
                 return presenter.prepareFailView("Error writing file");
             }
         }
+        storage.save();
         return presenter.prepareSuccessView();
+    }
+
+    @Override
+    public boolean filesExist() { //Check if a file will be overwritten
+        File file;
+        for (Metric m:
+                storage.getMetricList()) {
+            file = new File(folder + "\\" + m.getName() + ".csv");
+            if(file.exists()) return true;
+        }
+        return false;
     }
 }

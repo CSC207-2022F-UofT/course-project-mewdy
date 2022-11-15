@@ -2,7 +2,8 @@ package Models;
 
 import Entities.MetricStorage;
 
-public class ExportRequestModel {    private final String path;
+public class ExportRequestModel {
+    private final String path;
     private final MetricStorage store;
 
     public ExportRequestModel(String path, MetricStorage store) {
