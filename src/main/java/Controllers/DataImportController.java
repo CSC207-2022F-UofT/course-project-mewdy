@@ -6,7 +6,7 @@ import Models.ImportResponseModel;
 import UseCases.DataImportInputBoundary;
 
 public class DataImportController {
-    private DataImportInputBoundary gateway;
+    private final DataImportInputBoundary gateway;
 
     public DataImportController(DataImportInputBoundary gateway) {
         this.gateway = gateway;

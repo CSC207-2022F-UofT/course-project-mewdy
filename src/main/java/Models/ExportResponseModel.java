@@ -1,9 +1,9 @@
 package Models;
 
-public class ImportResponseModel {
+public class ExportResponseModel {
     private final String errorMsg;
 
-    public ImportResponseModel(String msg){this.errorMsg = msg;}
+    public ExportResponseModel(String msg){this.errorMsg = msg;}
 
     public String getErrorMsg() {
         return errorMsg;

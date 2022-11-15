@@ -3,6 +3,7 @@ package Presenters;
 import Models.ImportResponseModel;
 
 public class DataImportPresenter implements DataImportPresenterOutputBoundary {
+
     @Override
     public ImportResponseModel prepareSuccessView() {
         return new ImportResponseModel("");
