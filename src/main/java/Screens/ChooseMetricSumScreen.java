@@ -38,7 +38,7 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener{
         }
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+        
         this.add(title);
         this.add(buttons);
 
