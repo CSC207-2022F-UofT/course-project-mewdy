@@ -1,14 +1,12 @@
 package Controllers;
 
-import Entities.Metric;
-import Entities.MetricStorage;
+
 import Entities.MetricStorageInterface;
 import Presenters.DataLogFailed;
 import Presenters.DataLoggerPresenter;
 import Presenters.DataLoggerResponseModel;
 import UseCases.DataLogger;
 import UseCases.DataLoggerInputBoundary;
-import UseCases.DataLoggerOutputBoundary;
 import UseCases.DataLoggerRequestModel;
 
 import javax.xml.crypto.Data;

@@ -1,6 +1,5 @@
 package Presenters;
 
-import UseCases.DataLogger;
 import UseCases.DataLoggerOutputBoundary;
 
 public class DataLoggerPresenter implements DataLoggerOutputBoundary{

@@ -18,7 +18,7 @@ public class TestDataLogger {
     public void testLogDataPointMissingMetric() {
         MetricStorageInterface storage = new MetricStorage();
         DataLoggerPresenter presenter = new DataLoggerPresenter();
-        DataLoggerController controller = new DataLoggerController(storage, presenter);
+        DataLoggerController controller = new DataLoggerController(storage);
         String message = controller.logDataPoint(7, "mood").getMessage();
         assertEquals("Metric does not exist", message);
     }
@@ -28,7 +28,7 @@ public class TestDataLogger {
         MetricStorageInterface storage = new MetricStorage();
         DataLoggerPresenter presenter = new DataLoggerPresenter();
         storage.addMetric(new Metric("mood", 10, 0));
-        DataLoggerController controller = new DataLoggerController(storage, presenter);
+        DataLoggerController controller = new DataLoggerController(storage);
         String message = controller.logDataPoint(7, "meals eaten").getMessage();
         assertEquals("Metric does not exist", message);
     }
@@ -38,7 +38,7 @@ public class TestDataLogger {
         MetricStorageInterface storage = new MetricStorage();
         DataLoggerPresenter presenter = new DataLoggerPresenter();
         storage.addMetric(new Metric("mood", 10, 0));
-        DataLoggerController controller = new DataLoggerController(storage, presenter);
+        DataLoggerController controller = new DataLoggerController(storage);
         String message = controller.logDataPoint(7, "mood").getMessage();
         String expectedMsg = "Successfully added datapoint with value 7.0 to metric mood";
         assertEquals(expectedMsg, message);
@@ -50,7 +50,7 @@ public class TestDataLogger {
         DataLoggerPresenter presenter = new DataLoggerPresenter();
         storage.addMetric(new Metric("mood", 10, 0));
         storage.addMetric(new Metric("meals eaten", 5, 0));
-        DataLoggerController controller = new DataLoggerController(storage, presenter);
+        DataLoggerController controller = new DataLoggerController(storage);
         String message = controller.logDataPoint(3, "meals eaten").getMessage();
         String expectedMsg = "Successfully added datapoint with value 3.0 to metric meals eaten";
         assertEquals(expectedMsg, message);
@@ -61,7 +61,7 @@ public class TestDataLogger {
         MetricStorageInterface storage = new MetricStorage();
         DataLoggerPresenter presenter = new DataLoggerPresenter();
         storage.addMetric(new Metric("mood", 10, 0));
-        DataLoggerController controller = new DataLoggerController(storage, presenter);
+        DataLoggerController controller = new DataLoggerController(storage);
         String message = controller.logDataPoint(-1, "mood").getMessage();
         String expectedMsg = "Failed to add datapoint, invalid value";
         assertEquals(expectedMsg, message);
