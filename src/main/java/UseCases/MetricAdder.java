@@ -3,8 +3,8 @@ package UseCases;
 import Entities.DataPoint;
 import Entities.Metric;
 import Entities.MetricStorageInterface;
+import Models.AddMetricRequestModel;
 import Models.AddMetricResponseModel;
-import Presenters.AddMetricPresenter;
 
 import java.util.ArrayList;
 
@@ -29,16 +29,8 @@ public class MetricAdder implements AddMetricInputBoundary{
     *
      */
     @Override
-    public AddMetricPresenter addMetric(Metric metric, MetricStorageInterface storage) {
-        String name = metric.getName().toLowerCase();
-        ArrayList<Metric> metricList = storage.getMetricList();
-        for (Metric present: metricList){
-            if (present.getName().toLowerCase().equals(name)) {
-                return false;
-            }
-        }
-        storage.addMetric(metric);
-        return true;
+    public AddMetricResponseModel addMetric(AddMetricRequestModel requestModel, MetricStorageInterface storage) {
+
     }
 }
 

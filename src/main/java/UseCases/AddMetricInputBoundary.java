@@ -7,5 +7,6 @@ import Models.AddMetricResponseModel;
 import Presenters.AddMetricPresenter;
 
 public interface AddMetricInputBoundary {
-    AddMetricPresenter addMetric(AddMetricRequestModel requestModel, MetricStorageInterface storage);
+    AddMetricResponseModel addMetric(AddMetricRequestModel requestModel,
+                                     MetricStorageInterface storage) throws Exception;
 }
