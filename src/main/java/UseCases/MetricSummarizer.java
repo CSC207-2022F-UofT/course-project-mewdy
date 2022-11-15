@@ -7,6 +7,7 @@ import Models.MetricSumRequestModel;
 import Models.MetricSumResponseModel;
 import Presenters.MetricSumViewModel;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -30,7 +31,7 @@ public class MetricSummarizer implements MetricSumInputBoundary {
 
             ArrayList<DataPoint> dataPoints = metricToSum.getDataPoints();
             ArrayList<Double> dataList = new ArrayList<Double>();
-            ArrayList<Date> timePoints = new ArrayList<Date>();
+            ArrayList<LocalDateTime> timePoints = new ArrayList<LocalDateTime>();
             for (DataPoint d: dataPoints){
                 timePoints.add(d.getDate());
                 dataList.add(d.getValue());
@@ -39,7 +40,7 @@ public class MetricSummarizer implements MetricSumInputBoundary {
             int metricSize = calculateMetricSize(dataList);
 
             MetricSumResponseModel responseModel = new MetricSumResponseModel(timePoints, dataList, metricAverage,
-                    metricSize);
+                    metricSize, metricName);
             return presenter.prepareSuccessView(responseModel);
         } catch (Exception e) {
             return presenter.prepareDataSumFail(metricName + " not found in metric storage!");

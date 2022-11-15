@@ -1,28 +1,22 @@
 package Presenters;
 
+import org.jfree.chart.JFreeChart;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MetricSumViewModel {
 
-    ArrayList<Date> timePoints;
-    ArrayList<Double> dataList;
+    JFreeChart chart;
     String metricAverageAndSize;
 
 
-    public MetricSumViewModel(ArrayList<Date> timePoints, ArrayList<Double> dataList, String metricAverageAndSize){
-        this.timePoints = timePoints;
-        this.dataList = dataList;
+    public MetricSumViewModel(JFreeChart chart, String metricAverageAndSize){
+        this.chart = chart;
         this.metricAverageAndSize = metricAverageAndSize;
     }
 
-    public ArrayList<Date> getTimePoints() {
-        return timePoints;
-    }
-
-    public ArrayList<Double> getDataList() {
-        return dataList;
-    }
+    public JFreeChart getChart(){ return chart;}
 
     public String getMetricAverageAndSize(){ return  metricAverageAndSize;}
 }
