@@ -2,7 +2,7 @@ package Presenters;
 
 import Models.ImportResponseModel;
 
-public class DataImportPresenter implements DataImportPresenterGateway{
+public class DataImportPresenter implements DataImportPresenterOutputBoundary {
     @Override
     public ImportResponseModel prepareSuccessView() {
         return new ImportResponseModel("");

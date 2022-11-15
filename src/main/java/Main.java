@@ -4,8 +4,8 @@ import Entities.Metric;
 import Entities.MetricStorage;
 import Models.ImportRequestModel;
 import Presenters.DataImportPresenter;
-import Presenters.DataImportPresenterGateway;
-import UseCases.DataImportGateway;
+import Presenters.DataImportPresenterOutputBoundary;
+import UseCases.DataImportInputBoundary;
 import UseCases.DataImporter;
 
 import java.io.IOException;
@@ -14,10 +14,10 @@ public class Main {
     public static void main(String[] args) {
 
         MetricStorage storage = new MetricStorage();
-        DataImportPresenterGateway presenter = new DataImportPresenter();
+        DataImportPresenterOutputBoundary presenter = new DataImportPresenter();
         //ImportRequestModel importReq = new ImportRequestModel("./metrics", storage);
         ImportRequestModel importReq = new ImportRequestModel("./test data/metrics", storage); //DEBUG
-        DataImportGateway user;
+        DataImportInputBoundary user;
         try {
             user = new DataImporter(importReq, presenter);
         } catch (IOException e) {

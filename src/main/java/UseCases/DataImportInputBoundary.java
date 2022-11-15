@@ -3,7 +3,7 @@ package UseCases;
 import Models.ImportRequestModel;
 import Models.ImportResponseModel;
 
-public interface DataImportGateway {
+public interface DataImportInputBoundary {
 
     ImportResponseModel read();
     ImportResponseModel readFromNewFile(ImportRequestModel req);

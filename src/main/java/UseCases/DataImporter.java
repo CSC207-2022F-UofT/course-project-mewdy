@@ -5,19 +5,19 @@ import Entities.Metric;
 import Entities.MetricStorage;
 import Models.ImportRequestModel;
 import Models.ImportResponseModel;
-import Presenters.DataImportPresenterGateway;
+import Presenters.DataImportPresenterOutputBoundary;
 
 import java.io.*;
 import java.text.ParseException;
 import java.util.*;
 
-public class DataImporter implements DataImportGateway {
+public class DataImporter implements DataImportInputBoundary {
 
     private File metricFolder;
     private MetricStorage storage;
-    private final DataImportPresenterGateway presenter;
+    private final DataImportPresenterOutputBoundary presenter;
 
-    public DataImporter(ImportRequestModel req, DataImportPresenterGateway presenter) throws IOException {
+    public DataImporter(ImportRequestModel req, DataImportPresenterOutputBoundary presenter) throws IOException {
         this.metricFolder = new File(req.getPath());
         this.storage = req.getStore();
         this.presenter = presenter;

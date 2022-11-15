@@ -10,7 +10,7 @@ public class DataPoint {
     private double value;
     private LocalDateTime date;
 
-    public DataPoint(String date, double value) throws ParseException {
+    public DataPoint(String date, double value) {
         LocalDateTime d = formatDate(date);
         this.value = value;
         this.date = d;
@@ -18,7 +18,7 @@ public class DataPoint {
 
     //overload constructor for creating Entities.DataPoint at current date time
     public DataPoint(double value) {
-        LocalDateTime date = formatDate(LocalDateTime.now().toString());
+        LocalDateTime date = formatDate(LocalDateTime.now().format(FORMAT));
         this.value = value;
         this.date = date;
     }

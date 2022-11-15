@@ -3,12 +3,12 @@ package Controllers;
 import Entities.MetricStorage;
 import Models.ImportRequestModel;
 import Models.ImportResponseModel;
-import UseCases.DataImportGateway;
+import UseCases.DataImportInputBoundary;
 
 public class DataImportController {
-    private DataImportGateway gateway;
+    private DataImportInputBoundary gateway;
 
-    public DataImportController(DataImportGateway gateway) {
+    public DataImportController(DataImportInputBoundary gateway) {
         this.gateway = gateway;
     }
 
