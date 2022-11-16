@@ -1,18 +1,31 @@
 package Controllers;
 
 import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorage;
+import Entities.MetricStorageInterface;
+import Models.AddMetricRequestModel;
+import Models.AddMetricResponseModel;
+import Presenters.AddMetricPresenter;
+import UseCases.AddMetricInputBoundary;
+import UseCases.MetricAdder;
 
 import java.util.ArrayList;
 
 public class AddMetricController {
 
-    public void buttonPress() {
+    private final MetricStorageInterface metricStorage;
+
+    public AddMetricController(MetricStorageInterface metricStorage) {
+        this.metricStorage = metricStorage;
     }
 
-    public void passData(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound, MetricStorage storage) {
-        Metric newMetric = new Metric(name, dataPointList, upperBound, lowerBound);
-        storage.addMetric(newMetric);
+    public AddMetricResponseModel addMetric(String metricName, double upperBound, double lowerBound, boolean discrete, ArrayList<DataPoint> dataPointList) {
+        AddMetricPresenter presenter = new AddMetricPresenter();
+        AddMetricInputBoundary inputBoundary = new MetricAdder(presenter, metricStorage);
+        try {
+            AddMetricRequestModel requestModel = new AddMetricRequestModel(metricName, dataPointList, upperBound, lowerBound, discrete);
+            return inputBoundary.addMetric(requestModel);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }
