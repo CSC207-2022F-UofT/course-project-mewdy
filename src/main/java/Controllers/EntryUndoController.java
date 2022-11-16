@@ -3,20 +3,21 @@ package Controllers;
 import Models.EntryUndoRequestModel;
 import Models.EntryUndoResponseModel;
 import UseCases.EntryUndo;
+import UseCases.EntryUndoInputBoundary;
 
 public class EntryUndoController {
 
-    private EntryUndo entryUndo;
+    private EntryUndoInputBoundary entryUndo;
 
-    public EntryUndoController(EntryUndo entryUndo){
+    public EntryUndoController(EntryUndoInputBoundary entryUndo){
 
         this.entryUndo = entryUndo;
     }
 
-    EntryUndoResponseModel deleteLastEntry(String metricName){
-        EntryUndoRequestModel requestmodel = new EntryUndoRequestModel(metricName);
+    public EntryUndoResponseModel deleteLastEntry(String metricName){
+        EntryUndoRequestModel requestModel = new EntryUndoRequestModel(metricName);
 
-        return this.entryUndo.deleteDatapoint(requestmodel);
+        return this.entryUndo.deleteDatapoint(requestModel);
     }
 
 

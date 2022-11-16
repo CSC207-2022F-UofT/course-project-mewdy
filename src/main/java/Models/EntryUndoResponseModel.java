@@ -1,24 +1,36 @@
 package Models;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class EntryUndoResponseModel {
-    private String error;
+    private String information;
     private double value;
-    private Date date;
+    private LocalDateTime date;
     private String metric;
 
-    public EntryUndoResponseModel(double value, Date date, String metric){
+    public EntryUndoResponseModel(double value, LocalDateTime date, String metric){
         this.value = value;
         this.date = date;
         this.metric = metric;
     }
 
-    public EntryUndoResponseModel(String error){
-        this.error = error;
+    public EntryUndoResponseModel(String information){
+        this.information = information;
     }
-    public String getError(){
-        return error;
+    public String getInformation(){
+        return this.information;
     }
 
+    public double getValue() {
+        return this.value;
+    }
+
+    public LocalDateTime getDate() {
+        return this.date;
+    }
+
+    public String getMetric() {
+        return metric;
+    }
 }

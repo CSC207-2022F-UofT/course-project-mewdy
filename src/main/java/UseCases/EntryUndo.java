@@ -32,8 +32,7 @@ public class EntryUndo implements EntryUndoInputBoundary{
             }
             double value = deletedData.getValue();
             LocalDateTime date = deletedData.getDate();
-            String responseModel = value + ", " + new SimpleDateFormat("dd/MM/yyyy").format(date) + ", "
-                    + metricName;
+            EntryUndoResponseModel responseModel = new EntryUndoResponseModel(value, date, metricName);
             return presenter.prepareSuccessView(responseModel);
             } catch (Exception e) {
             return presenter.prepareFailView("Unknown Error");
