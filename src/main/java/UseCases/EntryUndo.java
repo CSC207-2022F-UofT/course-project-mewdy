@@ -1,7 +1,6 @@
 package UseCases;
 
 import Entities.MetricStorage;
-import Entities.Metric;
 import Entities.DataPoint;
 import Models.EntryUndoRequestModel;
 import Models.EntryUndoResponseModel;
@@ -9,11 +8,10 @@ import Presenters.EntryUndoPresenter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 
 
-public class EntryUndo {
+public class EntryUndo implements EntryUndoInputBoundary{
     private MetricStorage metricStorage;
     private EntryUndoPresenter presenter;
 

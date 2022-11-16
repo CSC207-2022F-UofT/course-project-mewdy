@@ -1,4 +1,7 @@
 package UseCases;
 
-public class EntryUndoInputBoundary {
+import Models.EntryUndoRequestModel;
+import Models.EntryUndoResponseModel;
+public interface EntryUndoInputBoundary {
+    EntryUndoResponseModel deleteDatapoint(EntryUndoRequestModel requestModel);
 }
