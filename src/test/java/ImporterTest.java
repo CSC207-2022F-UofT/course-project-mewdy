@@ -30,7 +30,7 @@ class ImporterTest {
         importer = new DataImporter(importReq, presenter);
 
         preMadeStorage = new MetricStorage();
-        ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
+        ArrayList<DataPoint> dataPoints = new ArrayList<>();
         dataPoints.add(new DataPoint("2022-11-11 12:47:18", 1));
         dataPoints.add(new DataPoint("2022-11-12 12:47:18", 3));
         dataPoints.add(new DataPoint("2022-11-14 12:47:18", 5));
