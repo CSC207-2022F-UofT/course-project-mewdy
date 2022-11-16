@@ -4,8 +4,6 @@ import Entities.MetricStorage;
 import Models.ExportRequestModel;
 import Presenters.DataExportPresenter;
 import Presenters.DataExportPresenterOutputBoundary;
-import UseCases.DataExportInputBoundary;
-import UseCases.DataExporter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,7 +12,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
+
+import UseCases.DataExportInputBoundary;
+import UseCases.DataExporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -40,23 +41,27 @@ public class ExportTest {
         }
     }
 
-    @Test
+    @Test //test export to root folder
     public void testExport() throws IOException {
         exporter.write();
-        Assertions.assertTrue(isEqual(this.ms, read(new File("./metrics"))));
+        File f = new File("./metrics");
+        f.deleteOnExit();
+        assertTrue(isEqual(this.ms, read(f)));
     }
 
     @Test
     public void testFilesExist() {
-        Assertions.assertTrue(exporter.filesExist());
+        assertTrue(exporter.filesExist());
     }
 
-    @Test
+    @Test //test export to folder that does not exist
     public void testExportToNewFile() throws IOException {
-        File f = new File("./new/metrics");
+        File f = new File("./new");
         f.deleteOnExit();
+        File f2 = new File("./new/metrics");
+        f2.deleteOnExit();
         exporter.writeToNewFile(new ExportRequestModel("./new", this.ms));
-        Assertions.assertTrue(isEqual(this.ms, read(f)));
+        assertTrue(isEqual(this.ms, read(f2)));
     }
 
     private MetricStorage read(File files) throws IOException {

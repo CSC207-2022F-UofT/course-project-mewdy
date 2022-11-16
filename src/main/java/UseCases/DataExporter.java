@@ -2,7 +2,7 @@ package UseCases;
 
 import Entities.DataPoint;
 import Entities.Metric;
-import Entities.MetricStorage;
+import Entities.MetricStorageInterface;
 import Models.ExportRequestModel;
 import Models.ExportResponseModel;
 import Presenters.DataExportPresenterOutputBoundary;
@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class DataExporter implements DataExportInputBoundary {
 
-    private MetricStorage storage;
+    private MetricStorageInterface storage;
     private File folder;
     private final DataExportPresenterOutputBoundary presenter;
 
