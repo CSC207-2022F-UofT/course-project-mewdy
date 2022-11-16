@@ -11,7 +11,7 @@ public class Metric {
     private double lowerBound;
 
     public Metric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound) {
-        //this is a Entities.Metric constructor that takes in an ArrayList of DataPoints in addition to the other
+        //this is an Entities.Metric constructor that takes in an ArrayList of DataPoints in addition to the other
         //instance variables
         if (name.equalsIgnoreCase("sleep")) {
             upperBound = 24;
@@ -42,7 +42,7 @@ public class Metric {
     }
 
     public ArrayList<DataPoint> getDataPoints() {
-        //this is a method for getting the list of DataPoints from a Entities.Metric
+        //this is a method for getting the list of DataPoints from an Entities.Metric
         return this.dataPointList;
     }
 
@@ -57,12 +57,12 @@ public class Metric {
     }
 
     public void addDataPoint(DataPoint entry) {
-        //this is a method for adding a Entities.DataPoint to the end of a Entities.Metric's dataPointList
+        //this is a method for adding an Entities.DataPoint to the end of an Entities.Metric's dataPointList
         this.dataPointList.add(entry);
     }
     public void popDataPoint() {
         //this is a method for removing the most recently added Entities.DataPoint from the Entities.Metric
-        this.dataPointList.remove(-1);
+        this.dataPointList.remove(dataPointList.size() - 1);
     }
 
     public String getName() {
