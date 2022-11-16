@@ -35,14 +35,13 @@ public class DataImporter implements DataImportInputBoundary {
     public ImportResponseModel read() {
         try {
             for (File file : Objects.requireNonNull(this.folder.listFiles())) {
-                ArrayList<String> dates = new ArrayList<String>();
-                ArrayList<Double> data = new ArrayList<Double>();
+                ArrayList<String> dates = new ArrayList<>();
+                ArrayList<Double> data = new ArrayList<>();
                 double upperBound = 0, lowerBound = 0;
                 String fullFileName = file.getName();
-                String extension = fullFileName.substring(fullFileName.lastIndexOf(".") + 1);
                 String filename = fullFileName.substring(0, fullFileName.lastIndexOf("."));
 
-                if (extension.equals("csv")) {
+                if (fullFileName.endsWith(".csv")) {
                     BufferedReader r = new BufferedReader(new FileReader(file));
                     String line = r.readLine();
                     if (line == null) {
@@ -75,7 +74,7 @@ public class DataImporter implements DataImportInputBoundary {
     private void createMetric(
             ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, String name) throws ParseException {
 
-            ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
+            ArrayList<DataPoint> dataPoints = new ArrayList<>();
             for (int i = 0; i < dates.size(); i++) {
                  dataPoints.add(new DataPoint(dates.get(i), data.get(i)));
             }

@@ -2,7 +2,6 @@ package Entities;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Objects;
 
 public class Metric {
@@ -37,7 +36,7 @@ public class Metric {
             lowerBound = 0;
         }
         this.NAME = name;
-        this.DATAPOINTS = new ArrayList<DataPoint>();
+        this.DATAPOINTS = new ArrayList<>();
         this.UPPOERBOUND = upperBound;
         this.LOWERBOUND = lowerBound;
     }
@@ -82,18 +81,12 @@ public class Metric {
         return this.LOWERBOUND;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == this) return true;
-        if (!(o instanceof Metric)) return false;
-
-        Metric metric = (Metric) o;
-
+    public boolean equals(Metric metric) {
         if (Objects.equals(metric.getName(), this.NAME)
                 && metric.getLowerBound() == this.LOWERBOUND
                 && metric.getUpperBound() == this.UPPOERBOUND) {
             for (int i = 0; i < this.DATAPOINTS.size(); i++) {
-                if (metric.getDataPoints().get(i) != this.DATAPOINTS.get(i)) return false;
+                if (!metric.getDataPoints().get(i).equals(this.DATAPOINTS.get(i))) return false;
             }
             return true;
         }

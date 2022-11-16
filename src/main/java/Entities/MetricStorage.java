@@ -11,14 +11,16 @@ public class MetricStorage implements MetricStorageInterface{
     private boolean saved;
 
     public MetricStorage(){
-        this.METRICLIST = new ArrayList<Metric>();
-        this.location = new File("./");
+        this.METRICLIST = new ArrayList<>();
+        this.location = new File("./metrics");
         this.saved = false;
     }
 
     @Override
     public void setPath(File path) {
-        this.location = path;
+        String folder = path.getPath();
+        if (!folder.endsWith("\\metrics")) folder += "\\metrics";
+        this.location = new File(folder);
     }
 
     @Override

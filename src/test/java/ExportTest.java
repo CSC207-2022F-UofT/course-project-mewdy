@@ -2,6 +2,8 @@ import Entities.DataPoint;
 import Entities.Metric;
 import Entities.MetricStorage;
 import Models.ExportRequestModel;
+import Presenters.DataExportPresenter;
+import Presenters.DataExportPresenterOutputBoundary;
 import UseCases.DataExportInputBoundary;
 import UseCases.DataExporter;
 
@@ -10,28 +12,27 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Objects;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
-
-public class TestExport {
+public class ExportTest {
     MetricStorage ms;
     ArrayList<DataPoint> dataPoints;
     DataExportInputBoundary exporter;
+    DataExportPresenterOutputBoundary presenter;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         ms = new MetricStorage();
+        presenter = new DataExportPresenter();
         ExportRequestModel req = new ExportRequestModel("./", this.ms);
-        exporter = new DataExporter(req, null);
-        String[] metrics = {"sleep", "work", "play"};
+        exporter = new DataExporter(req, presenter);
+        String[] metrics = {"play", "sleep", "work"};
         for (String name : metrics) {
-            dataPoints = new ArrayList<DataPoint>();
+            dataPoints = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
                 dataPoints.add(new DataPoint(i));
             }
@@ -39,45 +40,33 @@ public class TestExport {
         }
     }
 
-    @Test(timeout = 50)
+    @Test
     public void testExport() throws IOException {
         exporter.write();
-        assertTrue(isEqual(this.ms, read(new File("./"))));
+        Assertions.assertTrue(isEqual(this.ms, read(new File("./metrics"))));
     }
 
-    @Test(timeout = 50)
+    @Test
     public void testFilesExist() {
-        assertTrue(exporter.filesExist());
+        Assertions.assertTrue(exporter.filesExist());
     }
 
-    @Test(timeout = 50)
+    @Test
     public void testExportToNewFile() throws IOException {
+        File f = new File("./new/metrics");
+        f.deleteOnExit();
         exporter.writeToNewFile(new ExportRequestModel("./new", this.ms));
-        assertTrue(isEqual(this.ms, read(new File("./new"))));
-    }
-
-    @AfterAll
-    public static void cleanUp() {
-        File f;
-        String[] toClean = {"./metric", "./new"};
-        for (String s :
-                toClean) {
-            f = new File(s);
-            if (//f.delete()
-                    true) {
-                System.out.println("Deleted the file: " + Arrays.toString(f.listFiles()));
-            } else {
-                System.out.println("Cleanup failed");
-            }
-        }
+        Assertions.assertTrue(isEqual(this.ms, read(f)));
     }
 
     private MetricStorage read(File files) throws IOException {
         MetricStorage s = new MetricStorage();
 
         for (File file : Objects.requireNonNull(files.listFiles())) {
-            ArrayList<String> dates = new ArrayList<String>();
-            ArrayList<Double> data = new ArrayList<Double>();
+            if (!file.getName().contains(".csv")) continue;
+            file.deleteOnExit();
+            ArrayList<String> dates = new ArrayList<>();
+            ArrayList<Double> data = new ArrayList<>();
             double upperBound = 0, lowerBound = 0;
             String fullFileName = file.getName();
             String extension = fullFileName.substring(fullFileName.lastIndexOf(".") + 1);
@@ -105,7 +94,7 @@ public class TestExport {
     private void createMetric(
             ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, String name, MetricStorage s) {
 
-        ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
+        ArrayList<DataPoint> dataPoints = new ArrayList<>();
         for (int i = 0; i < dates.size(); i++) {
             dataPoints.add(new DataPoint(dates.get(i), data.get(i)));
         }
@@ -113,12 +102,9 @@ public class TestExport {
     }
 
     private boolean isEqual(MetricStorage s1, MetricStorage s2) {
-        if (s1.getMetricList().containsAll(s2.getMetricList())) {
-            for(int i = 0; i < s1.getMetricList().size(); i++) {
-              if (s1.getMetricList().get(i) != s2.getMetricList().get(i)) return false;
+            for (int i = 0; i < s1.getMetricList().size(); i++) {
+                if (!s1.getMetricList().get(i).equals(s2.getMetricList().get(i))) return false;
             }
             return true;
-        }
-        return false;
     }
 }

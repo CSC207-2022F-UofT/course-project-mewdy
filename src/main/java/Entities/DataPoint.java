@@ -27,18 +27,13 @@ public class DataPoint {
         return this.VALUE;
     }
 
-    public LocalDateTime getDate() {
-        //returns the date of the Entities.DataPoint
-        return this.DATE;
+    public String getDate() {
+        //returns date in string from
+        return this.DATE.format(FORMAT);
     }
 
-    @Override
-    public boolean equals(Object o){
-        if (o == this) return true;
-        if (!(o instanceof DataPoint)) return false;
-
-        DataPoint dp = (DataPoint) o;
-        return this.DATE == dp.getDate() && this.VALUE == dp.getValue();
+    public boolean equals(DataPoint dp){
+        return this.DATE.format(FORMAT).equals(dp.getDate()) && this.VALUE == dp.getValue();
     }
 
     private LocalDateTime formatDate(String date) {

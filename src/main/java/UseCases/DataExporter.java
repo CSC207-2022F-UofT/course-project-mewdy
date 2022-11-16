@@ -20,17 +20,17 @@ public class DataExporter implements DataExportInputBoundary {
 
 
     public DataExporter(ExportRequestModel req, DataExportPresenterOutputBoundary presenter) {
-        this.folder = new File(req.getPath());
         this.storage = req.getStore();
         this.presenter = presenter;
-        this.storage.setPath(this.folder);
+        this.storage.setPath(new File(req.getPath()));
+        this.folder = this.storage.getPath();
     }
 
     @Override
-    public ExportResponseModel writeToNewFile(ExportRequestModel req){
-        this.folder = new File(req.getPath());
+    public ExportResponseModel writeToNewFile(ExportRequestModel req) {
         this.storage = req.getStore();
-        this.storage.setPath(this.folder);
+        this.storage.setPath(new File(req.getPath()));
+        this.folder = this.storage.getPath();
         return write();
     }
 
@@ -38,23 +38,22 @@ public class DataExporter implements DataExportInputBoundary {
     public ExportResponseModel write() {
 
         BufferedWriter writer;
-        for (Metric metric :
-                storage.getMetricList()) {
+        for (Metric metric : storage.getMetricList()) {
             try {
-                String currentFIle = folder.getPath() + "\\" + metric.getName();
-                writer = new BufferedWriter(new FileWriter(currentFIle));
-                String header = String.format("Date,Datapoint,%s,%s",metric.getUpperBound(), metric.getLowerBound());
+                if (!this.folder.exists()) this.folder.mkdirs();
+                String currentFile = this.folder.getPath() + "\\" + metric.getName() + ".csv";
+                writer = new BufferedWriter(new FileWriter(currentFile));
+                String header = String.format("Date,Datapoint,%s,%s", metric.getUpperBound(), metric.getLowerBound());
                 writer.write(header);
                 writer.newLine();
-                for (DataPoint dp :
-                        metric.getDataPoints()) {
-                    String line = String.format("%s,%s,,",dp.getDate(), dp.getValue());
+                for (DataPoint dp : metric.getDataPoints()) {
+                    String line = String.format("%s,%s,,", dp.getDate(), dp.getValue());
                     writer.write(line);
                     writer.newLine();
                 }
                 writer.close();
             } catch (IOException e) {
-                return presenter.prepareFailView("Error writing file");
+                return presenter.prepareFailView(e.getMessage());
             }
         }
         storage.save();
@@ -64,10 +63,9 @@ public class DataExporter implements DataExportInputBoundary {
     @Override
     public boolean filesExist() { //Check if a file will be overwritten
         File file;
-        for (Metric m:
-                storage.getMetricList()) {
-            file = new File(folder + "\\" + m.getName() + ".csv");
-            if(file.exists()) return true;
+        for (Metric m : storage.getMetricList()) {
+            file = new File(this.folder + "\\" + m.getName() + ".csv");
+            if (file.exists()) return true;
         }
         return false;
     }
