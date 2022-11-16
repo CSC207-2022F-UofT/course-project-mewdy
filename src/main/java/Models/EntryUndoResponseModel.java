@@ -1,7 +1,6 @@
 package Models;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class EntryUndoResponseModel {
     private String information;

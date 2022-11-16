@@ -2,7 +2,6 @@ package Controllers;
 
 import Models.EntryUndoRequestModel;
 import Models.EntryUndoResponseModel;
-import UseCases.EntryUndo;
 import UseCases.EntryUndoInputBoundary;
 
 public class EntryUndoController {

@@ -8,12 +8,11 @@ import Presenters.EntryUndoPresenter;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.text.SimpleDateFormat;
 
 
 public class EntryUndo implements EntryUndoInputBoundary{
-    private MetricStorage metricStorage;
-    private EntryUndoPresenter presenter;
+    private final MetricStorage metricStorage;
+    private final EntryUndoPresenter presenter;
 
     public EntryUndo(MetricStorage metricStorage, EntryUndoPresenter presenter){
         this.metricStorage = metricStorage;
@@ -23,8 +22,8 @@ public class EntryUndo implements EntryUndoInputBoundary{
     public EntryUndoResponseModel deleteDatapoint(EntryUndoRequestModel requestModel){
         String metricName = requestModel.getMetricName();
         try{
-            ArrayList deletedMetric = this.metricStorage.getDataPointList(metricName);
-            DataPoint deletedData = (DataPoint) deletedMetric.get(-1);
+            ArrayList<DataPoint> deletedMetric = this.metricStorage.getDataPointList(metricName);
+            DataPoint deletedData = deletedMetric.get(-1);
             this.metricStorage.removeDataPoint(metricName);
             if (deletedData.getDate() == null){
                 return presenter.prepareFailView("Metric can't undo - " + metricName
