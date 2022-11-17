@@ -35,6 +35,7 @@ public class MetricStorage implements MetricStorageInterface{
         //this method removes the most recent Entities.DataPoint from a chosen Entities.Metric based on its given name
         for (Metric metric: this.metricList) {
             if (Objects.equals(metric.getName(), metricName)) {
+                metric.popDataPoint();
                 break;
             }
         }
