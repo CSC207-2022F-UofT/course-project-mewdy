@@ -41,7 +41,6 @@ class EntryUndoTest{
 
     preMadeStorage.addDataPoint("sleep", testDataA);
     preMadeStorage.addDataPoint("sleep", testDataC);
-    preMadeStorage.addDataPoint("sleep", testDataB);
 
 
 
