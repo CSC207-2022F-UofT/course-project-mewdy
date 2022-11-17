@@ -10,6 +10,7 @@ public class DataLoggerResponseModel{
     private String message;
 
     public DataLoggerResponseModel(String message, String metricName, double value) {
+        // depending on whether the DataLog fails or succeeds, these values will be relevant or not
         this.message = message;
         this.metricName = metricName;
         this.value = value;
