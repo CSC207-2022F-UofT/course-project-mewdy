@@ -1,22 +1,19 @@
 package Presenters;
 
-import org.jfree.chart.JFreeChart;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
+import org.knowm.xchart.XYChart;
 
 public class MetricSumViewModel {
 
-    JFreeChart chart;
+    XYChart chart;
     String metricAverageAndSize;
 
 
-    public MetricSumViewModel(JFreeChart chart, String metricAverageAndSize){
+    public MetricSumViewModel(XYChart chart, String metricAverageAndSize){
         this.chart = chart;
         this.metricAverageAndSize = metricAverageAndSize;
     }
 
-    public JFreeChart getChart(){ return chart;}
+    public XYChart getChart(){ return chart;}
 
     public String getMetricAverageAndSize(){ return  metricAverageAndSize;}
 }

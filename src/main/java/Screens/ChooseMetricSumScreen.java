@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 //import org.jfree.chart
 
-public class ChooseMetricSumScreen extends JPanel implements ActionListener{
+public class ChooseMetricSumScreen extends JFrame implements ActionListener{
 
     MetricStorageInterface metricStorage;
     MetricSumController metricSumController;
@@ -26,6 +26,7 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener{
 
         JLabel title = new JLabel("Metric Summary");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.setSize(500, 500);
 
         // Add buttons for every Metric in MetricStorage.
         JPanel buttons = new JPanel();
@@ -37,10 +38,13 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener{
             metricButton.setActionCommand(m.getName());
         }
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        JPanel main = new JPanel();
+        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+        main.add(buttons);
         
         this.add(title);
-        this.add(buttons);
+        this.add(main);
+        this.setVisible(true);
 
     }
 

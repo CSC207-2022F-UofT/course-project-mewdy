@@ -26,7 +26,7 @@ public class MetricSumResponseModel {
 
     public double getMetricAverage(){return this.metricAverage;}
 
-    public double getMetricSize(){return this.metricSize;}
+    public int getMetricSize(){return this.metricSize;}
 
     public String getMetricName(){return this.metricName;}
 }
