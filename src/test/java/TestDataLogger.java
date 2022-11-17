@@ -71,12 +71,24 @@ public class TestDataLogger {
 
     @Test
     public void testLogDataPointNoOverwrite() throws Exception {
-        // makes sure that 2 datapoints cannot be added for the same current day
+        // makes sure that adding multiple datapoints on the same day doesn't add more
         storage.addMetric(new Metric("mood", 10, 0));
-        controller.logDataPoint(1, "mood");
-        controller.logDataPoint(10, "mood");
+        for (int i = 1; i<=10;i++){
+            controller.logDataPoint(i, "mood");
+        }
         int length = storage.getMetricList().size();
         assertEquals(1, length);
+    }
+
+    @Test
+    public void testLogDataPointNoOverwrite2() throws Exception {
+        // makes sure that datapoints added on the same day don't overwrite their values
+        storage.addMetric(new Metric("mood", 10, 0));
+        for (int i = 1; i<=10;i++){
+            controller.logDataPoint(i, "mood");
+        }
+        double value = storage.getMetric("mood").getDataPoints().get(0).getValue();
+        assertEquals(1, value);
     }
 
 
