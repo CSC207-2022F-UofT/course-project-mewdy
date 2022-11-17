@@ -1,3 +1,4 @@
+import Entities.DataPoint;
 import UseCases.DataLogger;
 import UseCases.DataLoggerInputBoundary;
 import UseCases.DataLoggerOutputBoundary;
@@ -10,6 +11,8 @@ import Entities.Metric;
 import Entities.MetricStorage;
 import Entities.MetricStorageInterface;
 import Presenters.DataLoggerPresenter;
+
+import java.util.ArrayList;
 
 
 public class TestDataLogger {
@@ -70,13 +73,13 @@ public class TestDataLogger {
     }
 
     @Test
-    public void testLogDataPointNoOverwrite() throws Exception {
+    public void testLogDataPointOverwrite() throws Exception {
         // makes sure that adding multiple datapoints on the same day doesn't add more
         storage.addMetric(new Metric("mood", 10, 0));
         for (int i = 1; i<=10;i++){
             controller.logDataPoint(i, "mood");
         }
-        int length = storage.getMetricList().size();
+        int length = storage.getMetric("mood").getDataPoints().size();
         assertEquals(1, length);
     }
 
@@ -91,6 +94,45 @@ public class TestDataLogger {
         assertEquals(1, value);
     }
 
+    @Test
+    public void testLogDataPointOnLongList() throws Exception {
+        // makes sure that datapoints can be added while other datapoints are in the arraylist at other dates
+        Metric mood = new Metric("mood", 10, 0);
+        mood.addDataPoint(new DataPoint("2022-10-23 01:00:00", 3));
+        storage.addMetric(mood);
+        controller.logDataPoint(4, "mood");
+        int length = storage.getMetric("mood").getDataPoints().size();
+        assertEquals(2, length);
+    }
+
+    @Test
+    public void testLogDataPointOnLongListValuesCorrect() throws Exception {
+        // makes sure that datapoints values are consistent after adding datapoints on different days
+        Metric mood = new Metric("mood", 10, 0);
+        mood.addDataPoint(new DataPoint("2022-10-23 01:00:00", 3));
+        storage.addMetric(mood);
+        controller.logDataPoint(4, "mood");
+        ArrayList<DataPoint> dataPoints = storage.getMetric("mood").getDataPoints();
+        double first = dataPoints.get(0).getValue();
+        double second = dataPoints.get(1).getValue();
+        assertEquals(3, first);
+        assertEquals(4, second);
+    }
+
+    @Test
+    public void testLogDataPointReallyLongList() throws Exception {
+        // tests that adding many datapoints doesn't interfere with the usecase
+        Metric mood = new Metric("mood", 10, 0);
+        for (Integer i = 1; i<=9;i++) {
+            mood.addDataPoint(new DataPoint("2022-11-0" + i.toString() + " 01:00:00", i));
+        }
+
+        storage.addMetric(mood);
+        controller.logDataPoint(4, "mood");
+        ArrayList<DataPoint> dataPoints = storage.getMetric("mood").getDataPoints();
+        int length = storage.getMetric("mood").getDataPoints().size();
+        assertEquals(10, length);
+    }
 
 
 }

@@ -5,6 +5,9 @@ import Entities.Metric;
 import Entities.MetricStorageInterface;
 import Presenters.DataLoggerResponseModel;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class DataLogger implements DataLoggerInputBoundary{
 
     final MetricStorageInterface metricStorage;
@@ -29,14 +32,24 @@ public class DataLogger implements DataLoggerInputBoundary{
             Metric metric = metricStorage.getMetric(metricName);
             double upperBound = metric.getUpperBound();
             double lowerBound = metric.getLowerBound();
-
-            if ((lowerBound <= value) && (upperBound >= value)) {
+            int size = metric.getDataPoints().size();
+            String lastDate = null;
+            String todayDate = null;
+            if (size >= 1) {
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                lastDate = metric.getDataPoints().get(size - 1).getDate().format(myFormatObj);
+                todayDate = LocalDate.now().format(myFormatObj);
+            }
+            else {
+                todayDate = "neq";
+                lastDate = "neq2";
+            }
+            if ((lowerBound <= value) && (upperBound >= value) && (!todayDate.equals(lastDate))) {
                 DataPoint newEntry = new DataPoint(value);
                 metric.addDataPoint(newEntry);
 
                 return presenter.prepareSuccessView(responseModel);
-            }
-            else {
+            } else {
                 return presenter.prepareFailView("Failed to add datapoint, invalid value");
             }
         }
