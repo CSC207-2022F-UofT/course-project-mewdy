@@ -6,15 +6,15 @@ import models.ImportResponseModel;
 import use_cases.DataImportInputBoundary;
 
 public class DataImportController {
-    private final DataImportInputBoundary gateway;
+    private final DataImportInputBoundary INPUTBOUNDARY;
 
-    public DataImportController(DataImportInputBoundary gateway) {
-        this.gateway = gateway;
+    public DataImportController(DataImportInputBoundary inputBoundary) {
+        this.INPUTBOUNDARY = inputBoundary;
     }
 
      public ImportResponseModel readFromNewFile(String path, MetricStorage store) {
          ImportRequestModel req = new ImportRequestModel(path, store);
 
-         return gateway.readFromNewFile(req);
+         return INPUTBOUNDARY.readFromNewFile(req);
      }
 }

@@ -3,9 +3,9 @@ package controllers;
 import use_cases.DataExportInputBoundary;
 
 public class DataExportController {
-    private final DataExportInputBoundary gateway;
+    private final DataExportInputBoundary INPUTBOUNDARY;
 
-    public DataExportController(DataExportInputBoundary gateway) {
-        this.gateway = gateway;
+    public DataExportController(DataExportInputBoundary inputBoundary) {
+        this.INPUTBOUNDARY = inputBoundary;
     }
 }
