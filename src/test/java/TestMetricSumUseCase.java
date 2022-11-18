@@ -1,7 +1,6 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import Screens.DataSummaryFailed;
-import org.jfree.data.time.Day;
 import org.junit.jupiter.api.Test;
 
 import Entities.DataPoint;
@@ -14,12 +13,11 @@ import Presenters.MetricSumViewModel;
 import UseCases.MetricSumInputBoundary;
 import UseCases.MetricSumOutputBoundary;
 import UseCases.MetricSummarizer;
-import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TestMetricSumUseCase {
 
-            /*
+
     @Test
     public void testMetricSummarizerSuccess() throws Exception {
 
@@ -54,10 +52,10 @@ public class TestMetricSumUseCase {
 
         MetricSumViewModel viewModel = metricSummarizer.getMetricSummary(requestModel);
 
-        assertEquals("Average: 4; Size: 7", viewModel.getMetricAverageAndSize());
+        assertEquals("Average: 4.0; Size: 7", viewModel.getMetricAverageAndSize());
     }
 
-         */
+
 
 
     @Test

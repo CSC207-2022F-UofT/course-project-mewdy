@@ -3,11 +3,7 @@ package Presenters;
 import Models.MetricSumResponseModel;
 import Screens.DataSummaryFailed;
 import UseCases.MetricSumOutputBoundary;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.JFreeChart;
-import org.jfree.data.time.Day;
-import org.jfree.data.time.TimeSeries;
-import org.jfree.data.time.TimeSeriesCollection;
+
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 import org.knowm.xchart.XYSeries;
@@ -17,7 +13,9 @@ import org.knowm.xchart.style.lines.SeriesLines;
 import org.knowm.xchart.style.markers.SeriesMarkers;
 
 import java.awt.*;
-import java.time.LocalDate;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -45,36 +43,44 @@ public class MetricSumPresenter implements MetricSumOutputBoundary {
         throw new DataSummaryFailed(error);
     }
 
-    private XYChart createChart(MetricSumResponseModel responseModel){
-        String metricName = responseModel.getMetricName();
+    private XYChart createChart(MetricSumResponseModel responseModel) {
 
-        XYChart chart = new XYChartBuilder().width(800).height(600).theme(Styler.ChartTheme.Matlab).
-                title(metricName + " vs Time").xAxisTitle("Time").yAxisTitle(metricName).build();
+        XYChart chart = null;
+        try {
+            String metricName = responseModel.getMetricName();
 
-        chart.getStyler().setPlotGridLinesVisible(false);
+            chart = new XYChartBuilder().width(800).height(600).theme(Styler.ChartTheme.Matlab).
+                    title(metricName + " vs Time").xAxisTitle("Time").yAxisTitle(metricName).build();
 
-        ArrayList<LocalDateTime> xData = formatDates(responseModel);
-        ArrayList<Double> yData = responseModel.getDatalist();
+            chart.getStyler().setPlotGridLinesVisible(false);
 
-        XYSeries series = chart.addSeries(metricName, xData, yData);
-        series.setLineColor(XChartSeriesColors.LIGHT_GREY);
-        series.setMarkerColor(Color.BLACK);
-        series.setMarker(SeriesMarkers.CIRCLE);
-        series.setLineStyle(SeriesLines.SOLID);
+            ArrayList<Date> xData = formatDates(responseModel);
+            ArrayList<Double> yData = responseModel.getDatalist();
 
+            XYSeries series = chart.addSeries(metricName, xData, yData);
+            series.setLineColor(XChartSeriesColors.LIGHT_GREY);
+            series.setMarkerColor(Color.BLACK);
+            series.setMarker(SeriesMarkers.CIRCLE);
+            series.setLineStyle(SeriesLines.SOLID);
+
+            return chart;
+        } catch (ParseException e) {
+            System.err.println("ParseException caught!");
+            e.printStackTrace();
+        }
         return chart;
     }
 
-    private ArrayList<LocalDateTime> formatDates(MetricSumResponseModel responseModel){
+    private ArrayList<Date> formatDates(MetricSumResponseModel responseModel) throws ParseException {
         ArrayList<LocalDateTime> dates = responseModel.getTimePoints();
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-        ArrayList<LocalDateTime> formattedDates = new ArrayList<>();
+        ArrayList<Date> formattedDates = new ArrayList<>();
 
         for (LocalDateTime d: dates){
             String date = d.format(formatter);
-            LocalDateTime formattedDate = LocalDateTime.parse(date, formatter);
-            formattedDates.add(formattedDate);
+            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            formattedDates.add(sdf.parse(date));
         }
         return formattedDates;
     }

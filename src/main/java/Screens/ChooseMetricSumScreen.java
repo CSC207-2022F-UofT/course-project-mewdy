@@ -4,6 +4,7 @@ import Entities.Metric;
 import Entities.MetricStorageInterface;
 import Controllers.MetricSumController;
 import Presenters.MetricSumViewModel;
+import org.knowm.xchart.SwingWrapper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -54,6 +55,7 @@ public class ChooseMetricSumScreen extends JFrame implements ActionListener{
             MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
             String averageAndTrend = viewModel.getMetricAverageAndSize();
             JOptionPane.showMessageDialog(this, averageAndTrend);
+            new SwingWrapper(viewModel.getChart()).displayChart();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
