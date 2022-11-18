@@ -1,7 +1,7 @@
-package UseCases;
+package use_cases;
 
-import Models.ImportRequestModel;
-import Models.ImportResponseModel;
+import models.ImportRequestModel;
+import models.ImportResponseModel;
 
 public interface DataImportInputBoundary {
 

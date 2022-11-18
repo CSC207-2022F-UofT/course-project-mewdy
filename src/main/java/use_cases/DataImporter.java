@@ -1,11 +1,11 @@
-package UseCases;
+package use_cases;
 
-import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorageInterface;
-import Models.ImportRequestModel;
-import Models.ImportResponseModel;
-import Presenters.DataImportPresenterOutputBoundary;
+import entities.DataPoint;
+import entities.Metric;
+import entities.MetricStorageInterface;
+import models.ImportRequestModel;
+import models.ImportResponseModel;
+import presenters.DataImportPresenterOutputBoundary;
 
 import java.io.*;
 import java.text.ParseException;

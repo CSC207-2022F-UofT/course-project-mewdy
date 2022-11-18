@@ -1,11 +1,11 @@
-import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorage;
-import Models.ImportRequestModel;
-import Presenters.DataImportPresenter;
-import Presenters.DataImportPresenterOutputBoundary;
-import UseCases.DataImportInputBoundary;
-import UseCases.DataImporter;
+import entities.DataPoint;
+import entities.Metric;
+import entities.MetricStorage;
+import models.ImportRequestModel;
+import presenters.DataImportPresenter;
+import presenters.DataImportPresenterOutputBoundary;
+import use_cases.DataImportInputBoundary;
+import use_cases.DataImporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

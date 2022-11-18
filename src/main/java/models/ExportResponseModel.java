@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 public class ExportResponseModel {
     private final String errorMsg;

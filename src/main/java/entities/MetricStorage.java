@@ -1,4 +1,4 @@
-package Entities;
+package entities;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,6 +26,7 @@ public class MetricStorage implements MetricStorageInterface{
     @Override
     public void addMetric(Metric metric) {
         //this method adds an Entities.Metric to the end of the metricList
+        //TODO sort metrics as they are added
         this.METRICLIST.add(metric);
         this.saved = false;
     }

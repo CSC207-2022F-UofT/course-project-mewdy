@@ -1,6 +1,6 @@
-package Controllers;
+package controllers;
 
-import UseCases.DataExportInputBoundary;
+import use_cases.DataExportInputBoundary;
 
 public class DataExportController {
     private final DataExportInputBoundary gateway;

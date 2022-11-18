@@ -1,4 +1,4 @@
-package Models;
+package models;
 
 public class ImportResponseModel {
     private final String errorMsg;

@@ -1,6 +1,6 @@
-package Presenters;
+package presenters;
 
-import Models.ImportResponseModel;
+import models.ImportResponseModel;
 
 public class DataImportPresenter implements DataImportPresenterOutputBoundary {
 

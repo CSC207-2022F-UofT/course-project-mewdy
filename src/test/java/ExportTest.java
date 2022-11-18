@@ -1,9 +1,9 @@
-import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorage;
-import Models.ExportRequestModel;
-import Presenters.DataExportPresenter;
-import Presenters.DataExportPresenterOutputBoundary;
+import entities.DataPoint;
+import entities.Metric;
+import entities.MetricStorage;
+import models.ExportRequestModel;
+import presenters.DataExportPresenter;
+import presenters.DataExportPresenterOutputBoundary;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -14,8 +14,8 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import UseCases.DataExportInputBoundary;
-import UseCases.DataExporter;
+import use_cases.DataExportInputBoundary;
+import use_cases.DataExporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

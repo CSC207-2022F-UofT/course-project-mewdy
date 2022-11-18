@@ -1,9 +1,9 @@
-package Controllers;
+package controllers;
 
-import Entities.MetricStorage;
-import Models.ImportRequestModel;
-import Models.ImportResponseModel;
-import UseCases.DataImportInputBoundary;
+import entities.MetricStorage;
+import models.ImportRequestModel;
+import models.ImportResponseModel;
+import use_cases.DataImportInputBoundary;
 
 public class DataImportController {
     private final DataImportInputBoundary gateway;

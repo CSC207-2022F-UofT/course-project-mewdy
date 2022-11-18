@@ -1,7 +1,7 @@
-package UseCases;
+package use_cases;
 
-import Models.ExportRequestModel;
-import Models.ExportResponseModel;
+import models.ExportRequestModel;
+import models.ExportResponseModel;
 
 public interface DataExportInputBoundary {
     ExportResponseModel writeToNewFile(ExportRequestModel req);
