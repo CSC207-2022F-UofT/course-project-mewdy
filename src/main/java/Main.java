@@ -12,8 +12,7 @@ import java.util.Date;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        MetricStorageInterface storage = new MetricStorage();
-        DataPoint datapoint = new DataPoint(5);
+    public static void main(String[] args){
+
     }
 }
