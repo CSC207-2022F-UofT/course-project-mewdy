@@ -24,9 +24,8 @@ public class TestDataLogger {
     @BeforeEach
     public void setUp() {
         storage = new MetricStorage();
-        presenter = new DataLoggerPresenter();
-        dataLogger = new DataLogger(storage, presenter);
-        controller = new DataLoggerController(storage, dataLogger, presenter);
+        dataLogger = new DataLogger(storage);
+        controller = new DataLoggerController(dataLogger);
     }
 
     @Test
