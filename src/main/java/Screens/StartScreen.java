@@ -9,20 +9,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Objects;
 
-public class StartScreen extends JFrame implements ActionListener {
+public class StartScreen extends JPanel implements ActionListener {
 
-    MetricStorageInterface metricStorage;
-    MetricSumController metricSumController;
+    CardLayout cardlayout;
+    JPanel screens;
 
-    public StartScreen(MetricStorageInterface metricStorage, MetricSumController metricSumController){
+    public StartScreen(CardLayout cardLayout, JPanel screens){
 
-        this.metricStorage = metricStorage;
-        this.metricSumController = metricSumController;
+        this.cardlayout = cardLayout;
+        this.screens = screens;
 
-        JLabel title = new JLabel("Mewdy");
+
+        JLabel title = new JLabel("Start screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setSize(500,500);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JButton importButton = new JButton("Import");
         JButton newButton = new JButton("New");
@@ -35,19 +34,16 @@ public class StartScreen extends JFrame implements ActionListener {
         newButton.addActionListener(this);
         newButton.setActionCommand("New");
 
-        JPanel main = new JPanel();
-        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        main.add(title);
-        main.add(buttons);
-        this.add(main);
+        this.add(title);
+        this.add(buttons);
     }
 
     // React to button click
     public void actionPerformed(ActionEvent evt){
         if (Objects.equals(evt.getActionCommand(), "New")){
-            this.dispose();
-            new HomeScreen(metricStorage, metricSumController);
+            cardlayout.show(screens, "home");
         }
         System.out.println("Clicked");
     }

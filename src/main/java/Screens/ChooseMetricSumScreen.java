@@ -5,6 +5,7 @@ import Entities.MetricStorageInterface;
 import Controllers.MetricSumController;
 import Presenters.MetricSumViewModel;
 import org.knowm.xchart.SwingWrapper;
+import org.knowm.xchart.XYChart;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
 
 //import org.jfree.chart
 
-public class ChooseMetricSumScreen extends JFrame implements ActionListener{
+public class ChooseMetricSumScreen extends JPanel implements ActionListener{
 
     MetricStorageInterface metricStorage;
     MetricSumController metricSumController;
@@ -27,7 +28,6 @@ public class ChooseMetricSumScreen extends JFrame implements ActionListener{
 
         JLabel title = new JLabel("Metric Summary");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setSize(500, 500);
 
         // Add buttons for every Metric in MetricStorage.
         JPanel buttons = new JPanel();
@@ -39,13 +39,10 @@ public class ChooseMetricSumScreen extends JFrame implements ActionListener{
             metricButton.setActionCommand(m.getName());
         }
 
-        JPanel main = new JPanel();
-        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
-        main.add(buttons);
-        
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(title);
-        this.add(main);
-        this.setVisible(true);
+        this.add(buttons);
+
 
     }
 
@@ -54,8 +51,8 @@ public class ChooseMetricSumScreen extends JFrame implements ActionListener{
         try {
             MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
             String averageAndTrend = viewModel.getMetricAverageAndSize();
-            JOptionPane.showMessageDialog(this, averageAndTrend);
-            new SwingWrapper(viewModel.getChart()).displayChart();
+            XYChart chart = viewModel.getChart();
+            new MetricSummaryScreen(averageAndTrend, chart);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }

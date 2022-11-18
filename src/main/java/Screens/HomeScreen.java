@@ -9,21 +9,19 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HomeScreen extends JFrame implements ActionListener {
+public class HomeScreen extends JPanel implements ActionListener {
 
-    MetricStorageInterface metricStorage;
-    MetricSumController metricSumController;
+    CardLayout cardLayout;
+    JPanel screens;
 
-    public HomeScreen(MetricStorageInterface metricStorage, MetricSumController metricSumController) {
 
-        this.metricStorage = metricStorage;
-        this.metricSumController = metricSumController;
+    public HomeScreen(CardLayout cardLayout, JPanel screens) {
+
+        this.cardLayout = cardLayout;
+        this.screens = screens;
 
         JLabel title = new JLabel("Home");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-        this.setSize(500, 500);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JButton importButton = new JButton("Record");
         JButton summaryButton = new JButton("Summary");
@@ -39,19 +37,17 @@ public class HomeScreen extends JFrame implements ActionListener {
         summaryButton.addActionListener(this);
         summaryButton.setActionCommand("Summary");
 
-        JPanel main = new JPanel();
-        main.setLayout(new BoxLayout(main, BoxLayout.Y_AXIS));
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        main.add(title);
-        main.add(buttons);
-        this.add(main);
-        this.setVisible(true);
+        this.add(title);
+        this.add(buttons);
+
     }
 
     //React to summary button click
     public void actionPerformed(ActionEvent evt){
         if (evt.getActionCommand().equals("Summary")){
-            new ChooseMetricSumScreen(metricStorage, metricSumController);
+            cardLayout.show(screens, "chooseMetricSum");
         }
         System.out.println("Clicked");
 

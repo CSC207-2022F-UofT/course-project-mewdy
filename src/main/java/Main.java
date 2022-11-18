@@ -4,6 +4,8 @@ import Entities.Metric;
 import Entities.MetricStorage;
 import Entities.MetricStorageInterface;
 import Presenters.MetricSumPresenter;
+import Screens.ChooseMetricSumScreen;
+import Screens.HomeScreen;
 import Screens.StartScreen;
 import UseCases.MetricSumInputBoundary;
 import UseCases.MetricSumOutputBoundary;
@@ -18,10 +20,10 @@ public class Main {
     public static void main(String[] args) throws ParseException {
 
 
-        // Create necessary classes to run program
+        // Create metric storage
         MetricStorageInterface metricStorage = new MetricStorage();
 
-        //Create data points
+        //Create data points *test*
         ArrayList<DataPoint> dataPoints = new ArrayList<>();
         dataPoints.add(new DataPoint("2018-01-01 19:34:50", 1.0));
         dataPoints.add(new DataPoint("2018-01-02 19:34:50", 2.0));
@@ -31,23 +33,43 @@ public class Main {
         dataPoints.add(new DataPoint("2018-01-06 19:34:50", 6.0));
         dataPoints.add(new DataPoint("2018-01-07 19:34:50", 7.0));
 
-        //Create metrics
+        //Create metrics *test*
         Metric m1 = new Metric("sleep",dataPoints, 24, 0);
         Metric m2 = new Metric("empty", 10,0);
 
         metricStorage.addMetric(m1);
         metricStorage.addMetric(m2);
 
+        // Create necessary classess to run program
         MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
         MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
         MetricSumController metricSumController = new MetricSumController(metricSummarizer);
 
-        // Build the main program window
-        JFrame application = new StartScreen(metricStorage, metricSumController);
+
+        // Initialize UI components
+        JFrame frame = new JFrame("Mewdy");
+        frame.setSize(500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        CardLayout cardLayout = new CardLayout();
+        JPanel screens = new JPanel(cardLayout);
+
+        // Initialize screens
+        JPanel startScreen = new StartScreen(cardLayout, screens);
+        JPanel homeScreen = new HomeScreen(cardLayout, screens);
+        JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController);
+
+
+        screens.add(startScreen, "start");
+        screens.add(homeScreen, "home");
+        screens.add(chooseMetricSumScreen, "chooseMetricSum");
+
 
         // Build GUI
-
-        application.setVisible(true);
+        cardLayout.show(screens, "start");
+        frame.add(screens);
+        frame.pack();
+        frame.setVisible(true);
 
 
     }
