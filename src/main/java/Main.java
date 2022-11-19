@@ -55,7 +55,6 @@ public class Main {
         // Initialize UI components
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
-        new MainFrame(screens, cardLayout);
 
         // Initialize screens
         JPanel startScreen = new StartScreen(cardLayout, screens);
