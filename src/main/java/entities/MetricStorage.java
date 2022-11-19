@@ -20,6 +20,7 @@ public class MetricStorage implements MetricStorageInterface{
     public void setPath(File path) {
         String folder = path.getPath();
         if (!folder.endsWith(File.separator + "metrics")) folder += File.separator + "metrics";
+        System.out.println(folder);
         this.location = new File(folder);
     }
 
