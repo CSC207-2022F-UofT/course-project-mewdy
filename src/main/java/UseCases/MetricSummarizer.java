@@ -64,7 +64,7 @@ public class MetricSummarizer implements MetricSumInputBoundary {
         return sum;
     }
 
-    //helper method to calculate simple trend across datapoints in metric
+    //helper method to calculate number of datapoints stored in metric
     private int calculateMetricSize(ArrayList<DataPoint> dataPoints){
         return dataPoints.size();
     }

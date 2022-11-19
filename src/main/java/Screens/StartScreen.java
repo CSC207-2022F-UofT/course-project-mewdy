@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Objects;
 
 public class StartScreen extends JPanel implements ActionListener {
@@ -31,6 +32,7 @@ public class StartScreen extends JPanel implements ActionListener {
         buttons.add(newButton);
 
         importButton.addActionListener(this);
+        importButton.setActionCommand("Import");
         newButton.addActionListener(this);
         newButton.setActionCommand("New");
 
@@ -45,6 +47,16 @@ public class StartScreen extends JPanel implements ActionListener {
         if (Objects.equals(evt.getActionCommand(), "New")){
             cardlayout.show(screens, "home");
         }
-        System.out.println("Clicked");
+        if (evt.getActionCommand().equals("Import")){
+            JFileChooser importFileChooser = new JFileChooser();
+
+            //Select file to open
+            int response = importFileChooser.showOpenDialog(null);
+
+            if (response == JFileChooser.APPROVE_OPTION){
+                File file = new File(importFileChooser.getSelectedFile().getAbsolutePath());
+            }
+
+        }
     }
 }

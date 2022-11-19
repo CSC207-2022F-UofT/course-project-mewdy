@@ -1,6 +1,8 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import Controllers.MetricSumController;
 import Screens.DataSummaryFailed;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import Entities.DataPoint;
@@ -13,26 +15,31 @@ import Presenters.MetricSumViewModel;
 import UseCases.MetricSumInputBoundary;
 import UseCases.MetricSumOutputBoundary;
 import UseCases.MetricSummarizer;
+
+import java.text.ParseException;
 import java.util.ArrayList;
 
 public class TestMetricSumUseCase {
 
+    MetricSumInputBoundary metricSummarizer;
+    MetricStorageInterface metricStorage;
+    MetricSumOutputBoundary metricSumPresenter;
+    MetricSumController metricSumController;
 
-    @Test
-    public void testMetricSummarizerSuccess() throws Exception {
-
+    @BeforeEach
+    public void setUp() throws ParseException {
         //Initialize Presenter
-        MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
+        metricSumPresenter = new MetricSumPresenter();
 
         //Create data points
         ArrayList<DataPoint> dataPoints = new ArrayList<>();
-        dataPoints.add(new DataPoint("2018-01-01 19:34:50", 1.0));
-        dataPoints.add(new DataPoint("2018-01-02 19:34:50", 2.0));
-        dataPoints.add(new DataPoint("2018-01-04 19:34:50", 3.0));
-        dataPoints.add(new DataPoint("2018-01-04 19:34:50", 4.0));
-        dataPoints.add(new DataPoint("2018-01-05 19:34:50", 5.0));
-        dataPoints.add(new DataPoint("2018-01-06 19:34:50", 6.0));
-        dataPoints.add(new DataPoint("2018-01-07 19:34:50", 7.0));
+        dataPoints.add(new DataPoint("2018-01-01 19:34:50", 1.253));
+        dataPoints.add(new DataPoint("2018-01-02 19:34:50", 1.253));
+        dataPoints.add(new DataPoint("2018-01-04 19:34:50", 1.253));
+        dataPoints.add(new DataPoint("2018-01-04 19:34:50", 1.253));
+        dataPoints.add(new DataPoint("2018-01-05 19:34:50", 1.253));
+        dataPoints.add(new DataPoint("2018-01-06 19:34:50", 1.253));
+        dataPoints.add(new DataPoint("2018-01-07 19:34:50", 1.253));
 
         //Create metrics
         Metric m1 = new Metric("sleep",dataPoints, 24, 0);
@@ -40,53 +47,31 @@ public class TestMetricSumUseCase {
 
         //Create metric storage and populate with metrics and datapoints within the metrics.
 
-        MetricStorageInterface metricStorage = new MetricStorage();
+        metricStorage = new MetricStorage();
         metricStorage.addMetric(m1);
         metricStorage.addMetric(m2);
 
         //Initialize MetricSummarizer
-        MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
+        metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
+
+    }
+    // Test that Metric Summarizer returns view model with properly formatted String displaying avg and size of metric
+    @Test
+    public void testMetricSummarizerSuccess(){
 
         //Create request model
         MetricSumRequestModel requestModel = new MetricSumRequestModel("sleep");
 
         MetricSumViewModel viewModel = metricSummarizer.getMetricSummary(requestModel);
 
-        assertEquals("Average: 4.0; Size: 7", viewModel.getMetricAverageAndSize());
+
+        assertEquals("Average: 1.26; Size: 7", viewModel.getMetricAverageAndSize());
     }
 
-
-
-
+    // Test that Metric Summarizer throws DataSummaryFailed exception when Metric contains fewer than 7 dataPoints.
+    // Metric needs to contain >= 7 datapoints for summary function to work.
     @Test
-    public void testMetricSummarizerFail() throws Exception {
-
-        //Initialize Presenter
-        MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
-
-        //Create data points
-        ArrayList<DataPoint> dataPoints = new ArrayList<DataPoint>();
-        dataPoints.add(new DataPoint("2018-01-01 19:34:50", 1.0));
-        dataPoints.add(new DataPoint("2018-01-02 19:34:50", 2.0));
-        dataPoints.add(new DataPoint("2018-01-04 19:34:50", 3.0));
-        dataPoints.add(new DataPoint("2018-01-04 19:34:50", 4.0));
-        dataPoints.add(new DataPoint("2018-01-05 19:34:50", 5.0));
-        dataPoints.add(new DataPoint("2018-01-06 19:34:50", 6.0));
-        dataPoints.add(new DataPoint("2018-01-07 19:34:50", 7.0));
-
-        //Create metrics
-        Metric m1 = new Metric("sleep", dataPoints, 24, 0);
-        Metric m2 = new Metric("empty", 10, 0);
-
-        //Create metric storage and populate with metrics and datapoints within the metrics.
-
-        MetricStorageInterface metricStorage = new MetricStorage();
-        metricStorage.addMetric(m1);
-        metricStorage.addMetric(m2);
-
-        //Initialize MetricSummarizer
-        MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
-
+    public void testMetricSummarizerFail() {
         //Create request model
         MetricSumRequestModel requestModel = new MetricSumRequestModel("empty");
 
@@ -95,33 +80,7 @@ public class TestMetricSumUseCase {
         assertEquals("Metric summary unavailable - empty contains fewer than 7 data points.",
                 exception.getMessage());
     }
-    @Test
-    public void testMetricStorageGetMetric() throws Exception {
 
-        //Create data points
-        ArrayList<DataPoint> dataPoints = new ArrayList<>();
-        dataPoints.add(new DataPoint("2018-01-01 19:34:50", 1.0));
-        dataPoints.add(new DataPoint("2018-01-02 19:34:50", 2.0));
-        dataPoints.add(new DataPoint("2018-01-04 19:34:50", 3.0));
-        dataPoints.add(new DataPoint("2018-01-04 19:34:50", 4.0));
-        dataPoints.add(new DataPoint("2018-01-05 19:34:50", 5.0));
-        dataPoints.add(new DataPoint("2018-01-06 19:34:50", 6.0));
-        dataPoints.add(new DataPoint("2018-01-07 19:34:50", 7.0));
-
-        //Create metrics
-        Metric m1 = new Metric("sleep",dataPoints, 24, 0);
-        Metric m2 = new Metric("empty", 10,0);
-
-        //Create metric storage and populate with metrics and datapoints within the metrics.
-
-        MetricStorageInterface metricStorage = new MetricStorage();
-        metricStorage.addMetric(m1);
-        metricStorage.addMetric(m2);
-
-        assertEquals("sleep", m1.getName());
-        assertEquals(m1, metricStorage.getMetric("sleep"));
-        assertFalse(metricStorage.getMetric("sleep").getDataPoints().size() < 7);
-    }
 
 }
 
