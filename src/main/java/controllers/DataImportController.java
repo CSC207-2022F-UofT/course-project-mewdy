@@ -13,7 +13,7 @@ public class DataImportController {
         this.INPUTBOUNDARY = inputBoundary;
     }
 
-     public ImportResponseModel readFromNewFile(String path, MetricStorageInterface store) {
+     public ImportResponseModel readFromNewFile(String path) {
          ImportRequestModel req = new ImportRequestModel(path);
 
          return INPUTBOUNDARY.readFromNewFile(req);

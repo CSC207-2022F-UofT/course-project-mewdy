@@ -18,6 +18,7 @@ public class DataImporter implements DataImportInputBoundary {
     private final DataImportPresenterOutputBoundary presenter;
 
     public DataImporter(MetricStorageInterface storage, DataImportPresenterOutputBoundary presenter) throws IOException {
+        this.folder = storage.getPath();
         this.storage = storage;
         this.presenter = presenter;
 

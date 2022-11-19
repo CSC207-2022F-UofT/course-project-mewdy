@@ -10,6 +10,7 @@ import use_cases.DataImporter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -26,6 +27,7 @@ class ImporterTest {
     @BeforeEach
     void setUp() throws IOException {
         storage = new MetricStorage();
+        storage.setPath(new File("./test data/metrics"));
         presenter = new DataImportPresenter();
         importReq = new ImportRequestModel("./test data/metrics");
         importer = new DataImporter(storage, presenter);

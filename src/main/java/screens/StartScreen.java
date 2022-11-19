@@ -52,6 +52,7 @@ public class StartScreen extends JPanel implements ActionListener {
 
             if (response == JFileChooser.APPROVE_OPTION){
                 File file = new File(importFileChooser.getSelectedFile().getAbsolutePath());
+                System.out.println(file);
             }
         }
     }
