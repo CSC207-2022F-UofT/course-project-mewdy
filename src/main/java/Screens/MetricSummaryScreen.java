@@ -19,12 +19,15 @@ public class MetricSummaryScreen extends JFrame {
 
         JLabel title = new JLabel(metricAvgAndSize);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.setSize(500,500);
+        this.setSize(700,700);
 
         XChartPanel<XYChart> chartPanel = new XChartPanel<XYChart>(chart);
 
-        this.add(title);
-        this.add(chartPanel);
+        JPanel main = new JPanel();
+        main.setLayout(new BoxLayout(main, BoxLayout.PAGE_AXIS));
+        main.add(title);
+        main.add(chartPanel);
+        this.add(main);
 
         this.setVisible(true);
 

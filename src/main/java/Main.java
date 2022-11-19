@@ -4,9 +4,7 @@ import Entities.Metric;
 import Entities.MetricStorage;
 import Entities.MetricStorageInterface;
 import Presenters.MetricSumPresenter;
-import Screens.ChooseMetricSumScreen;
-import Screens.HomeScreen;
-import Screens.StartScreen;
+import Screens.*;
 import UseCases.MetricSumInputBoundary;
 import UseCases.MetricSumOutputBoundary;
 import UseCases.MetricSummarizer;
@@ -58,11 +56,13 @@ public class Main {
         JPanel startScreen = new StartScreen(cardLayout, screens);
         JPanel homeScreen = new HomeScreen(cardLayout, screens);
         JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController);
+        JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage);
 
 
         screens.add(startScreen, "start");
         screens.add(homeScreen, "home");
         screens.add(chooseMetricSumScreen, "chooseMetricSum");
+        screens.add(dataLogChooseScreen, "dataLogChoose");
 
 
         // Build GUI

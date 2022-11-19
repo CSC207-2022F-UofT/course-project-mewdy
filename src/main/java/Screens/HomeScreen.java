@@ -13,6 +13,7 @@ public class HomeScreen extends JPanel implements ActionListener {
 
     CardLayout cardLayout;
     JPanel screens;
+    JButton backButton;
 
 
     public HomeScreen(CardLayout cardLayout, JPanel screens) {
@@ -23,19 +24,32 @@ public class HomeScreen extends JPanel implements ActionListener {
         JLabel title = new JLabel("Home");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton importButton = new JButton("Record");
+        JButton recordButton = new JButton("Record");
         JButton summaryButton = new JButton("Summary");
         JButton saveButton = new JButton("Save");
         JButton exportButton = new JButton("Export");
+        JButton entryUndoButton = new JButton("Undo Entry");
+        JButton addMetricButton = new JButton("Add Metric");
+        JButton deleteMetricButton = new JButton("Delete Metric");
+        backButton = new JButton("Back");
 
         JPanel buttons = new JPanel();
-        buttons.add(importButton);
+        buttons.add(recordButton);
         buttons.add(summaryButton);
         buttons.add(saveButton);
         buttons.add(exportButton);
+        buttons.add(entryUndoButton);
+        buttons.add(addMetricButton);
+        buttons.add(deleteMetricButton);
+        buttons.add(backButton);
 
         summaryButton.addActionListener(this);
         summaryButton.setActionCommand("Summary");
+
+        recordButton.addActionListener(this);
+        recordButton.setActionCommand("dataLogChoose");
+
+        backButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -49,7 +63,12 @@ public class HomeScreen extends JPanel implements ActionListener {
         if (evt.getActionCommand().equals("Summary")){
             cardLayout.show(screens, "chooseMetricSum");
         }
-        System.out.println("Clicked");
+        if (evt.getActionCommand().equals("dataLogChoose")){
+            cardLayout.show(screens, "dataLogChoose");
+        }
+        if (evt.getSource() == backButton){
+            cardLayout.previous(screens);
+        }
 
     }
 }
