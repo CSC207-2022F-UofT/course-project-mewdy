@@ -1,15 +1,15 @@
 import controllers.DataImportController;
+import controllers.DataLoggerController;
 import controllers.MetricSumController;
 import entities.DataPoint;
 import entities.Metric;
 import entities.MetricStorage;
 import entities.MetricStorageInterface;
 import presenters.DataImportPresenter;
+import presenters.DataLoggerPresenter;
 import presenters.MetricSumPresenter;
 import screens.*;
-import use_cases.MetricSumInputBoundary;
-import use_cases.MetricSumOutputBoundary;
-import use_cases.MetricSummarizer;
+import use_cases.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,26 +41,27 @@ public class Main {
         metricStorage.addMetric(m2);
 
         // Create necessary classess to run program
+        //Metric Summary Use Case
         MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
         MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
         MetricSumController metricSumController = new MetricSumController(metricSummarizer);
 
-        DataImportPresenter dataImportPresenter = new DataImportPresenter();
+        //Data Logging Use Case
+        DataLoggerPresenter dataLoggerPresenter = new DataLoggerPresenter();
+        DataLoggerInputBoundary dataLogger = new DataLogger(metricStorage);
+        DataLoggerController dataLoggerController = new DataLoggerController(dataLogger);
 
 
         // Initialize UI components
-        JFrame frame = new JFrame("Mewdy");
-        frame.setSize(500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
+        new MainFrame(screens, cardLayout);
 
         // Initialize screens
         JPanel startScreen = new StartScreen(cardLayout, screens);
         JPanel homeScreen = new HomeScreen(cardLayout, screens);
         JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController);
-        JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage);
+        JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController);
 
 
         screens.add(startScreen, "start");
@@ -71,10 +72,6 @@ public class Main {
 
         // Build GUI
         cardLayout.show(screens, "start");
-        frame.add(screens);
-        frame.pack();
-        frame.setVisible(true);
-
 
     }
 }

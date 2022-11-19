@@ -1,5 +1,6 @@
 package screens;
 
+import controllers.DataLoggerController;
 import entities.Metric;
 import entities.MetricStorageInterface;
 
@@ -10,16 +11,14 @@ import java.util.ArrayList;
 public class DataLogChooseScreen extends JTabbedPane {
 
     MetricStorageInterface metricStorage;
+    DataLoggerController dataLoggerController;
 
-    public DataLogChooseScreen(MetricStorageInterface metricStorage){
+    public DataLogChooseScreen(MetricStorageInterface metricStorage, DataLoggerController dataLoggerController){
         this.metricStorage = metricStorage;
+        this.dataLoggerController = dataLoggerController;
 
         this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        JLabel title = new JLabel("Choose Metric to record");
-        title.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(title);
-        this.setBounds(50,50,200,200);
 
         // Add buttons for every Metric in MetricStorage.
         ArrayList<Metric> metricList = metricStorage.getMetricList();
@@ -27,10 +26,11 @@ public class DataLogChooseScreen extends JTabbedPane {
             String metricName = m.getName();
             double upperBound = m.getUpperBound();
             double lowerBound = m.getLowerBound();
-            DataLogInputScreen tab = new DataLogInputScreen(metricName, upperBound,lowerBound);
+            DataLogInputScreen tab = new DataLogInputScreen(metricName, upperBound,lowerBound, dataLoggerController);
             this.add(metricName, tab);
         }
 
+        this.add("Add Metric", new AddMetricScreen(metricStorage));
 
 
     }

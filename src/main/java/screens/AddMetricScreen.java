@@ -53,6 +53,10 @@ public class AddMetricScreen extends JPanel {
         customMetrics.add(upperBoundInput);
         customMetrics.add(customLowerBound);
         customMetrics.add(lowerBoundInput);
+        customMetrics.add(createButton);
+
+        this.add(presetMetrics);
+        this.add(customMetrics);
 
     }
 }
