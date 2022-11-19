@@ -19,7 +19,7 @@ public class MetricStorage implements MetricStorageInterface{
     @Override
     public void setPath(File path) {
         String folder = path.getPath();
-        if (!folder.endsWith("/metrics")) folder += "/metrics";
+        if (!folder.endsWith("metrics")) folder += File.separator + "metrics";
         this.location = new File(folder);
     }
 
