@@ -1,4 +1,4 @@
-package Presenters;
+package presenters;
 
 import org.knowm.xchart.XYChart;
 

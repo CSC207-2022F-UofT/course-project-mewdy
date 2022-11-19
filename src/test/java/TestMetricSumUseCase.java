@@ -1,20 +1,20 @@
 import static org.junit.jupiter.api.Assertions.*;
 
-import Controllers.MetricSumController;
-import Screens.DataSummaryFailed;
+import controllers.MetricSumController;
+import screens.DataSummaryFailed;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorage;
-import Entities.MetricStorageInterface;
-import Models.MetricSumRequestModel;
-import Presenters.MetricSumPresenter;
-import Presenters.MetricSumViewModel;
-import UseCases.MetricSumInputBoundary;
-import UseCases.MetricSumOutputBoundary;
-import UseCases.MetricSummarizer;
+import entities.DataPoint;
+import entities.Metric;
+import entities.MetricStorage;
+import entities.MetricStorageInterface;
+import models.MetricSumRequestModel;
+import presenters.MetricSumPresenter;
+import presenters.MetricSumViewModel;
+import use_cases.MetricSumInputBoundary;
+import use_cases.MetricSumOutputBoundary;
+import use_cases.MetricSummarizer;
 
 import java.text.ParseException;
 import java.util.ArrayList;

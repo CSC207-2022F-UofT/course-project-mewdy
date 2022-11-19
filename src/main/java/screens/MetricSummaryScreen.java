@@ -1,7 +1,5 @@
-package Screens;
+package screens;
 
-import Presenters.MetricSumViewModel;
-import org.jfree.chart.ChartPanel;
 import org.knowm.xchart.XChartPanel;
 import org.knowm.xchart.XYChart;
 

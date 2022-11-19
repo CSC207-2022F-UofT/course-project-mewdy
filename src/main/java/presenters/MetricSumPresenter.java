@@ -1,8 +1,8 @@
-package Presenters;
+package presenters;
 
-import Models.MetricSumResponseModel;
-import Screens.DataSummaryFailed;
-import UseCases.MetricSumOutputBoundary;
+import models.MetricSumResponseModel;
+import screens.DataSummaryFailed;
+import use_cases.MetricSumOutputBoundary;
 
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
@@ -18,8 +18,6 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -87,15 +85,13 @@ public class MetricSumPresenter implements MetricSumOutputBoundary {
     }
 
     private ArrayList<Date> formatDates(MetricSumResponseModel responseModel) throws ParseException {
-        ArrayList<LocalDateTime> dates = responseModel.getTimePoints();
+        ArrayList<String> dates = responseModel.getTimePoints();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         ArrayList<Date> formattedDates = new ArrayList<>();
 
-        for (LocalDateTime d: dates){
-            String date = d.format(formatter);
-            DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            formattedDates.add(sdf.parse(date));
+        for (String d: dates){
+            formattedDates.add(sdf.parse(d));
         }
         return formattedDates;
     }

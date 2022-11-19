@@ -1,10 +1,9 @@
-package Screens;
+package screens;
 
-import Entities.Metric;
-import Entities.MetricStorageInterface;
-import Controllers.MetricSumController;
-import Presenters.MetricSumViewModel;
-import org.knowm.xchart.SwingWrapper;
+import entities.Metric;
+import entities.MetricStorageInterface;
+import controllers.MetricSumController;
+import presenters.MetricSumViewModel;
 import org.knowm.xchart.XYChart;
 
 import javax.swing.*;

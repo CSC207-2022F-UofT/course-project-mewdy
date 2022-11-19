@@ -1,12 +1,10 @@
-package Screens;
+package screens;
 
-import Entities.Metric;
-import Entities.MetricStorageInterface;
+import entities.Metric;
+import entities.MetricStorageInterface;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class DataLogChooseScreen extends JTabbedPane {

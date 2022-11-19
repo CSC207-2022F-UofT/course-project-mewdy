@@ -1,7 +1,4 @@
-package Screens;
-
-import Controllers.MetricSumController;
-import Entities.MetricStorageInterface;
+package screens;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,7 +53,6 @@ public class StartScreen extends JPanel implements ActionListener {
             if (response == JFileChooser.APPROVE_OPTION){
                 File file = new File(importFileChooser.getSelectedFile().getAbsolutePath());
             }
-
         }
     }
 }

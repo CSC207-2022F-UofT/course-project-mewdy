@@ -1,16 +1,16 @@
-package UseCases;
+package use_cases;
 
-import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorageInterface;
-import Models.MetricSumRequestModel;
-import Models.MetricSumResponseModel;
-import Presenters.MetricSumViewModel;
-import Screens.DataSummaryFailed;
+import entities.DataPoint;
+import entities.Metric;
+import entities.MetricStorageInterface;
+import models.MetricSumRequestModel;
+import models.MetricSumResponseModel;
+import presenters.MetricSumViewModel;
+import screens.DataSummaryFailed;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.math.*;
+
 public class MetricSummarizer implements MetricSumInputBoundary {
 
     private MetricStorageInterface metricStorage;
@@ -33,7 +33,7 @@ public class MetricSummarizer implements MetricSumInputBoundary {
 
             ArrayList<DataPoint> dataPoints = metricToSum.getDataPoints();
             ArrayList<Double> dataList = new ArrayList<>();
-            ArrayList<LocalDateTime> timePoints = new ArrayList<>();
+            ArrayList<String> timePoints = new ArrayList<>();
             for (DataPoint d: dataPoints){
                 timePoints.add(d.getDate());
                 dataList.add(d.getValue());

@@ -1,6 +1,6 @@
-package Screens;
+package screens;
 
-import Entities.MetricStorageInterface;
+import entities.MetricStorageInterface;
 
 import javax.swing.*;
 import java.awt.*;

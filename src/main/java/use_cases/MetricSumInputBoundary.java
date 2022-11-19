@@ -1,7 +1,7 @@
-package UseCases;
+package use_cases;
 
-import Models.MetricSumRequestModel;
-import Presenters.MetricSumViewModel;
+import models.MetricSumRequestModel;
+import presenters.MetricSumViewModel;
 
 public interface MetricSumInputBoundary {
     MetricSumViewModel getMetricSummary(MetricSumRequestModel requestModel);

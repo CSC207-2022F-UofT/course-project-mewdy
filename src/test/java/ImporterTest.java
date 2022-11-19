@@ -1,6 +1,7 @@
 import entities.DataPoint;
 import entities.Metric;
 import entities.MetricStorage;
+import entities.MetricStorageInterface;
 import models.ImportRequestModel;
 import presenters.DataImportPresenter;
 import presenters.DataImportPresenterOutputBoundary;
@@ -15,8 +16,8 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ImporterTest {
-    MetricStorage preMadeStorage;
-    MetricStorage storage;
+    MetricStorageInterface preMadeStorage;
+    MetricStorageInterface storage;
 
     DataImportPresenterOutputBoundary presenter;
     DataImportInputBoundary importer;
@@ -26,8 +27,8 @@ class ImporterTest {
     void setUp() throws IOException {
         storage = new MetricStorage();
         presenter = new DataImportPresenter();
-        importReq = new ImportRequestModel("./test data/metrics", storage);
-        importer = new DataImporter(importReq, presenter);
+        importReq = new ImportRequestModel("./test data/metrics");
+        importer = new DataImporter(storage, presenter);
 
         preMadeStorage = new MetricStorage();
         ArrayList<DataPoint> dataPoints = new ArrayList<>();
@@ -55,7 +56,7 @@ class ImporterTest {
         assertTrue(isEqual(storage, preMadeStorage));
     }
 
-    private boolean isEqual(MetricStorage s1, MetricStorage s2) {
+    private boolean isEqual(MetricStorageInterface s1, MetricStorageInterface s2) {
         for (int i = 0; i < s1.getMetricList().size(); i++) {
             if (!s1.getMetricList().get(i).equals(s2.getMetricList().get(i))) return false;
         }

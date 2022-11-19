@@ -1,13 +1,15 @@
-import Controllers.MetricSumController;
-import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorage;
-import Entities.MetricStorageInterface;
-import Presenters.MetricSumPresenter;
-import Screens.*;
-import UseCases.MetricSumInputBoundary;
-import UseCases.MetricSumOutputBoundary;
-import UseCases.MetricSummarizer;
+import controllers.DataImportController;
+import controllers.MetricSumController;
+import entities.DataPoint;
+import entities.Metric;
+import entities.MetricStorage;
+import entities.MetricStorageInterface;
+import presenters.DataImportPresenter;
+import presenters.MetricSumPresenter;
+import screens.*;
+import use_cases.MetricSumInputBoundary;
+import use_cases.MetricSumOutputBoundary;
+import use_cases.MetricSummarizer;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,6 +44,8 @@ public class Main {
         MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
         MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
         MetricSumController metricSumController = new MetricSumController(metricSummarizer);
+
+        DataImportPresenter dataImportPresenter = new DataImportPresenter();
 
 
         // Initialize UI components

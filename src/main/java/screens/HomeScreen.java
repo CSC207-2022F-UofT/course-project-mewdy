@@ -1,8 +1,7 @@
-package Screens;
+package screens;
 
-import Controllers.MetricSumController;
-import Entities.MetricStorage;
-import Entities.MetricStorageInterface;
+import entities.MetricStorage;
+import entities.MetricStorageInterface;
 
 import javax.swing.*;
 import java.awt.*;
