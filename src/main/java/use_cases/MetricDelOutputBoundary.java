@@ -1,6 +1,6 @@
-package UseCases;
+package use_cases;
 
-import Models.MetricDelResponseModel;
+import models.MetricDelResponseModel;
 
 public interface MetricDelOutputBoundary {
     MetricDelResponseModel prepareSuccessView(MetricDelResponseModel responseModel);

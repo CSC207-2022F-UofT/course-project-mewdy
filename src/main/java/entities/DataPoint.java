@@ -1,4 +1,4 @@
-package Entities;
+package entities;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;

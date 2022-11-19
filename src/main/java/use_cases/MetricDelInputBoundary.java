@@ -1,7 +1,7 @@
-package UseCases;
+package use_cases;
 
-import Models.MetricDelRequestModel;
-import Models.MetricDelResponseModel;
+import models.MetricDelRequestModel;
+import models.MetricDelResponseModel;
 
 public interface MetricDelInputBoundary {
     MetricDelResponseModel create(MetricDelRequestModel requestModel);
