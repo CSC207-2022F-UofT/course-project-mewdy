@@ -1,10 +1,11 @@
-package UseCases;
+package use_cases;
 
-import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorageInterface;
-import Presenters.DataLoggerPresenter;
-import Presenters.DataLoggerResponseModel;
+import entities.DataPoint;
+import entities.Metric;
+import entities.MetricStorageInterface;
+import models.DataLoggerRequestModel;
+import presenters.DataLoggerPresenter;
+import models.DataLoggerResponseModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +27,7 @@ public class DataLogger implements DataLoggerInputBoundary{
         double value = requestModel.getValue();
         DataLoggerResponseModel responseModel = new DataLoggerResponseModel("Successfully added datapoint",
                 metricName, value);
-        DataLoggerOutputBoundary presenter = new DataLoggerPresenter();
+        DataLoggerOutputBoundary presenter = (DataLoggerOutputBoundary) new DataLoggerPresenter();
         try {
             Metric metric = this.metricStorage.getMetric(metricName);
             double upperBound = metric.getUpperBound();
@@ -35,8 +36,8 @@ public class DataLogger implements DataLoggerInputBoundary{
             String lastDate = null;
             String todayDate = null;
             if (size >= 1) {
-                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                lastDate = metric.getDataPoints().get(size - 1).getDate().format(myFormatObj);
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+                lastDate = metric.getDataPoints().get(size - 1).getDate().substring(0, 10);
                 todayDate = LocalDate.now().format(myFormatObj);
             }
             else {

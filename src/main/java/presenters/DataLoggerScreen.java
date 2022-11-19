@@ -1,4 +1,4 @@
-package Presenters;
+package presenters;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

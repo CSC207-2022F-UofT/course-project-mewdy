@@ -1,6 +1,6 @@
-package UseCases;
+package use_cases;
 
-import Presenters.DataLoggerResponseModel;
+import models.DataLoggerResponseModel;
 
 public interface DataLoggerOutputBoundary {
 

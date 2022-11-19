@@ -1,6 +1,4 @@
-package Presenters;
-
-import UseCases.DataLoggerOutputBoundary;
+package models;
 
 public class DataLoggerResponseModel{
 

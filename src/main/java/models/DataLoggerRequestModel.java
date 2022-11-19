@@ -1,6 +1,6 @@
-package UseCases;
+package models;
 
-import Entities.MetricStorageInterface;
+import entities.MetricStorageInterface;
 
 public class DataLoggerRequestModel {
 

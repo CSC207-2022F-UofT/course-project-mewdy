@@ -1,37 +1,41 @@
-package Entities;
+package entities;
 
-import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DataPoint {
 
     private final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private double value;
-    private LocalDateTime date;
+    private final double VALUE;
+    private final LocalDateTime DATE;
 
-    public DataPoint(String date, double value) throws ParseException {
+    public DataPoint(String date, double value) {
         LocalDateTime d = formatDate(date);
-        this.value = value;
-        this.date = d;
+        this.VALUE = value;
+        this.DATE = d;
     }
 
     //overload constructor for creating Entities.DataPoint at current date time
     public DataPoint(double value) {
         LocalDateTime date = formatDate(LocalDateTime.now().format(FORMAT));
-        this.value = value;
-        this.date = date;
+        this.VALUE = value;
+        this.DATE = date;
     }
 
     public double getValue() {
         //returns the value of the Entities.DataPoint
-        return this.value;
+        return this.VALUE;
     }
 
-    public LocalDateTime getDate() {
-        //returns the date of the Entities.DataPoint
-        return this.date;
+    public String getDate() {
+        //returns date in string from
+        return this.DATE.format(FORMAT);
     }
+
+    public boolean equals(DataPoint dp){
+        return this.DATE.format(FORMAT).equals(dp.getDate()) && this.VALUE == dp.getValue();
+    }
+
     private LocalDateTime formatDate(String date) {
         return LocalDateTime.parse(date, FORMAT);
     }

@@ -1,17 +1,10 @@
-package Controllers;
+package controllers;
 
 
-import Entities.Metric;
-import Entities.MetricStorageInterface;
-import Presenters.DataLogFailed;
-import Presenters.DataLoggerPresenter;
-import Presenters.DataLoggerResponseModel;
-import UseCases.DataLogger;
-import UseCases.DataLoggerInputBoundary;
-import UseCases.DataLoggerOutputBoundary;
-import UseCases.DataLoggerRequestModel;
-
-import javax.xml.crypto.Data;
+import presenters.DataLogFailed;
+import models.DataLoggerResponseModel;
+import models.DataLoggerRequestModel;
+import use_cases.DataLoggerInputBoundary;
 
 public class DataLoggerController{
 

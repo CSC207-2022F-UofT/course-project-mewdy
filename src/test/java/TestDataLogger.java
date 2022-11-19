@@ -1,30 +1,28 @@
-import Entities.DataPoint;
-import UseCases.DataLogger;
-import UseCases.DataLoggerInputBoundary;
-import UseCases.DataLoggerOutputBoundary;
+import entities.DataPoint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-import Controllers.DataLoggerController;
-import Entities.Metric;
-import Entities.MetricStorage;
-import Entities.MetricStorageInterface;
-import Presenters.DataLoggerPresenter;
+import controllers.DataLoggerController;
+import entities.Metric;
+import entities.MetricStorage;
+import entities.MetricStorageInterface;
+import use_cases.DataLogger;
+import use_cases.DataLoggerInputBoundary;
+import use_cases.DataLoggerOutputBoundary;
 
 import java.util.ArrayList;
 
 
 public class TestDataLogger {
     MetricStorageInterface storage;
-    DataLoggerOutputBoundary presenter;
     DataLoggerInputBoundary dataLogger;
     DataLoggerController controller;
 
     @BeforeEach
     public void setUp() {
         storage = new MetricStorage();
-        dataLogger = new DataLogger(storage);
+        dataLogger = (DataLoggerInputBoundary) new DataLogger(storage);
         controller = new DataLoggerController(dataLogger);
     }
 
@@ -79,6 +77,7 @@ public class TestDataLogger {
             controller.logDataPoint(i, "mood");
         }
         int length = storage.getMetric("mood").getDataPoints().size();
+
         assertEquals(1, length);
     }
 
