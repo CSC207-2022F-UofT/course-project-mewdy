@@ -41,7 +41,7 @@ public class DataExporter implements DataExportInputBoundary {
         for (Metric metric : storage.getMetricList()) {
             try {
                 if (!this.folder.exists()) this.folder.mkdirs();
-                String currentFile = this.folder.getPath() + "\\" + metric.getName() + ".csv";
+                String currentFile = this.folder.getPath() + File.separator + metric.getName() + ".csv";
                 writer = new BufferedWriter(new FileWriter(currentFile));
                 String header = String.format("Date,Datapoint,%s,%s", metric.getUpperBound(), metric.getLowerBound());
                 writer.write(header);
@@ -64,7 +64,7 @@ public class DataExporter implements DataExportInputBoundary {
     public boolean filesExist() { //Check if a file will be overwritten
         File file;
         for (Metric m : storage.getMetricList()) {
-            file = new File(this.folder + "\\" + m.getName() + ".csv");
+            file = new File(this.folder + File.separator + m.getName() + ".csv");
             if (file.exists()) return true;
         }
         return false;
