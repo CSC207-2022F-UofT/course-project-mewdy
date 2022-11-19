@@ -67,7 +67,7 @@ public class ExportTest {
     private MetricStorage read(File files) throws IOException {
         MetricStorage s = new MetricStorage();
 
-        for (File file : Objects.requireNonNull(files.listFiles())) {
+        for (File file :files.listFiles()) {
             if (!file.getName().contains(".csv")) continue;
             file.deleteOnExit();
             ArrayList<String> dates = new ArrayList<>();
