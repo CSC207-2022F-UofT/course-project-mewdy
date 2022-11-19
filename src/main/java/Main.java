@@ -1,18 +1,5 @@
-import Controllers.DataLoggerController;
-import Entities.DataPoint;
-import Entities.Metric;
-import Entities.MetricStorage;
-import Entities.MetricStorageInterface;
-import Presenters.DataLoggerPresenter;
-import UseCases.DataLoggerInputBoundary;
-import UseCases.DataLoggerOutputBoundary;
-import UseCases.MetricAdder;
-
-import java.util.Date;
-import java.util.Scanner;
-
 public class Main {
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
+        
     }
 }
