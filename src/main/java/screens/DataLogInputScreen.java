@@ -1,18 +1,29 @@
 package screens;
 
+import controllers.DataLoggerController;
+import models.DataLoggerResponseModel;
+import presenters.DataLogFailed;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class DataLogInputScreen extends JPanel {
+public class DataLogInputScreen extends JPanel implements ActionListener {
 
     String metricName;
     double upperBound;
     double lowerBound;
+    JButton recordButton;
+    JTextField dataInput;
+    DataLoggerController dataLoggerController;
 
-    public DataLogInputScreen(String metricName, double upperBound, double lowerBound){
+    public DataLogInputScreen(String metricName, double upperBound, double lowerBound,
+                              DataLoggerController dataLoggerController){
         this.metricName = metricName;
         this.upperBound = upperBound;
         this.lowerBound = lowerBound;
+        this.dataLoggerController = dataLoggerController;
 
         JLabel title = new JLabel("Input data for " + metricName);
         JLabel bounds = new JLabel("Upper Bound: " + upperBound + " Lower Bound: " +
@@ -21,8 +32,9 @@ public class DataLogInputScreen extends JPanel {
         bounds.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 
-        JButton recordButton = new JButton("Record");
-        JTextField dataInput = new JTextField();
+        recordButton = new JButton("Record");
+        recordButton.addActionListener(this);
+        dataInput = new JTextField();
         dataInput.setPreferredSize(new Dimension(250,40));
 
         this.add(title);
@@ -30,5 +42,20 @@ public class DataLogInputScreen extends JPanel {
         this.add(dataInput);
         this.add(recordButton);
 
+    }
+
+    public void actionPerformed(ActionEvent evt){
+        if (evt.getSource() == recordButton){
+            try {
+                double dataValue = Double.parseDouble(dataInput.getText());
+                DataLoggerResponseModel responseModel = dataLoggerController.logDataPoint(dataValue, metricName);
+                JOptionPane.showMessageDialog(this, responseModel.getMessage());
+            } catch (DataLogFailed e){
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Invalid input! Please enter a number");
+            }
+
+        }
     }
 }
