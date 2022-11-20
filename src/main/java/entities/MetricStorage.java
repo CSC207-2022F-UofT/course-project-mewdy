@@ -30,7 +30,6 @@ public class MetricStorage implements MetricStorageInterface{
     @Override
     public void addMetric(Metric metric) {
         //this method adds an Entities.Metric to the end of the metricList
-        //TODO sort metrics as they are added
         this.METRICLIST.add(metric);
         Collections.sort(this.METRICLIST, new MetricComparator());
         this.saved = false;
@@ -110,9 +109,8 @@ public class MetricStorage implements MetricStorageInterface{
 
     public static class MetricComparator implements Comparator<Metric> {
 
-        public int compare(Metric s, Metric t) {
-            return s.getName().compareTo(t.getName());
-            //return (f != 0) ? f : s.date.compareTo(t.date);
+        public int compare(Metric m1, Metric m2) {
+            return m1.getName().compareTo(m2.getName());
         }
     }
 }

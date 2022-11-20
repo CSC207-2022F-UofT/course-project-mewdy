@@ -49,8 +49,8 @@ class ImporterTest {
     @Test
     void read() {
         importer.read();
-        printMetrics(storage);
-        printMetrics(preMadeStorage);
+        //printMetrics(storage);
+        //printMetrics(preMadeStorage);
         assertTrue(isEqual(storage, preMadeStorage));
     }
 
