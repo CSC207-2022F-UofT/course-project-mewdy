@@ -49,6 +49,8 @@ class ImporterTest {
     @Test
     void read() {
         importer.read();
+        //printMetrics(storage);
+        //printMetrics(preMadeStorage);
         assertTrue(isEqual(storage, preMadeStorage));
     }
 
@@ -63,6 +65,18 @@ class ImporterTest {
             if (!s1.getMetricList().get(i).equals(s2.getMetricList().get(i))) return false;
         }
         return true;
+    }
+
+    private void printMetrics(MetricStorageInterface storage){
+        for (Metric metric:
+                storage.getMetricList()) {
+            System.out.println(metric.getName() + " " + metric.getUpperBound() + " " + metric.getLowerBound());
+            for (DataPoint dp:
+                    metric.getDataPoints()) {
+                System.out.println(dp.getDate() + ", " + dp.getValue());
+            }
+            System.out.println();
+        }
     }
 
 }
