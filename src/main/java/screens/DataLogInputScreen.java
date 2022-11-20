@@ -16,14 +16,19 @@ public class DataLogInputScreen extends JPanel implements ActionListener {
     double lowerBound;
     JButton recordButton;
     JTextField dataInput;
+    JButton  backButton;
     DataLoggerController dataLoggerController;
+    CardLayout cardLayout;
+    JPanel screens;
 
     public DataLogInputScreen(String metricName, double upperBound, double lowerBound,
-                              DataLoggerController dataLoggerController){
+                              DataLoggerController dataLoggerController, CardLayout cardLayout, JPanel screens){
         this.metricName = metricName;
         this.upperBound = upperBound;
         this.lowerBound = lowerBound;
         this.dataLoggerController = dataLoggerController;
+        this.cardLayout = cardLayout;
+        this.screens = screens;
 
         JLabel title = new JLabel("Input data for " + metricName);
         JLabel bounds = new JLabel("Upper Bound: " + upperBound + " Lower Bound: " +
@@ -36,15 +41,21 @@ public class DataLogInputScreen extends JPanel implements ActionListener {
         recordButton.addActionListener(this);
         dataInput = new JTextField();
         dataInput.setPreferredSize(new Dimension(250,40));
+        backButton = new JButton("Back");
+        backButton.addActionListener(this);
 
         this.add(title);
         this.add(bounds);
         this.add(dataInput);
         this.add(recordButton);
+        this.add(backButton);
 
     }
 
     public void actionPerformed(ActionEvent evt){
+        if (evt.getSource() == backButton){
+            cardLayout.show(screens, "home");
+        }
         if (evt.getSource() == recordButton){
             try {
                 double dataValue = Double.parseDouble(dataInput.getText());

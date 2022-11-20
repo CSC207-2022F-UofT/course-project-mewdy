@@ -23,6 +23,7 @@ public class Main {
         // Create metric storage
         MetricStorageInterface metricStorage = new MetricStorage();
 
+
         //Create data points *test*
         ArrayList<DataPoint> dataPoints = new ArrayList<>();
         dataPoints.add(new DataPoint("2018-01-01 19:34:50", 1.0));
@@ -40,7 +41,15 @@ public class Main {
         metricStorage.addMetric(m1);
         metricStorage.addMetric(m2);
 
+
+
         // Create necessary classess to run program
+        //Import Use Case
+        DataImportPresenter dataImportPresenter = new DataImportPresenter();
+        DataImportInputBoundary dataImporter = new DataImporter(metricStorage, dataImportPresenter);
+        DataImportController dataImportController = new DataImportController(dataImporter);
+
+
         //Metric Summary Use Case
         MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
         MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
@@ -55,17 +64,19 @@ public class Main {
         // Initialize UI components
         JFrame application = new JFrame("Mewdy");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        application.setSize(500,500);
+        application.setSize(800,300);
+
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
 
 
 
         // Initialize screens
-        JPanel startScreen = new StartScreen(cardLayout, screens);
+        JPanel startScreen = new StartScreen(cardLayout, screens, dataImportController);
         JPanel homeScreen = new HomeScreen(cardLayout, screens);
         JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController);
-        JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController);
+        JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController, cardLayout,
+                screens);
 
 
         screens.add(startScreen, "start");

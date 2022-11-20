@@ -40,9 +40,9 @@ public class AddMetricScreen extends JPanel {
         JTextField nameInput = new JTextField();
         JTextField upperBoundInput = new JTextField();
         JTextField lowerBoundInput = new JTextField();
-        nameInput.setPreferredSize(new Dimension(250,40));
-        upperBoundInput.setPreferredSize(new Dimension(250,40));
-        lowerBoundInput.setPreferredSize(new Dimension(250,40));
+        nameInput.setPreferredSize(new Dimension(100,40));
+        upperBoundInput.setPreferredSize(new Dimension(100,40));
+        lowerBoundInput.setPreferredSize(new Dimension(100,40));
 
         createButton = new JButton("Create");
 

@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Objects;
 
 public class HomeScreen extends JPanel implements ActionListener {
 
@@ -28,7 +29,6 @@ public class HomeScreen extends JPanel implements ActionListener {
         JButton saveButton = new JButton("Save");
         JButton exportButton = new JButton("Export");
         JButton entryUndoButton = new JButton("Undo Entry");
-        JButton addMetricButton = new JButton("Add Metric");
         JButton deleteMetricButton = new JButton("Delete Metric");
         backButton = new JButton("Back");
 
@@ -38,7 +38,6 @@ public class HomeScreen extends JPanel implements ActionListener {
         buttons.add(saveButton);
         buttons.add(exportButton);
         buttons.add(entryUndoButton);
-        buttons.add(addMetricButton);
         buttons.add(deleteMetricButton);
         buttons.add(backButton);
 
@@ -60,9 +59,11 @@ public class HomeScreen extends JPanel implements ActionListener {
     //React to summary button click
     public void actionPerformed(ActionEvent evt){
         if (evt.getActionCommand().equals("Summary")){
+            refreshScreen("ChooseMetricSum");
             cardLayout.show(screens, "chooseMetricSum");
         }
         if (evt.getActionCommand().equals("dataLogChoose")){
+            refreshScreen("DataLogChoose");
             cardLayout.show(screens, "dataLogChoose");
         }
         if (evt.getSource() == backButton){
@@ -70,4 +71,13 @@ public class HomeScreen extends JPanel implements ActionListener {
         }
 
     }
+
+    private void refreshScreen(String screenName){
+        for (Component c: screens.getComponents()){
+                if (c instanceof Refreshable && Objects.equals(c.getName(), screenName)){
+                ((Refreshable) c).refresh();
+            }
+        }
+    }
+
 }

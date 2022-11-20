@@ -1,21 +1,27 @@
 package screens;
 
+import controllers.DataImportController;
+import models.ImportResponseModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class StartScreen extends JPanel implements ActionListener {
 
     CardLayout cardlayout;
     JPanel screens;
+    DataImportController dataImportController;
 
-    public StartScreen(CardLayout cardLayout, JPanel screens){
+    public StartScreen(CardLayout cardLayout, JPanel screens, DataImportController dataImportController){
 
         this.cardlayout = cardLayout;
         this.screens = screens;
+        this.dataImportController = dataImportController;
 
 
         JLabel title = new JLabel("Start screen");
@@ -46,14 +52,22 @@ public class StartScreen extends JPanel implements ActionListener {
         }
         if (evt.getActionCommand().equals("Import")){
             JFileChooser importFileChooser = new JFileChooser();
+            importFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
             //Select file to open
             int response = importFileChooser.showOpenDialog(null);
 
-            if (response == JFileChooser.APPROVE_OPTION){
+            if (response == JFileChooser.APPROVE_OPTION) {
                 File file = new File(importFileChooser.getSelectedFile().getAbsolutePath());
-                System.out.println(file);
+                ImportResponseModel responseModel = dataImportController.readFromNewFile(file.getAbsolutePath());
+                if (responseModel.getErrorMsg().length() > 1) {
+                    JOptionPane.showMessageDialog(this, responseModel.getErrorMsg());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Success!");
+                    cardlayout.show(screens, "home");
+                    }
+                }
             }
         }
     }
-}
+

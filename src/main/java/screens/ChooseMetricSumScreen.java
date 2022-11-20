@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 //import org.jfree.chart
 
-public class ChooseMetricSumScreen extends JPanel implements ActionListener{
+public class ChooseMetricSumScreen extends JPanel implements ActionListener, Refreshable{
 
     MetricStorageInterface metricStorage;
     MetricSumController metricSumController;
@@ -24,6 +24,41 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener{
                                  MetricSumController metricSumController){
         this.metricStorage = metricStorageInterface;
         this.metricSumController = metricSumController;
+        this.setName("ChooseMetricSum");
+
+        JLabel title = new JLabel("Metric Summary");
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        // Add buttons for every Metric in MetricStorage.
+        JPanel buttons = new JPanel();
+        ArrayList<Metric> metricList = metricStorage.getMetricList();
+        for (Metric m: metricList){
+            JButton metricButton = new JButton(m.getName());
+            buttons.add(metricButton);
+            metricButton.addActionListener( this);
+            metricButton.setActionCommand(m.getName());
+        }
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(title);
+        this.add(buttons);
+    }
+
+    //React to button press to summarize chosen Metric.
+    public void actionPerformed(ActionEvent evt){
+        try {
+            MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
+            String averageAndTrend = viewModel.getMetricAverageAndSize();
+            XYChart chart = viewModel.getChart();
+            new MetricSummaryScreen(averageAndTrend, chart);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
+    }
+
+    @Override
+    public void refresh(){
+        this.removeAll();
 
         JLabel title = new JLabel("Metric Summary");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -42,18 +77,7 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener{
         this.add(title);
         this.add(buttons);
 
-
-    }
-
-    //React to button press to summarize chosen Metric.
-    public void actionPerformed(ActionEvent evt){
-        try {
-            MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
-            String averageAndTrend = viewModel.getMetricAverageAndSize();
-            XYChart chart = viewModel.getChart();
-            new MetricSummaryScreen(averageAndTrend, chart);
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        }
+        this.revalidate();
+        this.repaint();
     }
 }
