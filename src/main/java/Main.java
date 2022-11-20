@@ -53,8 +53,13 @@ public class Main {
 
 
         // Initialize UI components
+        JFrame application = new JFrame("Mewdy");
+        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        application.setSize(500,500);
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
+
+
 
         // Initialize screens
         JPanel startScreen = new StartScreen(cardLayout, screens);
@@ -70,7 +75,9 @@ public class Main {
 
 
         // Build GUI
+        application.add(screens);
         cardLayout.show(screens, "start");
+        application.setVisible(true);
 
     }
 }
