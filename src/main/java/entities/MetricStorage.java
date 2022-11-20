@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class Storage implements MetricStorageInterface{
+public class MetricStorage implements MetricStorageInterface{
 
     private final ArrayList<Metric> METRICLIST;
     private File location;
