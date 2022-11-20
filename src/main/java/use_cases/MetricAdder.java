@@ -1,8 +1,8 @@
-package use_cases;
+package UseCases;
 
-import entities.DataPoint;
-import entities.MetricStorage;
-import entities.Metric;
+import Entities.DataPoint;
+import Entities.MetricStorage;
+import Entities.Metric;
 
 import java.util.ArrayList;
 
