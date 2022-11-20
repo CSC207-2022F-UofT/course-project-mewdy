@@ -2,6 +2,8 @@ package entities;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class MetricStorage implements MetricStorageInterface{
@@ -30,6 +32,7 @@ public class MetricStorage implements MetricStorageInterface{
         //this method adds an Entities.Metric to the end of the metricList
         //TODO sort metrics as they are added
         this.METRICLIST.add(metric);
+        Collections.sort(this.METRICLIST, new MetricComparator());
         this.saved = false;
     }
 
@@ -103,5 +106,13 @@ public class MetricStorage implements MetricStorageInterface{
             }
         }
         return returnValue;
+    }
+
+    public static class MetricComparator implements Comparator<Metric> {
+
+        public int compare(Metric s, Metric t) {
+            return s.getName().compareTo(t.getName());
+            //return (f != 0) ? f : s.date.compareTo(t.date);
+        }
     }
 }
