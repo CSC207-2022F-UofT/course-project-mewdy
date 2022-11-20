@@ -1,5 +1,11 @@
 package use_cases;
 
-public class DataImportInputBoundary {
+import models.ImportRequestModel;
+import models.ImportResponseModel;
+
+public interface DataImportInputBoundary {
+
+    ImportResponseModel read();
+    ImportResponseModel readFromNewFile(ImportRequestModel req);
 
 }
