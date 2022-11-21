@@ -36,6 +36,11 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
             DataLogInputScreen tab = new DataLogInputScreen(metricName, upperBound,lowerBound, dataLoggerController,
                     cardLayout, screens);
             this.add(metricName, tab);
+
+            int i = metricList.indexOf(m);
+            MetricTab metricTab = new MetricTab(this, metricName);
+            this.setTabComponentAt(i, metricTab);
+
         }
 
         this.add("Add Metric", new AddMetricScreen(metricStorage));
@@ -58,6 +63,9 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
             DataLogInputScreen tab = new DataLogInputScreen(metricName, upperBound,lowerBound, dataLoggerController,
                     cardLayout, screens);
             this.add(metricName, tab);
+
+            int i = metricList.indexOf(m);
+            this.setTabComponentAt(i, new MetricTab(this, metricName));
         }
 
         this.add("Add Metric", new AddMetricScreen(metricStorage));
