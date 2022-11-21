@@ -7,4 +7,5 @@ public interface DataImportInputBoundary {
 
     ImportResponseModel read();
     ImportResponseModel readFromNewFile(ImportRequestModel req);
+
 }
