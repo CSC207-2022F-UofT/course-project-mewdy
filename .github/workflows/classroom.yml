@@ -4,7 +4,7 @@ on: [push]
 
 permissions:
   checks: write
-  actions: read
+  actions: write
   contents: read
 
 jobs:
