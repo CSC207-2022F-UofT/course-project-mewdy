@@ -38,12 +38,13 @@ public class MetricAdder implements AddMetricInputBoundary{
     public AddMetricResponseModel addMetric(AddMetricRequestModel requestModel) {
             for (Metric m : metricStorage.getMetricList()) {
                 if (m.getName().equalsIgnoreCase(requestModel.getMetricName())) {
-                    return presenter.metricAddedFailureView("Metric already exists.");
+                    return presenter.metricAddedFailureView("Metric already exists");
                 }
             }
+            AddMetricResponseModel responseModel = new AddMetricResponseModel(requestModel.getMetricName(), " was added successfully!");
             Metric metric = createMetric(requestModel.getMetricName(), requestModel.getUpperBound(), requestModel.getLowerBound());
             this.metricStorage.addMetric(metric);
-            return presenter.metricAddedSuccessView(new AddMetricResponseModel(requestModel.getMetricName()));
+            return presenter.metricAddedSuccessView(responseModel);
             }
         }
 

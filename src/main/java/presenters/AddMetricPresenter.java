@@ -6,25 +6,15 @@ import models.AddMetricResponseModel;
 // Subclass of AddMetricOutputBoundary
 public class AddMetricPresenter implements AddMetricOutputBoundary {
 
-    /**
-     *
-     * @param responseModel represents the response view
-     * metricAddedSuccessView returns
-     */
     @Override
     public AddMetricResponseModel metricAddedSuccessView(AddMetricResponseModel responseModel) {
-        String message = "Metric " + responseModel.getMetricName() + " added successfully";
+        String message = "Metric with the name" + responseModel.getMetricName() + responseModel.getMessage();
         return new AddMetricResponseModel(message);
     }
 
-    /**
-     *
-     * @param errorMessage represents the error message being displayed
-     * metricAddedFailureView returns the error message
-     */
     @Override
     public AddMetricResponseModel metricAddedFailureView(String errorMessage) {
-        return new AddMetricResponseModel(errorMessage);
+        return new AddMetricResponseModel("Metric already exists");
     }
 }
 
