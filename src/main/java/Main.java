@@ -21,7 +21,6 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws ParseException {
 
-
         // Create metric storage
         MetricStorageInterface metricStorage = new MetricStorage();
 
