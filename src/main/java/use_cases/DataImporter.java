@@ -1,9 +1,5 @@
 package use_cases;
 
-<<<<<<< HEAD
-public class DataImporter {
-
-=======
 import entities.DataPoint;
 import entities.Metric;
 import entities.MetricStorageInterface;
@@ -21,16 +17,17 @@ public class DataImporter implements DataImportInputBoundary {
     private MetricStorageInterface storage;
     private final DataImportPresenterOutputBoundary presenter;
 
-    public DataImporter(MetricStorageInterface storage, DataImportPresenterOutputBoundary presenter){
-        this.folder = storage.getPath();
-        this.storage = storage;
+    public DataImporter(ImportRequestModel req, DataImportPresenterOutputBoundary presenter) throws IOException {
+        this.folder = new File(req.getPath());
+        this.storage = req.getStore();
         this.presenter = presenter;
-
+        this.storage.setPath(this.folder);
     }
 
     @Override
     public ImportResponseModel readFromNewFile(ImportRequestModel req){
         this.folder = new File(req.getPath());
+        this.storage = req.getStore();
         this.storage.setPath(this.folder);
         return read();
     }
@@ -84,5 +81,4 @@ public class DataImporter implements DataImportInputBoundary {
             }
             storage.addMetric(new Metric(name, dataPoints, ub, lb));
     }
->>>>>>> 1a7e3b6895d936eee5e68cf04e9c29d52db1081f
 }
