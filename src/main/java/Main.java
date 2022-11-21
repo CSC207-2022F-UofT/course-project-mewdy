@@ -1,41 +1,82 @@
-import java.text.ParseException;
 
-import presenters.EntryUndoOutputBoundary;
-import presenters.EntryUndoPresenter;
-import entities.MetricStorage;
-import entities.Metric;
+
+import controllers.DataExportController;
+import controllers.DataImportController;
+import controllers.DataLoggerController;
+import controllers.MetricSumController;
 import entities.DataPoint;
-import controllers.EntryUndoController;
-import use_cases.EntryUndo;
-import use_cases.EntryUndoInputBoundary;
+import entities.Metric;
+import entities.MetricStorage;
+import entities.MetricStorageInterface;
+import presenters.DataExportPresenter;
+import presenters.DataImportPresenter;
+import presenters.DataLoggerPresenter;
+import presenters.MetricSumPresenter;
+import screens.*;
+import use_cases.*;
+
+import javax.swing.*;
+import java.awt.*;
+import java.text.ParseException;
+import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws ParseException {
-        Metric metric = new Metric("sleep", 24, 0);
-        DataPoint testDataA =  new DataPoint("2022-11-16 12:47:18", 1);
-        DataPoint testDataB =  new DataPoint("2022-11-17 12:47:18", 2);
-        DataPoint testDataC =  new DataPoint("2022-11-18 12:47:18", 3);
-        MetricStorage metricStorage = new MetricStorage();
-        metricStorage.addMetric(metric);
-        metricStorage.addDataPoint("sleep", testDataA);
-        metricStorage.addDataPoint("sleep", testDataC);
-        metricStorage.addDataPoint("sleep", testDataB);
+
+        // Create metric storage
+        MetricStorageInterface metricStorage = new MetricStorage();
+
+        // Create necessary classes to run program
+        //Import Use Case
+        DataImportPresenter dataImportPresenter = new DataImportPresenter();
+        DataImportInputBoundary dataImporter = new DataImporter(metricStorage, dataImportPresenter);
+        DataImportController dataImportController = new DataImportController(dataImporter);
+
+        //Metric Summary Use Case
+        MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
+        MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
+        MetricSumController metricSumController = new MetricSumController(metricSummarizer);
+
+        //Data Logging Use Case
+        DataLoggerPresenter dataLoggerPresenter = new DataLoggerPresenter();
+        DataLoggerInputBoundary dataLogger = new DataLogger(metricStorage);
+        DataLoggerController dataLoggerController = new DataLoggerController(dataLogger);
+
+        //Export Use Case
+        DataExportPresenter dataExportPresenter = new DataExportPresenter();
+        DataExportInputBoundary dataExporter = new DataExporter(metricStorage, dataExportPresenter);
+        DataExportController dataExportController = new DataExportController(dataExporter);
 
 
-        EntryUndoOutputBoundary entryUndoPresenter = new EntryUndoPresenter();
-        EntryUndoInputBoundary entryUndo = new EntryUndo(metricStorage, entryUndoPresenter);
-        EntryUndoController entryUndoController = new EntryUndoController(entryUndo);
-        entryUndoController.deleteLastEntry("sleep");
+        // Initialize UI components
+        JFrame application = new JFrame("Mewdy");
+        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        application.setSize(800,300);
 
-        for (Metric metricB:
-                metricStorage.getMetricList()) {
-            System.out.println(metricB.getName() + " " + metricB.getUpperBound() + " " + metricB.getLowerBound());
-            for (DataPoint dp:
-                    metricB.getDataPoints()) {
-                System.out.println(dp.getDate() + ", " + dp.getValue());
-            }
-            System.out.println();
-        }
+        CardLayout cardLayout = new CardLayout();
+        JPanel screens = new JPanel(cardLayout);
+
+
+
+        // Initialize screens
+        JPanel startScreen = new StartScreen(cardLayout, screens, dataImportController);
+        JPanel homeScreen = new HomeScreen(cardLayout, screens, dataExportController);
+        JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController, cardLayout,
+                screens);
+        JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController, cardLayout,
+                screens);
+
+
+        screens.add(startScreen, "start");
+        screens.add(homeScreen, "home");
+        screens.add(chooseMetricSumScreen, "chooseMetricSum");
+        screens.add(dataLogChooseScreen, "dataLogChoose");
+
+
+        // Build GUI
+        application.add(screens);
+        cardLayout.show(screens, "start");
+        application.setVisible(true);
 
     }
 }
