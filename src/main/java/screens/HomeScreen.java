@@ -39,7 +39,6 @@ public class HomeScreen extends JPanel implements ActionListener {
         saveButton = new JButton("Save");
         exportButton = new JButton("Export");
         JButton entryUndoButton = new JButton("Undo Entry");
-        JButton deleteMetricButton = new JButton("Delete Metric");
         backButton = new JButton("Back");
 
         JPanel buttons = new JPanel();
@@ -48,7 +47,6 @@ public class HomeScreen extends JPanel implements ActionListener {
         buttons.add(saveButton);
         buttons.add(exportButton);
         buttons.add(entryUndoButton);
-        buttons.add(deleteMetricButton);
         buttons.add(backButton);
 
         summaryButton.addActionListener(this);
