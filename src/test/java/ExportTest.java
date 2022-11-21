@@ -29,8 +29,7 @@ public class ExportTest {
     public void setUp() {
         ms = new MetricStorage();
         presenter = new DataExportPresenter();
-        ExportRequestModel req = new ExportRequestModel("./", this.ms);
-        exporter = new DataExporter(req, presenter);
+        exporter = new DataExporter(ms, presenter);
         String[] metrics = {"play", "sleep", "work"};
         for (String name : metrics) {
             dataPoints = new ArrayList<>();
@@ -60,7 +59,7 @@ public class ExportTest {
         f.deleteOnExit();
         File f2 = new File("./new/metrics");
         f2.deleteOnExit();
-        exporter.writeToNewFile(new ExportRequestModel("./new", this.ms));
+        exporter.writeToNewFile(new ExportRequestModel("./new"));
         assertTrue(isEqual(this.ms, read(f2)));
     }
 

@@ -21,17 +21,16 @@ public class DataImporter implements DataImportInputBoundary {
     private MetricStorageInterface storage;
     private final DataImportPresenterOutputBoundary presenter;
 
-    public DataImporter(ImportRequestModel req, DataImportPresenterOutputBoundary presenter) throws IOException {
-        this.folder = new File(req.getPath());
-        this.storage = req.getStore();
+    public DataImporter(MetricStorageInterface storage, DataImportPresenterOutputBoundary presenter){
+        this.folder = storage.getPath();
+        this.storage = storage;
         this.presenter = presenter;
-        this.storage.setPath(this.folder);
+
     }
 
     @Override
     public ImportResponseModel readFromNewFile(ImportRequestModel req){
         this.folder = new File(req.getPath());
-        this.storage = req.getStore();
         this.storage.setPath(this.folder);
         return read();
     }
