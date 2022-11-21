@@ -3,7 +3,6 @@
 Mewdy is a configurable mood tracking application with customizable metric builder.
 
 ## How to run:
-- pull from FEATURE-metric-summary
 - run Main.java
 - when the java swing window opens, click import
 - find the folder "test data" on your computer (it is located inside the src folder)
