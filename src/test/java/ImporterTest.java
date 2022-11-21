@@ -3,18 +3,17 @@ import entities.Metric;
 import entities.MetricStorage;
 import entities.MetricStorageInterface;
 import models.ImportRequestModel;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import presenters.DataImportPresenter;
 import presenters.DataImportPresenterOutputBoundary;
 import use_cases.DataImportInputBoundary;
 import use_cases.DataImporter;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ImporterTest {
     MetricStorageInterface preMadeStorage;
@@ -25,7 +24,7 @@ class ImporterTest {
     ImportRequestModel importReq;
 
     @BeforeEach
-    void setUp() throws IOException {
+    void setUp() {
         storage = new MetricStorage();
         storage.setPath(new File("./test data/metrics"));
         presenter = new DataImportPresenter();
