@@ -2,12 +2,12 @@
 
 Mewdy is a configurable mood tracking application with customizable metric builder.
 
-How to run:
+## How to run:
 - pull from FEATURE-metric-summary
 - run Main.java
 - when the java swing window opens, click import
-- find the folder "test data" on your computer (it is located inside of the src folder)
-- go inside of it and select the "metrics" folder and choose that
+- find the folder "test data" on your computer (it is located inside the src folder)
+- go inside it and select the "metrics" folder and choose that
 - if it says "success", then continue onto the next page.
 - currently, we are having issues with button formatting MacOS for the tabs at the top of the screen when you press "record" it is recommended to use windows for testing currently
 - you can [record] datapoints to metrics you choose. Pressing the X button next to each metric will delete them permanently.
@@ -15,8 +15,6 @@ How to run:
 - the only metric with more than 7 datapoints currently saved is "work"
 - when you hit the [Summary] button, and then press the button corresponding to the "work" metric, you will be able to see the graph of a user's work every day
 - hitting save will allow you to save a folder of csv files corresponding to every metric currently active.
-
-Mewdy is a configurable mood tracking application with customizable metric builder.
 
 Users can create a "metric" or category that takes numerical data they input each day and can later summarize that data graphically.
 
