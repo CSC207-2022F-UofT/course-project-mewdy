@@ -8,13 +8,13 @@ public class AddMetricPresenter implements AddMetricOutputBoundary {
 
     @Override
     public AddMetricResponseModel metricAddedSuccessView(AddMetricResponseModel responseModel) {
-        String message = "Metric with the name" + responseModel.getMetricName() + responseModel.getMessage();
+        String message = "Metric with the name " + responseModel.getMetricName() + responseModel.getMessage();
         return new AddMetricResponseModel(message);
     }
 
     @Override
     public AddMetricResponseModel metricAddedFailureView(String errorMessage) {
-        return new AddMetricResponseModel("Metric already exists");
+        return new AddMetricResponseModel(errorMessage);
     }
 }
 
