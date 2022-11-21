@@ -80,7 +80,6 @@ public class MetricStorage implements MetricStorageInterface{
         throw new Exception("No Metric found with name: " + metricName);
     }
 
-    @Override
     public File getPath() {
         return this.location;
     }

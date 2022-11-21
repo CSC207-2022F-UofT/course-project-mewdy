@@ -35,6 +35,7 @@ public class DataImporter implements DataImportInputBoundary {
         this.storage.setPath(this.folder);
         return read();
     }
+    
     @Override
     public ImportResponseModel read() {
         try {

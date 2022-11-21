@@ -1,8 +1,16 @@
+<<<<<<< HEAD
 package UseCases;
 
 import Entities.DataPoint;
 import Entities.MetricStorage;
 import Entities.Metric;
+=======
+package use_cases;
+
+import entities.DataPoint;
+import entities.MetricStorage;
+import entities.Metric;
+>>>>>>> 341cb8914b93424896a86420445614c47cb806ec
 
 import java.util.ArrayList;
 
