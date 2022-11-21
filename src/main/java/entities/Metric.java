@@ -10,6 +10,7 @@ public class Metric {
     private final double UPPOERBOUND;
     private final double LOWERBOUND;
 
+
     public Metric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound) {
         //this is an Entities.Metric constructor that takes in an ArrayList of DataPoints in addition to the other
         //instance variables
@@ -20,6 +21,7 @@ public class Metric {
             upperBound = 10;
             lowerBound = 0;
         }
+        
         this.NAME = name;
         this.DATAPOINTS = dataPointList;
         this.UPPOERBOUND = upperBound;
