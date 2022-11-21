@@ -1,33 +1,43 @@
 package screens;
 
+import controllers.DataExportController;
 import entities.MetricStorage;
 import entities.MetricStorageInterface;
+import models.ExportResponseModel;
+import models.ImportResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.util.Objects;
 
 public class HomeScreen extends JPanel implements ActionListener {
 
     CardLayout cardLayout;
     JPanel screens;
+    DataExportController dataExportController;
+    JButton recordButton;
+    JButton summaryButton;
+    JButton saveButton;
+    JButton exportButton;
     JButton backButton;
 
 
-    public HomeScreen(CardLayout cardLayout, JPanel screens) {
+    public HomeScreen(CardLayout cardLayout, JPanel screens, DataExportController dataExportController) {
 
         this.cardLayout = cardLayout;
         this.screens = screens;
+        this.dataExportController = dataExportController;
 
         JLabel title = new JLabel("Home");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JButton recordButton = new JButton("Record");
-        JButton summaryButton = new JButton("Summary");
-        JButton saveButton = new JButton("Save");
-        JButton exportButton = new JButton("Export");
+        recordButton = new JButton("Record");
+        summaryButton = new JButton("Summary");
+        saveButton = new JButton("Save");
+        exportButton = new JButton("Export");
         JButton entryUndoButton = new JButton("Undo Entry");
         JButton deleteMetricButton = new JButton("Delete Metric");
         backButton = new JButton("Back");
@@ -42,12 +52,9 @@ public class HomeScreen extends JPanel implements ActionListener {
         buttons.add(backButton);
 
         summaryButton.addActionListener(this);
-        summaryButton.setActionCommand("Summary");
-
         recordButton.addActionListener(this);
-        recordButton.setActionCommand("dataLogChoose");
-
         backButton.addActionListener(this);
+        exportButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -58,13 +65,31 @@ public class HomeScreen extends JPanel implements ActionListener {
 
     //React to summary button click
     public void actionPerformed(ActionEvent evt){
-        if (evt.getActionCommand().equals("Summary")){
+        if (evt.getSource() == summaryButton){
             refreshScreen("ChooseMetricSum");
             cardLayout.show(screens, "chooseMetricSum");
         }
-        if (evt.getActionCommand().equals("dataLogChoose")){
+        if (evt.getSource() == recordButton){
             refreshScreen("DataLogChoose");
             cardLayout.show(screens, "dataLogChoose");
+        }
+        if (evt.getSource() == exportButton){
+            //Set up file chooser
+            JFileChooser exportFileChooser = new JFileChooser();
+            exportFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+
+            //Select location to export
+            int response = exportFileChooser.showOpenDialog(null);
+
+            if (response == JFileChooser.APPROVE_OPTION) {
+                File file = new File(exportFileChooser.getSelectedFile().getAbsolutePath());
+                ExportResponseModel responseModel = dataExportController.writeToNewFile(file.getAbsolutePath());
+                if (responseModel.getErrorMsg().length() > 1) {
+                    JOptionPane.showMessageDialog(this, responseModel.getErrorMsg());
+                } else {
+                    JOptionPane.showMessageDialog(this, "Success!");
+                }
+            }
         }
         if (evt.getSource() == backButton){
             cardLayout.previous(screens);

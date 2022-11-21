@@ -19,16 +19,14 @@ public class DataExporter implements DataExportInputBoundary {
     private final DataExportPresenterOutputBoundary presenter;
 
 
-    public DataExporter(ExportRequestModel req, DataExportPresenterOutputBoundary presenter) {
-        this.storage = req.getStore();
+    public DataExporter(MetricStorageInterface metricStorage, DataExportPresenterOutputBoundary presenter) {
+        this.storage = metricStorage;
         this.presenter = presenter;
-        this.storage.setPath(new File(req.getPath()));
         this.folder = this.storage.getPath();
     }
 
     @Override
     public ExportResponseModel writeToNewFile(ExportRequestModel req) {
-        this.storage = req.getStore();
         this.storage.setPath(new File(req.getPath()));
         this.folder = this.storage.getPath();
         return write();
