@@ -6,6 +6,7 @@ import entities.Metric;
 
 import java.util.ArrayList;
 
+
 public class MetricAdder {
 
     public Metric createMetric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound) {
@@ -25,4 +26,3 @@ public class MetricAdder {
         return storage;
     }
 }
-
