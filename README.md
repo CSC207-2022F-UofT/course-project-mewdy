@@ -1,39 +1,28 @@
-# Project Template
+# Project Mewdy
 
-This is a template repository for CSC 207 projects. 
-This repository contains starter code for a gradle project.
-It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
+Mewdy is a configurable mood tracking application with customizable metric builder.
 
-## Checklist For Your Project
-- [ ] Verify the correct settings for your project repository
-- [ ] Set up Github Projects
-- [ ] Create the implementation plan using issues and Github Projects
-- [ ] Create deveopment branches for your features
-- [ ] Use pull requests to merge finished features into main branch
-- [ ] Conduct code reviews
+## How to run:
+- run Main.java
+- when the java swing window opens, click import
+- find the folder "test data" on your computer (it is located inside the src folder)
+- go inside it and select the "metrics" folder and choose that
+- if it says "success", then continue onto the next page.
+- currently, we are having issues with button formatting MacOS for the tabs at the top of the screen when you press "record" it is recommended to use windows for testing currently
+- you can [record] datapoints to metrics you choose. Pressing the X button next to each metric will delete them permanently.
+- you can add datapoints to each metric once per day
+- the only metric with more than 7 datapoints currently saved is "work"
+- when you hit the [Summary] button, and then press the button corresponding to the "work" metric, you will be able to see the graph of a user's work every day
+- hitting save will allow you to save a folder of csv files corresponding to every metric currently active.
 
-**If your team has trouble with any of these steps, please ask on Piazza. For example, with how GitHub Classroom works, your team *may* not have permissions to do some of the first few steps, in which case we'll post alternative instructions as needed.**
+Users can create a "metric" or category that takes numerical data they input each day and can later summarize that data graphically.
 
-## Workflow Documents
+Users can create any metrics they wish, such as metrics for mood (on a scale of 1-10), sleep (on a scale of 0-24), and their very own metrics that take values in a range specified by them.
 
-* Github Workflow: Please refer to the workflow that was introduced in the first lab. You should follow this when working on your code. The following document provides additional details too.
+Users can view a summary of each metric, with the value of the data they logged each day on a line chart.
 
-* [Project Planning and Development Guide](project_plan_dev.md): This document helps you to understand how to create and maintain a project plan for your class project. **This document helps you to complete the Implementation Plan Milestone.**
+Users can log their data for each metric once per day. The data they log must be within the acceptable range for each metric. For example, if a user enters -5 for hours of sleep, it won't be inputted. If a user wants to change the data logged on that day, they can delete the most recently added data point.
 
-## Gradle Project
-Import this project into your Intellij editor. It should automatically recognise this as a gradle repository.
-The starter code was built using SDK version 11.0.1. Ensure that you are using this version for this project. (You can, of course, change the SDK version as per your requirement if your team has all agreed to use a different version)
+Users can delete metrics, but all data from that metric will be deleted.
 
-You have been provided with two starter files for demonstration: HelloWorld and HelloWorldTest.
-
-You will find HelloWorld in `src/main/java/tutorial` directory. Right click on the HelloWorld file and click on `Run HelloWorld.main()`.
-This should run the program and print on your console.
-
-You will find HelloWorldTest in `src/test/java/tutorial` directory. Right click on the HelloWorldTest file and click on `Run HelloWorldTest`.
-All tests should pass. Your team can remove this sample of how testing works once you start adding your project code to the repo.
-
-Moving forward, we expect you to maintain this project structure. You *should* use Gradle as the build environment, but it is fine if your team prefers to use something else -- just remove the gradle files and push your preferred project setup. Assuming you stick with Gradle, your source code should go into `src/main/java` (you can keep creating more subdirectories as per your project requirement). Every source class can auto-generate a test file for you. For example, open HelloWorld.java file and click on the `HelloWorld` variable as shown in the image below. You should see an option `Generate` and on clicking this your should see an option `Test`. Clicking on this will generate a JUnit test file for `HelloWorld` class. This was used to generate the `HelloWorldTest`.
-
-![image](https://user-images.githubusercontent.com/5333020/196066655-d3c97bf4-fdbd-46b0-b6ae-aeb8dbcf351d.png)
-
-You can create another simple class and try generating a test for this class.
+Data is imported from a csv file at the start if users do not specify that they want to create a new metric.
