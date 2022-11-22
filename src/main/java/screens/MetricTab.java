@@ -36,11 +36,16 @@ public class MetricTab extends JPanel {
         }
 
         public void actionPerformed(ActionEvent evt){
-            MetricDelResponseModel responseModel = metricDelController.create(title);
-            JOptionPane.showMessageDialog(this, responseModel.getMetricName() + " was deleted. " +
-                    "It contained " + responseModel.getNumDataPoints() + " data points.");
-            int i = pane.indexOfTabComponent(MetricTab.this);
-            pane.remove(i);
+            int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to " +
+                    "delete this metric? Any data stored will be lost.","Select an Option",
+                    JOptionPane.YES_NO_OPTION);
+            if (input == JOptionPane.YES_OPTION) {
+                MetricDelResponseModel responseModel = metricDelController.create(title);
+                JOptionPane.showMessageDialog(this, responseModel.getMetricName() + " was deleted. " +
+                        "It contained " + responseModel.getNumDataPoints() + " data points.");
+                int i = pane.indexOfTabComponent(MetricTab.this);
+                pane.remove(i);
+            }
         }
 
 

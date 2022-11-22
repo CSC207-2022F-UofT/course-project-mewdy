@@ -21,6 +21,7 @@ public class AddMetricScreen extends JPanel implements ActionListener {
     JTextField lowerBoundInput;
     AddMetricController addMetricController;
     final Refreshable tabbedPane;
+    JButton backButton;
 
     public AddMetricScreen(MetricStorageInterface metricStorage, AddMetricController addMetricController,
                            Refreshable tabbedPane){
@@ -35,7 +36,9 @@ public class AddMetricScreen extends JPanel implements ActionListener {
         JLabel presetTitle = new JLabel("Select from preset Metrics");
         presetTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         sleepButton = new JButton("Sleep");
+        sleepButton.addActionListener(this);
         moodButton = new JButton("Mood");
+        moodButton.addActionListener(this);
         presetMetrics.add(presetTitle);
         presetMetrics.add(sleepButton);
         presetMetrics.add(moodButton);
@@ -72,6 +75,9 @@ public class AddMetricScreen extends JPanel implements ActionListener {
         this.add(presetMetrics);
         this.add(customMetrics);
 
+        backButton = new JButton("Back");
+        backButton.addActionListener(this);
+
     }
 
     public void actionPerformed(ActionEvent evt){
@@ -85,5 +91,26 @@ public class AddMetricScreen extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(this, error.getMessage());
             }
         }
+        if (evt.getSource() == sleepButton){
+            try {
+                AddMetricResponseModel responseModel = addMetricController.addMetric("Sleep",
+                        24.0, 0.0);
+                JOptionPane.showMessageDialog(this, responseModel.getMessage());
+                this.tabbedPane.refresh();
+            } catch (AddMetricFail error){
+                JOptionPane.showMessageDialog(this, error.getMessage());
+            }
+        }
+        if (evt.getSource() == moodButton){
+            try {
+                AddMetricResponseModel responseModel = addMetricController.addMetric("Mood",
+                        100.0, 0.0);
+                JOptionPane.showMessageDialog(this, responseModel.getMessage());
+                this.tabbedPane.refresh();
+            } catch (AddMetricFail error){
+                JOptionPane.showMessageDialog(this, error.getMessage());
+            }
+        }
+
     }
 }
