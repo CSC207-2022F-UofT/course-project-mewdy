@@ -2,7 +2,6 @@ package screens;
 
 import controllers.DataLoggerController;
 import models.DataLoggerResponseModel;
-import presenters.DataLogFailed;
 
 import javax.swing.*;
 import java.awt.*;

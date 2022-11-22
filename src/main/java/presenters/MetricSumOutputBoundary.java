@@ -1,4 +1,4 @@
-package use_cases;
+package presenters;
 
 import models.MetricSumResponseModel;
 import presenters.MetricSumViewModel;

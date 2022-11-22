@@ -1,7 +1,7 @@
 package controllers;
 
 
-import presenters.DataLogFailed;
+import screens.DataLogFailed;
 import models.DataLoggerResponseModel;
 import models.DataLoggerRequestModel;
 import use_cases.DataLoggerInputBoundary;

@@ -5,10 +5,10 @@ import entities.Metric;
 import entities.MetricStorageInterface;
 import models.MetricSumRequestModel;
 import models.MetricSumResponseModel;
+import presenters.MetricSumOutputBoundary;
 import presenters.MetricSumViewModel;
 import screens.DataSummaryFailed;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class MetricSummarizer implements MetricSumInputBoundary {

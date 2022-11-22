@@ -1,6 +1,5 @@
 package presenters;
 
-import use_cases.AddMetricOutputBoundary;
 import models.AddMetricResponseModel;
 
 // Subclass of AddMetricOutputBoundary

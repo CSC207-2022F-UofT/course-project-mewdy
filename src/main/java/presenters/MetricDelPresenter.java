@@ -1,7 +1,7 @@
 package presenters;
 
 import models.MetricDelResponseModel;
-import use_cases.MetricDelOutputBoundary;
+import screens.MetricDeleterFailed;
 
 public class MetricDelPresenter implements MetricDelOutputBoundary{
 

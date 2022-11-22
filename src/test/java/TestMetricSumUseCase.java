@@ -13,7 +13,7 @@ import models.MetricSumRequestModel;
 import presenters.MetricSumPresenter;
 import presenters.MetricSumViewModel;
 import use_cases.MetricSumInputBoundary;
-import use_cases.MetricSumOutputBoundary;
+import presenters.MetricSumOutputBoundary;
 import use_cases.MetricSummarizer;
 
 import java.text.ParseException;

@@ -1,19 +1,32 @@
 package screens;
 
+import controllers.AddMetricController;
 import entities.MetricStorageInterface;
+import models.AddMetricResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class AddMetricScreen extends JPanel {
+public class AddMetricScreen extends JPanel implements ActionListener {
 
     MetricStorageInterface metricStorage;
     JButton sleepButton;
     JButton moodButton;
     JButton createButton;
+    JTextField nameInput;
+    JTextField upperBoundInput;
+    JTextField lowerBoundInput;
+    AddMetricController addMetricController;
+    final Refreshable tabbedPane;
+    JButton backButton;
 
-    public AddMetricScreen(MetricStorageInterface metricStorage){
+    public AddMetricScreen(MetricStorageInterface metricStorage, AddMetricController addMetricController,
+                           Refreshable tabbedPane){
         this.metricStorage = metricStorage;
+        this.addMetricController = addMetricController;
+        this.tabbedPane = tabbedPane;
 
         JLabel title = new JLabel("Create a Metric to track");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -22,7 +35,9 @@ public class AddMetricScreen extends JPanel {
         JLabel presetTitle = new JLabel("Select from preset Metrics");
         presetTitle.setAlignmentX(Component.CENTER_ALIGNMENT);
         sleepButton = new JButton("Sleep");
+        sleepButton.addActionListener(this);
         moodButton = new JButton("Mood");
+        moodButton.addActionListener(this);
         presetMetrics.add(presetTitle);
         presetMetrics.add(sleepButton);
         presetMetrics.add(moodButton);
@@ -37,14 +52,15 @@ public class AddMetricScreen extends JPanel {
         JLabel customLowerBound = new JLabel("Lower Bound");
         customLowerBound.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        JTextField nameInput = new JTextField();
-        JTextField upperBoundInput = new JTextField();
-        JTextField lowerBoundInput = new JTextField();
+        nameInput = new JTextField();
+        upperBoundInput = new JTextField();
+        lowerBoundInput = new JTextField();
         nameInput.setPreferredSize(new Dimension(100,40));
         upperBoundInput.setPreferredSize(new Dimension(100,40));
         lowerBoundInput.setPreferredSize(new Dimension(100,40));
 
         createButton = new JButton("Create");
+        createButton.addActionListener(this);
 
         customMetrics.add(customMetricTitle);
         customMetrics.add(customMetricName);
@@ -57,6 +73,43 @@ public class AddMetricScreen extends JPanel {
 
         this.add(presetMetrics);
         this.add(customMetrics);
+
+        backButton = new JButton("Back");
+        backButton.addActionListener(this);
+
+    }
+
+    public void actionPerformed(ActionEvent evt){
+        if (evt.getSource() == createButton){
+            try {
+                AddMetricResponseModel responseModel = addMetricController.addMetric(nameInput.getText(),
+                        Double.parseDouble(upperBoundInput.getText()), Double.parseDouble(lowerBoundInput.getText()));
+                JOptionPane.showMessageDialog(this, responseModel.getMessage());
+                this.tabbedPane.refresh();
+            } catch (AddMetricFail error){
+                JOptionPane.showMessageDialog(this, error.getMessage());
+            }
+        }
+        if (evt.getSource() == sleepButton){
+            try {
+                AddMetricResponseModel responseModel = addMetricController.addMetric("Sleep",
+                        24.0, 0.0);
+                JOptionPane.showMessageDialog(this, responseModel.getMessage());
+                this.tabbedPane.refresh();
+            } catch (AddMetricFail error){
+                JOptionPane.showMessageDialog(this, error.getMessage());
+            }
+        }
+        if (evt.getSource() == moodButton){
+            try {
+                AddMetricResponseModel responseModel = addMetricController.addMetric("Mood",
+                        10.0, 0.0);
+                JOptionPane.showMessageDialog(this, responseModel.getMessage());
+                this.tabbedPane.refresh();
+            } catch (AddMetricFail error){
+                JOptionPane.showMessageDialog(this, error.getMessage());
+            }
+        }
 
     }
 }
