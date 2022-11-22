@@ -13,7 +13,7 @@ public class MetricDelController {
     }
 
     //Calls the use case interactor, MetricDeleter
-    MetricDelResponseModel create(String metricName) {
+    public MetricDelResponseModel create(String metricName) {
         MetricDelRequestModel requestModel = new MetricDelRequestModel(metricName);
         return metricDeleter.create(requestModel);
     }

@@ -1,15 +1,9 @@
-import controllers.DataExportController;
-import controllers.DataImportController;
-import controllers.DataLoggerController;
-import controllers.MetricSumController;
+import controllers.*;
 import entities.DataPoint;
 import entities.Metric;
 import entities.MetricStorage;
 import entities.MetricStorageInterface;
-import presenters.DataExportPresenter;
-import presenters.DataImportPresenter;
-import presenters.DataLoggerPresenter;
-import presenters.MetricSumPresenter;
+import presenters.*;
 import screens.*;
 import use_cases.*;
 
@@ -26,7 +20,7 @@ public class Main {
 
         // Create necessary classes to run program
         //Import Use Case
-        DataImportPresenter dataImportPresenter = new DataImportPresenter();
+        DataImportPresenterOutputBoundary dataImportPresenter = new DataImportPresenter();
         DataImportInputBoundary dataImporter = new DataImporter(metricStorage, dataImportPresenter);
         DataImportController dataImportController = new DataImportController(dataImporter);
 
@@ -36,14 +30,24 @@ public class Main {
         MetricSumController metricSumController = new MetricSumController(metricSummarizer);
 
         //Data Logging Use Case
-        DataLoggerPresenter dataLoggerPresenter = new DataLoggerPresenter();
-        DataLoggerInputBoundary dataLogger = new DataLogger(metricStorage);
+        DataLoggerOutputBoundary dataLoggerPresenter = new DataLoggerPresenter();
+        DataLoggerInputBoundary dataLogger = new DataLogger(metricStorage, dataLoggerPresenter);
         DataLoggerController dataLoggerController = new DataLoggerController(dataLogger);
 
         //Export Use Case
-        DataExportPresenter dataExportPresenter = new DataExportPresenter();
+        DataExportPresenterOutputBoundary dataExportPresenter = new DataExportPresenter();
         DataExportInputBoundary dataExporter = new DataExporter(metricStorage, dataExportPresenter);
         DataExportController dataExportController = new DataExportController(dataExporter);
+
+        //Delete Metric Use Case
+        MetricDelOutputBoundary metricDelPresenter = new MetricDelPresenter();
+        MetricDelInputBoundary metricDeleter = new MetricDeleter(metricStorage, metricDelPresenter);
+        MetricDelController metricDelController = new MetricDelController(metricDeleter);
+
+        //Add Metric Use Case
+        AddMetricOutputBoundary addMetricPresenter = new AddMetricPresenter();
+        AddMetricInputBoundary metricAdder = new MetricAdder(addMetricPresenter, metricStorage);
+        AddMetricController addMetricController = new AddMetricController(metricAdder);
 
 
         // Initialize UI components
@@ -61,8 +65,8 @@ public class Main {
         JPanel homeScreen = new HomeScreen(cardLayout, screens, dataExportController);
         JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController, cardLayout,
                 screens);
-        JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController, cardLayout,
-                screens);
+        JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController,
+                metricDelController, addMetricController, cardLayout, screens);
 
 
         screens.add(startScreen, "start");

@@ -13,9 +13,11 @@ import java.time.format.DateTimeFormatter;
 public class DataLogger implements DataLoggerInputBoundary{
 
     final MetricStorageInterface metricStorage;
+    final DataLoggerOutputBoundary presenter;
 
-    public DataLogger(MetricStorageInterface metricStorage) {
+    public DataLogger(MetricStorageInterface metricStorage, DataLoggerOutputBoundary presenter) {
         this.metricStorage = metricStorage;
+        this.presenter = presenter;
     }
 
     public DataLoggerResponseModel logDataPoint(DataLoggerRequestModel requestModel) throws Exception {
@@ -27,7 +29,6 @@ public class DataLogger implements DataLoggerInputBoundary{
         double value = requestModel.getValue();
         DataLoggerResponseModel responseModel = new DataLoggerResponseModel("Successfully added datapoint",
                 metricName, value);
-        DataLoggerOutputBoundary presenter = (DataLoggerOutputBoundary) new DataLoggerPresenter();
         try {
             Metric metric = this.metricStorage.getMetric(metricName);
             double upperBound = metric.getUpperBound();
