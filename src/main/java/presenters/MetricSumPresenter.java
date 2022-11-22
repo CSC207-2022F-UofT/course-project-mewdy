@@ -2,7 +2,6 @@ package presenters;
 
 import models.MetricSumResponseModel;
 import screens.DataSummaryFailed;
-import use_cases.MetricSumOutputBoundary;
 
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;

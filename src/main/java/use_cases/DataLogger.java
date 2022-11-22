@@ -4,7 +4,7 @@ import entities.DataPoint;
 import entities.Metric;
 import entities.MetricStorageInterface;
 import models.DataLoggerRequestModel;
-import presenters.DataLoggerPresenter;
+import presenters.DataLoggerOutputBoundary;
 import models.DataLoggerResponseModel;
 
 import java.time.LocalDate;

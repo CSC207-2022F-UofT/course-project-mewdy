@@ -1,6 +1,4 @@
 import controllers.*;
-import entities.DataPoint;
-import entities.Metric;
 import entities.MetricStorage;
 import entities.MetricStorageInterface;
 import presenters.*;
@@ -10,7 +8,6 @@ import use_cases.*;
 import javax.swing.*;
 import java.awt.*;
 import java.text.ParseException;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws ParseException {

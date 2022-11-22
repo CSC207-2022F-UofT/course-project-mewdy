@@ -83,8 +83,4 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
         this.repaint();
     }
 
-    public void goBack(){
-        cardLayout.show(screens, "home");
-    }
-
 }

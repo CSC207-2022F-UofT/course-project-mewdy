@@ -3,7 +3,6 @@ package screens;
 import controllers.AddMetricController;
 import entities.MetricStorageInterface;
 import models.AddMetricResponseModel;
-import presenters.AddMetricFail;
 
 import javax.swing.*;
 import java.awt.*;
@@ -104,7 +103,7 @@ public class AddMetricScreen extends JPanel implements ActionListener {
         if (evt.getSource() == moodButton){
             try {
                 AddMetricResponseModel responseModel = addMetricController.addMetric("Mood",
-                        100.0, 0.0);
+                        10.0, 0.0);
                 JOptionPane.showMessageDialog(this, responseModel.getMessage());
                 this.tabbedPane.refresh();
             } catch (AddMetricFail error){

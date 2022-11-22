@@ -4,6 +4,7 @@ import entities.Metric;
 import entities.MetricStorageInterface;
 import models.MetricDelRequestModel;
 import models.MetricDelResponseModel;
+import presenters.MetricDelOutputBoundary;
 
 public class MetricDeleter implements MetricDelInputBoundary {
 

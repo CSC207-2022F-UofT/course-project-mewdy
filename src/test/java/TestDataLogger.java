@@ -7,9 +7,10 @@ import controllers.DataLoggerController;
 import entities.Metric;
 import entities.MetricStorage;
 import entities.MetricStorageInterface;
+import presenters.DataLoggerOutputBoundary;
+import presenters.DataLoggerPresenter;
 import use_cases.DataLogger;
 import use_cases.DataLoggerInputBoundary;
-import use_cases.DataLoggerOutputBoundary;
 
 import java.util.ArrayList;
 
@@ -22,7 +23,8 @@ public class TestDataLogger {
     @BeforeEach
     public void setUp() {
         storage = new MetricStorage();
-        dataLogger = (DataLoggerInputBoundary) new DataLogger(storage);
+        DataLoggerOutputBoundary presenter = new DataLoggerPresenter();
+        dataLogger = (DataLoggerInputBoundary) new DataLogger(storage, presenter);
         controller = new DataLoggerController(dataLogger);
     }
 
