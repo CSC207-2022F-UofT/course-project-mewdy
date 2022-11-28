@@ -13,6 +13,10 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class DataExporter implements DataExportInputBoundary {
+    /**
+     * Export UseCase
+     * Saves data to a metrics folder with corresponding metric csv files
+     */
 
     private MetricStorageInterface storage;
     private File folder;
@@ -38,28 +42,37 @@ public class DataExporter implements DataExportInputBoundary {
         BufferedWriter writer;
         for (Metric metric : storage.getMetricList()) {
             try {
+                // Create folders if they don't exist
                 if (!this.folder.exists()) this.folder.mkdirs();
+
+                // Get file name from metric name
                 String currentFile = this.folder.getPath() + File.separator + metric.getName() + ".csv";
+
+                // Write header to file
                 writer = new BufferedWriter(new FileWriter(currentFile));
                 String header = String.format("Date,Datapoint,%s,%s", metric.getUpperBound(), metric.getLowerBound());
                 writer.write(header);
                 writer.newLine();
+
+                // Write data to file
                 for (DataPoint dp : metric.getDataPoints()) {
                     String line = String.format("%s,%s,,", dp.getDate(), dp.getValue());
                     writer.write(line);
                     writer.newLine();
                 }
                 writer.close();
+
             } catch (IOException e) {
                 return presenter.prepareFailView(e.getMessage());
             }
         }
-        storage.save();
+        storage.save(); // Indicate that changes have been saved
         return presenter.prepareSuccessView();
     }
 
     @Override
-    public boolean filesExist() { //Check if a file will be overwritten
+    public boolean filesExist() {
+        //Check if a file will be overwritten return true if so
         File file;
         for (Metric m : storage.getMetricList()) {
             file = new File(this.folder + File.separator + m.getName() + ".csv");

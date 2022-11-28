@@ -2,7 +2,10 @@ import controllers.*;
 import entities.MetricStorage;
 import entities.MetricStorageInterface;
 import presenters.*;
-import screens.*;
+import screens.ChooseMetricSumScreen;
+import screens.DataLogChooseScreen;
+import screens.HomeScreen;
+import screens.StartScreen;
 import use_cases.*;
 
 import javax.swing.*;
@@ -50,11 +53,10 @@ public class Main {
         // Initialize UI components
         JFrame application = new JFrame("Mewdy");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        application.setSize(800,300);
+        application.setSize(800, 300);
 
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
-
 
 
         // Initialize screens
