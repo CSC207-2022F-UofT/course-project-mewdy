@@ -6,13 +6,13 @@ public class EntryUndoResponseModel {
     private String date;
     private String metric;
 
-    public EntryUndoResponseModel(double value, String date, String metric){
+    public EntryUndoResponseModel(double value, String date, String metric) {
         this.value = value;
         this.date = date;
         this.metric = metric;
     }
 
-    public EntryUndoResponseModel(String information){
+    public EntryUndoResponseModel(String information) {
         this.information = information;
     }
 

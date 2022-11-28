@@ -8,11 +8,11 @@ public class MetricSumController {
 
     final MetricSumInputBoundary metricSummarizer;
 
-    public MetricSumController(MetricSumInputBoundary metricSummarizer){
+    public MetricSumController(MetricSumInputBoundary metricSummarizer) {
         this.metricSummarizer = metricSummarizer;
     }
 
-    public MetricSumViewModel getMetricSummary(String metricName){
+    public MetricSumViewModel getMetricSummary(String metricName) {
         MetricSumRequestModel requestModel = new MetricSumRequestModel(metricName);
 
         return this.metricSummarizer.getMetricSummary(requestModel);

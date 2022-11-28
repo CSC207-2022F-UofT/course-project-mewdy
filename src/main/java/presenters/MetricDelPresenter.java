@@ -3,7 +3,7 @@ package presenters;
 import models.MetricDelResponseModel;
 import screens.MetricDeleterFailed;
 
-public class MetricDelPresenter implements MetricDelOutputBoundary{
+public class MetricDelPresenter implements MetricDelOutputBoundary {
 
     //Returns the response model for the metric that was deleted
     @Override

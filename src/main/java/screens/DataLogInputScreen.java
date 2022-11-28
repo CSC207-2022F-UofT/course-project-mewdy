@@ -15,13 +15,13 @@ public class DataLogInputScreen extends JPanel implements ActionListener {
     double lowerBound;
     JButton recordButton;
     JTextField dataInput;
-    JButton  backButton;
+    JButton backButton;
     DataLoggerController dataLoggerController;
     CardLayout cardLayout;
     JPanel screens;
 
     public DataLogInputScreen(String metricName, double upperBound, double lowerBound,
-                              DataLoggerController dataLoggerController, CardLayout cardLayout, JPanel screens){
+                              DataLoggerController dataLoggerController, CardLayout cardLayout, JPanel screens) {
         this.metricName = metricName;
         this.upperBound = upperBound;
         this.lowerBound = lowerBound;
@@ -39,7 +39,7 @@ public class DataLogInputScreen extends JPanel implements ActionListener {
         recordButton = new JButton("Record");
         recordButton.addActionListener(this);
         dataInput = new JTextField();
-        dataInput.setPreferredSize(new Dimension(250,40));
+        dataInput.setPreferredSize(new Dimension(250, 40));
         backButton = new JButton("Back");
         backButton.addActionListener(this);
 
@@ -51,18 +51,18 @@ public class DataLogInputScreen extends JPanel implements ActionListener {
 
     }
 
-    public void actionPerformed(ActionEvent evt){
-        if (evt.getSource() == backButton){
+    public void actionPerformed(ActionEvent evt) {
+        if (evt.getSource() == backButton) {
             cardLayout.show(screens, "home");
         }
-        if (evt.getSource() == recordButton){
+        if (evt.getSource() == recordButton) {
             try {
                 double dataValue = Double.parseDouble(dataInput.getText());
                 DataLoggerResponseModel responseModel = dataLoggerController.logDataPoint(dataValue, metricName);
                 JOptionPane.showMessageDialog(this, responseModel.getMessage());
-            } catch (DataLogFailed e){
+            } catch (DataLogFailed e) {
                 JOptionPane.showMessageDialog(this, e.getMessage());
-            } catch (NumberFormatException e){
+            } catch (NumberFormatException e) {
                 JOptionPane.showMessageDialog(this, "Invalid input! Please enter a number");
             }
 

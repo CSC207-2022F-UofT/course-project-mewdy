@@ -4,13 +4,13 @@ import entities.DataPoint;
 import entities.Metric;
 import entities.MetricStorageInterface;
 import models.DataLoggerRequestModel;
-import presenters.DataLoggerOutputBoundary;
 import models.DataLoggerResponseModel;
+import presenters.DataLoggerOutputBoundary;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class DataLogger implements DataLoggerInputBoundary{
+public class DataLogger implements DataLoggerInputBoundary {
 
     final MetricStorageInterface metricStorage;
     final DataLoggerOutputBoundary presenter;
@@ -40,8 +40,7 @@ public class DataLogger implements DataLoggerInputBoundary{
                 DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYY-MM-dd");
                 lastDate = metric.getDataPoints().get(size - 1).getDate().substring(0, 10);
                 todayDate = LocalDate.now().format(myFormatObj);
-            }
-            else {
+            } else {
                 todayDate = "neq";
                 lastDate = "neq2";
             }
@@ -53,8 +52,7 @@ public class DataLogger implements DataLoggerInputBoundary{
             } else {
                 return presenter.prepareFailView("Failed to add datapoint, invalid value");
             }
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return presenter.prepareFailView("Metric does not exist");
         }
     }

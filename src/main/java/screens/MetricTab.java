@@ -1,11 +1,9 @@
 package screens;
 
 import controllers.MetricDelController;
-import entities.Metric;
 import models.MetricDelResponseModel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -14,7 +12,7 @@ public class MetricTab extends JPanel {
     private final MetricDelController metricDelController;
     private final String title;
 
-    public MetricTab(final JTabbedPane pane, String title, MetricDelController metricDelController){
+    public MetricTab(final JTabbedPane pane, String title, MetricDelController metricDelController) {
         this.pane = pane;
         this.metricDelController = metricDelController;
         this.title = title;
@@ -27,17 +25,17 @@ public class MetricTab extends JPanel {
         this.add(deleteButton);
     }
 
-    private class DeleteButton extends JButton implements ActionListener{
+    private class DeleteButton extends JButton implements ActionListener {
 
-        public DeleteButton(){
+        public DeleteButton() {
             this.setText("x");
             setToolTipText("Delete this metric");
             addActionListener(this);
         }
 
-        public void actionPerformed(ActionEvent evt){
+        public void actionPerformed(ActionEvent evt) {
             int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to " +
-                    "delete this metric? Any data stored will be lost.","Select an Option",
+                            "delete this metric? Any data stored will be lost.", "Select an Option",
                     JOptionPane.YES_NO_OPTION);
             if (input == JOptionPane.YES_OPTION) {
                 MetricDelResponseModel responseModel = metricDelController.create(title);

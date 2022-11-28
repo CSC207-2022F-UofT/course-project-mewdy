@@ -1,8 +1,6 @@
 package presenters;
 
 import models.MetricSumResponseModel;
-import screens.DataSummaryFailed;
-
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 import org.knowm.xchart.XYSeries;
@@ -10,6 +8,7 @@ import org.knowm.xchart.style.Styler;
 import org.knowm.xchart.style.colors.XChartSeriesColors;
 import org.knowm.xchart.style.lines.SeriesLines;
 import org.knowm.xchart.style.markers.SeriesMarkers;
+import screens.DataSummaryFailed;
 
 import java.awt.*;
 import java.math.RoundingMode;
@@ -22,10 +21,11 @@ import java.util.Date;
 
 public class MetricSumPresenter implements MetricSumOutputBoundary {
 
-    public MetricSumPresenter(){}
+    public MetricSumPresenter() {
+    }
 
     @Override
-    public MetricSumViewModel prepareSuccessView(MetricSumResponseModel responseModel){
+    public MetricSumViewModel prepareSuccessView(MetricSumResponseModel responseModel) {
 
         //Create decimal formatter to round numbers to 2 decimal points.
         DecimalFormat df = new DecimalFormat("#.##");
@@ -45,7 +45,7 @@ public class MetricSumPresenter implements MetricSumOutputBoundary {
     }
 
     @Override
-    public MetricSumViewModel prepareDataSumFail(String error){
+    public MetricSumViewModel prepareDataSumFail(String error) {
         throw new DataSummaryFailed(error);
     }
 
@@ -89,7 +89,7 @@ public class MetricSumPresenter implements MetricSumOutputBoundary {
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         ArrayList<Date> formattedDates = new ArrayList<>();
 
-        for (String d: dates){
+        for (String d : dates) {
             formattedDates.add(sdf.parse(d));
         }
         return formattedDates;

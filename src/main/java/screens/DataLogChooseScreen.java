@@ -21,7 +21,7 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
 
     public DataLogChooseScreen(MetricStorageInterface metricStorage, DataLoggerController dataLoggerController,
                                MetricDelController metricDelController, AddMetricController addMetricController,
-                               CardLayout cardLayout, JPanel screens){
+                               CardLayout cardLayout, JPanel screens) {
         this.metricStorage = metricStorage;
         this.dataLoggerController = dataLoggerController;
         this.metricDelController = metricDelController;
@@ -36,11 +36,11 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
 
         // Add buttons for every Metric in MetricStorage.
         ArrayList<Metric> metricList = metricStorage.getMetricList();
-        for (Metric m: metricList){
+        for (Metric m : metricList) {
             String metricName = m.getName();
             double upperBound = m.getUpperBound();
             double lowerBound = m.getLowerBound();
-            DataLogInputScreen tab = new DataLogInputScreen(metricName, upperBound,lowerBound, dataLoggerController,
+            DataLogInputScreen tab = new DataLogInputScreen(metricName, upperBound, lowerBound, dataLoggerController,
                     cardLayout, screens);
             this.add(metricName, tab);
 
@@ -57,18 +57,18 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
     }
 
     @Override
-    public void refresh(){
+    public void refresh() {
         this.removeAll();
 
         this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
         // Add buttons for every Metric in MetricStorage.
         ArrayList<Metric> metricList = metricStorage.getMetricList();
-        for (Metric m: metricList){
+        for (Metric m : metricList) {
             String metricName = m.getName();
             double upperBound = m.getUpperBound();
             double lowerBound = m.getLowerBound();
-            DataLogInputScreen tab = new DataLogInputScreen(metricName, upperBound,lowerBound, dataLoggerController,
+            DataLogInputScreen tab = new DataLogInputScreen(metricName, upperBound, lowerBound, dataLoggerController,
                     cardLayout, screens);
             this.add(metricName, tab);
 

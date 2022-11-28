@@ -2,6 +2,10 @@ package presenters;
 
 import models.ImportResponseModel;
 
+/**
+ * Prepares a response model for a successful or failed import
+ */
+
 public class DataImportPresenter implements DataImportPresenterOutputBoundary {
 
     @Override
