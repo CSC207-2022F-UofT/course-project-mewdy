@@ -1,7 +1,7 @@
 package controllers;
 
-import models.MetricDelResponseModel;
 import models.MetricDelRequestModel;
+import models.MetricDelResponseModel;
 import use_cases.MetricDelInputBoundary;
 
 /**

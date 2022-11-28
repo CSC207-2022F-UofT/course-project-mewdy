@@ -32,7 +32,7 @@ public class Metric {
             upperBound = 10;
             lowerBound = 0;
         }
-        
+
         this.NAME = name;
         this.DATAPOINTS = dataPointList;
         this.UPPOERBOUND = upperBound;
