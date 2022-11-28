@@ -8,7 +8,7 @@ public class DataLoggerRequestModel {
     private double value;
     private MetricStorageInterface storage;
 
-    public DataLoggerRequestModel(String metricName, double value){
+    public DataLoggerRequestModel(String metricName, double value) {
         // sends necessary values to the DataLogger use case
         this.metricName = metricName;
         this.value = value;

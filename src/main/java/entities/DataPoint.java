@@ -32,7 +32,7 @@ public class DataPoint {
         return this.DATE.format(FORMAT);
     }
 
-    public boolean equals(DataPoint dp){
+    public boolean equals(DataPoint dp) {
         return this.DATE.format(FORMAT).equals(dp.getDate()) && this.VALUE == dp.getValue();
     }
 

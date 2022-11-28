@@ -1,10 +1,8 @@
 package screens;
 
 import controllers.DataExportController;
-import entities.MetricStorage;
 import entities.MetricStorageInterface;
 import models.ExportResponseModel;
-import models.ImportResponseModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -64,16 +62,16 @@ public class HomeScreen extends JPanel implements ActionListener {
     }
 
     //React to summary button click
-    public void actionPerformed(ActionEvent evt){
-        if (evt.getSource() == summaryButton){
+    public void actionPerformed(ActionEvent evt) {
+        if (evt.getSource() == summaryButton) {
             refreshScreen("ChooseMetricSum");
             cardLayout.show(screens, "chooseMetricSum");
         }
-        if (evt.getSource() == recordButton){
+        if (evt.getSource() == recordButton) {
             refreshScreen("DataLogChoose");
             cardLayout.show(screens, "dataLogChoose");
         }
-        if (evt.getSource() == exportButton){
+        if (evt.getSource() == exportButton) {
             //Set up file chooser
             JFileChooser exportFileChooser = new JFileChooser();
             exportFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -91,7 +89,7 @@ public class HomeScreen extends JPanel implements ActionListener {
                 }
             }
         }
-        if (evt.getSource() == backButton){
+        if (evt.getSource() == backButton) {
             cardLayout.previous(screens);
         }
         if (evt.getSource() == saveButton){
@@ -104,9 +102,9 @@ public class HomeScreen extends JPanel implements ActionListener {
         }
     }
 
-    private void refreshScreen(String screenName){
-        for (Component c: screens.getComponents()){
-                if (c instanceof Refreshable && Objects.equals(c.getName(), screenName)){
+    private void refreshScreen(String screenName) {
+        for (Component c : screens.getComponents()) {
+            if (c instanceof Refreshable && Objects.equals(c.getName(), screenName)) {
                 ((Refreshable) c).refresh();
             }
         }

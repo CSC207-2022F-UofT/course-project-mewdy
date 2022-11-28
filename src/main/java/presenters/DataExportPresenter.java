@@ -2,7 +2,10 @@ package presenters;
 
 import models.ExportResponseModel;
 
-public class DataExportPresenter implements DataExportPresenterOutputBoundary{
+public class DataExportPresenter implements DataExportPresenterOutputBoundary {
+    /**
+     * Prepares a response model for a successful or failed export
+     */
 
     @Override
     public ExportResponseModel prepareSuccessView() {
