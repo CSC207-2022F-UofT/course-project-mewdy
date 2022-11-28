@@ -27,6 +27,25 @@ Users can delete metrics, but all data from that metric will be deleted.
 
 Data is imported from a directory containing csv files at the start if users do not specify that they want to create a new metric.
 
+## Code Structure
+
+### Entities
+- Datapoint, contains a date and value, has getter and setter methods as well as an equals method and a date formatting method
+- Metric, contains an arraylist of datapoints, has a name, upper bound and lowerbound. Methods include getter, setter, equals, and overridden constructor for creating a new metric
+- MetricStorage, container for metrics, has getter and setter methods, accessed through an interface
+### Use Cases
+- Add Metric, adds a metric to metric storage
+- Delete Metric, removes a metric from metric storage
+- Data Logger, adds a datapoint to a metric
+- Undo Entry, undoes the most recent datapoint logged to a metric
+- Import/export, accesses csv files to store and retrieve data to be used in the metric storage.
+- Metric Summary, creates a visualization of datapoints and statistically manipulates data, such as getting mean value for datapoints
+### Controllers, Presenters, Output/Input layers
+- Each use case has a controller, presenter, and associated input/output boundaries.
+### Screens, models
+- Screens and view models are used for the UI component of the program. 
+- They have associated use cases as well as functionalities with the outer most layer of the program.
+
 ## Test cases
 
 ### EntryUndoTest
