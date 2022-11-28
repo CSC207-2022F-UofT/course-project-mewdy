@@ -1,6 +1,5 @@
 package presenters;
 
-import use_cases.DataLoggerOutputBoundary;
 import models.DataLoggerResponseModel;
 
 public class DataLoggerPresenter implements DataLoggerOutputBoundary{

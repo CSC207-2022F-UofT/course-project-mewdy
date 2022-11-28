@@ -2,6 +2,8 @@ package entities;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Objects;
 
 public class MetricStorage implements MetricStorageInterface{
@@ -19,15 +21,17 @@ public class MetricStorage implements MetricStorageInterface{
     @Override
     public void setPath(File path) {
         String folder = path.getPath();
-        if (!folder.endsWith("\\metrics")) folder += "\\metrics";
+        if (!(folder.endsWith(File.separator + "metrics")||folder.endsWith(File.separator + "metrics/")))
+            folder += File.separator + "metrics";
+        System.out.println(folder);
         this.location = new File(folder);
     }
 
     @Override
     public void addMetric(Metric metric) {
         //this method adds an Entities.Metric to the end of the metricList
-        //TODO sort metrics as they are added
         this.METRICLIST.add(metric);
+        Collections.sort(this.METRICLIST, new MetricComparator());
         this.saved = false;
     }
 
@@ -80,7 +84,6 @@ public class MetricStorage implements MetricStorageInterface{
         throw new Exception("No Metric found with name: " + metricName);
     }
 
-    @Override
     public File getPath() {
         return this.location;
     }
@@ -101,5 +104,12 @@ public class MetricStorage implements MetricStorageInterface{
             }
         }
         return returnValue;
+    }
+
+    public static class MetricComparator implements Comparator<Metric> {
+
+        public int compare(Metric m1, Metric m2) {
+            return m1.getName().compareTo(m2.getName());
+        }
     }
 }
