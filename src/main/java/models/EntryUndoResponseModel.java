@@ -28,4 +28,6 @@ public class EntryUndoResponseModel {
     public String getMetric() {
         return metric;
     }
+
+    public String getInformation() {return information;}
 }

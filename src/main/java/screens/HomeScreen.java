@@ -38,7 +38,6 @@ public class HomeScreen extends JPanel implements ActionListener {
         summaryButton = new JButton("Summary");
         saveButton = new JButton("Save");
         exportButton = new JButton("Export");
-        JButton entryUndoButton = new JButton("Undo Entry");
         backButton = new JButton("Back");
 
         JPanel buttons = new JPanel();
@@ -46,13 +45,13 @@ public class HomeScreen extends JPanel implements ActionListener {
         buttons.add(summaryButton);
         buttons.add(saveButton);
         buttons.add(exportButton);
-        buttons.add(entryUndoButton);
         buttons.add(backButton);
 
         summaryButton.addActionListener(this);
         recordButton.addActionListener(this);
         backButton.addActionListener(this);
         exportButton.addActionListener(this);
+        saveButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -92,7 +91,6 @@ public class HomeScreen extends JPanel implements ActionListener {
         if (evt.getSource() == backButton){
             cardLayout.previous(screens);
         }
-
     }
 
     private void refreshScreen(String screenName){

@@ -5,8 +5,8 @@ public class EntryUndoPresenter implements EntryUndoOutputBoundary{
     public EntryUndoPresenter(){}
     @Override
     public EntryUndoResponseModel prepareSuccessView(EntryUndoResponseModel responseModel) {
-        String newInformation = "Value: "+ responseModel.getValue() + "; Date: " + responseModel.getDate()
-                + "; Metric: " + responseModel.getMetric();
+        String newInformation = "Most recent data point was deleted. Value: "+ responseModel.getValue() + "; Date: "
+                + responseModel.getDate() + "; Metric: " + responseModel.getMetric();
         System.out.println(newInformation);
         return new EntryUndoResponseModel(newInformation);
     }
