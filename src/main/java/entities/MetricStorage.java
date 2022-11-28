@@ -6,13 +6,13 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 
-public class MetricStorage implements MetricStorageInterface{
+public class MetricStorage implements MetricStorageInterface {
 
     private final ArrayList<Metric> METRICLIST;
     private File location;
     private boolean saved;
 
-    public MetricStorage(){
+    public MetricStorage() {
         this.METRICLIST = new ArrayList<>();
         this.location = new File("./metrics");
         this.saved = false;
@@ -21,7 +21,7 @@ public class MetricStorage implements MetricStorageInterface{
     @Override
     public void setPath(File path) {
         String folder = path.getPath();
-        if (!(folder.endsWith(File.separator + "metrics")||folder.endsWith(File.separator + "metrics/")))
+        if (!(folder.endsWith(File.separator + "metrics") || folder.endsWith(File.separator + "metrics/")))
             folder += File.separator + "metrics";
         System.out.println(folder);
         this.location = new File(folder);
@@ -40,7 +40,7 @@ public class MetricStorage implements MetricStorageInterface{
         //this method inserts an Entities.DataPoint into an Entities.Metric specified by name
         //this method will not rename the metricName contained in the dataPoint class, that responsibility
         //should lie within wherever the Entities.DataPoint is constructed
-        for (Metric metric: this.METRICLIST) {
+        for (Metric metric : this.METRICLIST) {
             if (Objects.equals(metric.getName(), metricName)) {
                 metric.addDataPoint(dataPoint);
                 break;
@@ -52,7 +52,7 @@ public class MetricStorage implements MetricStorageInterface{
     @Override
     public void removeDataPoint(String metricName) {
         //this method removes the most recent Entities.DataPoint from a chosen Entities.Metric based on its given name
-        for (Metric metric: this.METRICLIST) {
+        for (Metric metric : this.METRICLIST) {
             if (Objects.equals(metric.getName(), metricName)) {
                 metric.popDataPoint();
                 break;
@@ -75,7 +75,7 @@ public class MetricStorage implements MetricStorageInterface{
 
     @Override
     public Metric getMetric(String metricName) throws Exception {
-        for (Metric metric:this.METRICLIST) {
+        for (Metric metric : this.METRICLIST) {
             if (metric.getName().equalsIgnoreCase(metricName)) {
                 return metric;
             }

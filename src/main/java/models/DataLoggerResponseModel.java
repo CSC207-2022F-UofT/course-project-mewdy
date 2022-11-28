@@ -1,6 +1,6 @@
 package models;
 
-public class DataLoggerResponseModel{
+public class DataLoggerResponseModel {
 
     private final String metricName;
     private final double value;
@@ -14,7 +14,7 @@ public class DataLoggerResponseModel{
         this.value = value;
     }
 
-    public DataLoggerResponseModel(String message){
+    public DataLoggerResponseModel(String message) {
         this.message = message;
         this.metricName = "";
         this.value = 0;
@@ -24,11 +24,11 @@ public class DataLoggerResponseModel{
         return this.message;
     }
 
-    public String getMetricName(){
+    public String getMetricName() {
         return this.metricName;
     }
 
-    public double getValue(){
+    public double getValue() {
         return this.value;
     }
 }

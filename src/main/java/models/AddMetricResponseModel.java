@@ -18,6 +18,7 @@ public class AddMetricResponseModel {
     public String getMetricName() {
         return metricName;
     }
+
     public String getMessage() {
         return message;
     }
