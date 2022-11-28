@@ -65,7 +65,7 @@ public class Main {
 
         // Initialize screens
         JPanel startScreen = new StartScreen(cardLayout, screens, dataImportController);
-        JPanel homeScreen = new HomeScreen(cardLayout, screens, dataExportController);
+        JPanel homeScreen = new HomeScreen(cardLayout, screens, dataExportController, metricStorage);
         JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController, cardLayout,
                 screens);
         JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController,

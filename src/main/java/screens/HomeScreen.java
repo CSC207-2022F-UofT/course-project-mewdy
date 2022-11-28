@@ -23,13 +23,16 @@ public class HomeScreen extends JPanel implements ActionListener {
     JButton saveButton;
     JButton exportButton;
     JButton backButton;
+    MetricStorageInterface metricStorage;
 
 
-    public HomeScreen(CardLayout cardLayout, JPanel screens, DataExportController dataExportController) {
+    public HomeScreen(CardLayout cardLayout, JPanel screens, DataExportController dataExportController,
+                      MetricStorageInterface metricStorage) {
 
         this.cardLayout = cardLayout;
         this.screens = screens;
         this.dataExportController = dataExportController;
+        this.metricStorage = metricStorage;
 
         JLabel title = new JLabel("Home");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -90,6 +93,14 @@ public class HomeScreen extends JPanel implements ActionListener {
         }
         if (evt.getSource() == backButton){
             cardLayout.previous(screens);
+        }
+        if (evt.getSource() == saveButton){
+            ExportResponseModel responseModel = dataExportController.writeToNewFile(metricStorage.getPath().getAbsolutePath());
+            if (responseModel.getErrorMsg().length() > 1) {
+                JOptionPane.showMessageDialog(this, responseModel.getErrorMsg());
+            } else {
+                JOptionPane.showMessageDialog(this, "Success!");
+            }
         }
     }
 
