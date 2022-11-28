@@ -15,7 +15,7 @@ public class MetricStorage implements MetricStorageInterface {
     public MetricStorage() {
         this.METRICLIST = new ArrayList<>();
         this.location = new File("./metrics");
-        this.saved = false;
+        this.saved = true; // if storage is empty, nothing to save
     }
 
     @Override

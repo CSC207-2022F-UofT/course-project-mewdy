@@ -20,7 +20,7 @@ public class DataLogger implements DataLoggerInputBoundary {
         this.presenter = presenter;
     }
 
-    public DataLoggerResponseModel logDataPoint(DataLoggerRequestModel requestModel) throws Exception {
+    public DataLoggerResponseModel logDataPoint(DataLoggerRequestModel requestModel) {
         //this is the DataLogger.DataLogger use case interactor which takes a metricName, value for the DataPoint,
         //and the metricStorage object that we are adding to.
         //this throws an exception whenever the metric name is invalid or whenever the
@@ -34,8 +34,8 @@ public class DataLogger implements DataLoggerInputBoundary {
             double upperBound = metric.getUpperBound();
             double lowerBound = metric.getLowerBound();
             int size = metric.getDataPoints().size();
-            String lastDate = null;
-            String todayDate = null;
+            String lastDate;
+            String todayDate;
             if (size >= 1) {
                 DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYY-MM-dd");
                 lastDate = metric.getDataPoints().get(size - 1).getDate().substring(0, 10);
