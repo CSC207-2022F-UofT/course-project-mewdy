@@ -20,27 +20,23 @@ public class DataImporter implements DataImportInputBoundary {
      * Import UseCase
      * Imports data from csv files to a metric storage
      */
-    private File folder;
     private final MetricStorageInterface storage;
     private final DataImportPresenterOutputBoundary presenter;
 
     public DataImporter(MetricStorageInterface storage, DataImportPresenterOutputBoundary presenter) {
-        this.folder = storage.getPath();
         this.storage = storage;
         this.presenter = presenter;
     }
 
     @Override
     public ImportResponseModel readFromNewFile(ImportRequestModel req) {
-        this.folder = new File(req.getPath());
-        this.storage.setPath(this.folder);
+        this.storage.setPath(new File(req.getPath()));
         return read();
     }
 
-    @Override
-    public ImportResponseModel read() {
+    private ImportResponseModel read() { // Reads csv files from the folder and adds them to the metric storage
         try {
-            for (File file : Objects.requireNonNull(this.folder.listFiles())) {
+            for (File file : Objects.requireNonNull(this.storage.getPath().listFiles())) {
                 ArrayList<String> dates = new ArrayList<>();
                 ArrayList<Double> data = new ArrayList<>();
                 double upperBound = 0, lowerBound = 0;
@@ -74,7 +70,7 @@ public class DataImporter implements DataImportInputBoundary {
                 storage.save(); // State should be identical from last save
             }
         } catch (RuntimeException | IOException e) {
-            return presenter.prepareFailView("File either does not exist or does not have access.");
+            return presenter.prepareFailView("Folder either does not contain csv files or does not have access.");
         } catch (ParseException e) {
             return presenter.prepareFailView("Bad data.");
         }
