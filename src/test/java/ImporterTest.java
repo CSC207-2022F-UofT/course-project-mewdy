@@ -53,16 +53,10 @@ class ImporterTest {
     }
 
     @Test
-    void read() { // Test reading from file
-        importer.read();
-        //printMetrics(storage); //DEBUG
-        //printMetrics(preMadeStorage); //DEBUG
-        assertTrue(isEqual(storage, preMadeStorage));
-    }
-
-    @Test
     void readFromNewFile() { // Test Reading from new directory
         importer.readFromNewFile(importReq);
+        //printMetrics(storage); //DEBUG
+        //printMetrics(preMadeStorage); //DEBUG
         assertTrue(isEqual(storage, preMadeStorage));
     }
 
