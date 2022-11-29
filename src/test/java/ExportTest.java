@@ -2,8 +2,12 @@ import entities.DataPoint;
 import entities.Metric;
 import entities.MetricStorage;
 import models.ExportRequestModel;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import presenters.DataExportPresenter;
 import presenters.DataExportPresenterOutputBoundary;
+import use_cases.DataExportInputBoundary;
+import use_cases.DataExporter;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -12,24 +16,19 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import use_cases.DataExportInputBoundary;
-import use_cases.DataExporter;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExportTest {
     MetricStorage ms;
-    ArrayList<DataPoint> dataPoints;
-    DataExportInputBoundary exporter;
     DataExportPresenterOutputBoundary presenter;
+    DataExportInputBoundary exporter;
+    ArrayList<DataPoint> dataPoints;
 
     @BeforeEach
     public void setUp() {
-        ms = new MetricStorage();
-        presenter = new DataExportPresenter();
-        exporter = new DataExporter(ms, presenter);
+        this.ms = new MetricStorage();
+        this.presenter = new DataExportPresenter();
+        this.exporter = new DataExporter(ms, presenter);
         String[] metrics = {"play", "sleep", "work"};
         for (String name : metrics) {
             dataPoints = new ArrayList<>();
@@ -40,28 +39,24 @@ public class ExportTest {
         }
     }
 
-    @Test //test export to root folder
-    public void testExport() throws IOException {
-        exporter.write();
-        File f = new File("./metrics");
-        f.deleteOnExit();
+    @Test //test export to folder that does not exist
+    public void testExportToNewFile() throws IOException {
+        File f = new File("./new/metrics");
+        exporter.writeToNewFile(new ExportRequestModel("./new"));
         assertTrue(isEqual(this.ms, read(f)));
     }
 
-    @Test
-    public void testFilesExist() {
-        assertTrue(exporter.filesExist());
-    }
-
     @Test //test export to folder that does not exist
-    public void testExportToNewFile() throws IOException {
-        File f = new File("./new");
+    public void testDeleteMetrics() throws IOException {
+        File f = new File("./new"); // Initialize folders so that they will delete after test
         f.deleteOnExit();
         File f2 = new File("./new/metrics");
         f2.deleteOnExit();
+        //this.ms.deleteMetric()
         exporter.writeToNewFile(new ExportRequestModel("./new"));
         assertTrue(isEqual(this.ms, read(f2)));
     }
+
 
     private MetricStorage read(File files) throws IOException {
         MetricStorage s = new MetricStorage();
@@ -105,9 +100,9 @@ public class ExportTest {
     }
 
     private boolean isEqual(MetricStorage s1, MetricStorage s2) {
-            for (int i = 0; i < s1.getMetricList().size(); i++) {
-                if (!s1.getMetricList().get(i).equals(s2.getMetricList().get(i))) return false;
-            }
-            return true;
+        for (int i = 0; i < s1.getMetricList().size(); i++) {
+            if (!s1.getMetricList().get(i).equals(s2.getMetricList().get(i))) return false;
+        }
+        return true;
     }
 }

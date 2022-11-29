@@ -19,34 +19,30 @@ public class DataExporter implements DataExportInputBoundary {
      */
 
     private MetricStorageInterface storage;
-    private File folder;
     private final DataExportPresenterOutputBoundary presenter;
 
 
     public DataExporter(MetricStorageInterface metricStorage, DataExportPresenterOutputBoundary presenter) {
         this.storage = metricStorage;
         this.presenter = presenter;
-        this.folder = this.storage.getPath();
     }
 
     @Override
     public ExportResponseModel writeToNewFile(ExportRequestModel req) {
-        this.storage.setPath(new File(req.getPath()));
-        this.folder = this.storage.getPath();
+        this.storage.setPath(new File(req.getPath())); // Set MetricStorage path to the path in the request
         return write();
     }
 
-    @Override
-    public ExportResponseModel write() {
+    private ExportResponseModel write() {
 
         BufferedWriter writer;
         for (Metric metric : storage.getMetricList()) {
             try {
                 // Create folders if they don't exist
-                if (!this.folder.exists()) this.folder.mkdirs();
+                if (!this.storage.getPath().exists()) this.storage.getPath().mkdirs();
 
                 // Get file name from metric name
-                String currentFile = this.folder.getPath() + File.separator + metric.getName() + ".csv";
+                String currentFile = this.storage.getPath().getPath() + File.separator + metric.getName() + ".csv";
 
                 // Write header to file
                 writer = new BufferedWriter(new FileWriter(currentFile));
@@ -62,6 +58,9 @@ public class DataExporter implements DataExportInputBoundary {
                 }
                 writer.close();
 
+                // Remove deleted Metrics from folder
+                cleanUp(this.storage);
+
             } catch (IOException e) {
                 return presenter.prepareFailView(e.getMessage());
             }
@@ -70,14 +69,17 @@ public class DataExporter implements DataExportInputBoundary {
         return presenter.prepareSuccessView();
     }
 
-    @Override
-    public boolean filesExist() {
-        //Check if a file will be overwritten return true if so
-        File file;
-        for (Metric m : storage.getMetricList()) {
-            file = new File(this.folder + File.separator + m.getName() + ".csv");
-            if (file.exists()) return true;
+    private void cleanUp(MetricStorageInterface storage) {
+        // Delete removed metrics from the metrics folder
+        File[] files = this.storage.getPath().listFiles();
+        files:
+        for (File f : files) {
+            if (f.getPath().endsWith(".csv")) {
+                for (Metric m : storage.getMetricList()) {
+                    if (f.getName().equals(m.getName() + ".csv")) continue files;
+                }
+                f.delete();
+            }
         }
-        return false;
     }
 }
