@@ -1,8 +1,20 @@
 package presenters;
 
 import models.EntryUndoResponseModel;
+
+/**
+ * Subclass of the EntryUndoOutputBoundary
+ */
 public class EntryUndoPresenter implements EntryUndoOutputBoundary{
+
+    /**
+     * Constructor for the EntryUndoPresenter???
+     */
     public EntryUndoPresenter(){}
+
+    /*
+
+     */
     @Override
     public EntryUndoResponseModel prepareSuccessView(EntryUndoResponseModel responseModel) {
         String newInformation = "Value: "+ responseModel.getValue() + "; Date: " + responseModel.getDate()
