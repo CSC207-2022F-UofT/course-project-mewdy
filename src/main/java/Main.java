@@ -84,7 +84,7 @@ public class Main {
         application.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                if (metricStorage.getSaveStatus()) {
+                if (dataExportController.getSaveStatus()) {
                     application.dispose();
                 } else {
                     int confirmed = JOptionPane.showConfirmDialog(

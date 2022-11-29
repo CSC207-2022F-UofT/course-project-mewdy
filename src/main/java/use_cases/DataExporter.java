@@ -33,6 +33,11 @@ public class DataExporter implements DataExportInputBoundary {
         return write();
     }
 
+    @Override
+    public boolean getSaveStatus() {
+        return this.storage.getSaveStatus();
+    }
+
     private ExportResponseModel write() {
 
         BufferedWriter writer;
