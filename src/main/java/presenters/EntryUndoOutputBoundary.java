@@ -11,7 +11,7 @@ public interface EntryUndoOutputBoundary {
      * prepareSuccessView returns the success view
      *
      * @param msg represents the success message
-     * @return EntryUndoResponseModel
+     * @return the success view for the EntryUndo usecase
      */
     EntryUndoResponseModel prepareSuccessView(EntryUndoResponseModel msg);
 
@@ -19,7 +19,7 @@ public interface EntryUndoOutputBoundary {
      * prepareFailView returns the fail view
      *
      * @param msg represents the fail message
-     * @return EntryUndoResponseModel
+     * @return the fail view for the EntryUndo usecase
      */
     EntryUndoResponseModel prepareFailView(String msg);
 }
