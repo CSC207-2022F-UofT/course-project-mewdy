@@ -51,12 +51,10 @@ public class ExportTest {
     @Test //test export to folder that does not exist
     public void testDeleteMetrics() throws IOException {
         File f = new File("./new"); // Initialize folders so that they will delete after test
-        //test export to folder that does not exist
-        File f = new File("./new");
         f.deleteOnExit();
         File f2 = new File("./new/metrics");
         f2.deleteOnExit();
-        //this.ms.deleteMetric()
+        this.ms.removeMetric(this.ms.getMetricList().get(0)); // remove the first metric
         exporter.writeToNewFile(new ExportRequestModel("./new"));
         assertTrue(isEqual(this.ms, read(f2)));
     }
