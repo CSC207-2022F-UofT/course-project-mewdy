@@ -56,10 +56,14 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         if (evt.getSource() == backButton) {
             cardLayout.show(screens, "home");
         } else {
-            MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
-            String averageAndTrend = viewModel.getMetricAverageAndSize();
-            XYChart chart = viewModel.getChart();
-            new MetricSummaryScreen(averageAndTrend, chart);
+            try {
+                MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
+                String averageAndTrend = viewModel.getMetricAverageAndSize();
+                XYChart chart = viewModel.getChart();
+                new MetricSummaryScreen(averageAndTrend, chart);
+            } catch (NullPointerException | DataSummaryFailed e) {
+                JOptionPane.showMessageDialog(this , e.getMessage());
+            }
         }
     }
 
