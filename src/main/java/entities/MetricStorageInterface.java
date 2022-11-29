@@ -7,6 +7,7 @@ public interface MetricStorageInterface {
     void setPath(File path);
 
     void addMetric(Metric metric);
+    void removeMetric(Metric metric);
 
     void addDataPoint(String metricName, DataPoint dataPoint);
 
@@ -18,7 +19,7 @@ public interface MetricStorageInterface {
 
     ArrayList<DataPoint> getDataPointList(String metricName);
 
-    Metric getMetric(String metricName) throws Exception;
+    Metric getMetric(String metricName) throws NullPointerException;
 
     File getPath();
 

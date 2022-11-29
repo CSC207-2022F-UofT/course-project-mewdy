@@ -5,5 +5,5 @@ import models.AddMetricResponseModel;
 
 
 public interface AddMetricInputBoundary {
-    AddMetricResponseModel addMetric(AddMetricRequestModel requestModel) throws Exception;
+    AddMetricResponseModel addMetric(AddMetricRequestModel requestModel);
 }

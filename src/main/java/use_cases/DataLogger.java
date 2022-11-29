@@ -30,29 +30,31 @@ public class DataLogger implements DataLoggerInputBoundary {
         DataLoggerResponseModel responseModel = new DataLoggerResponseModel("Successfully added datapoint",
                 metricName, value);
         try {
+            // Get metric info
             Metric metric = this.metricStorage.getMetric(metricName);
             double upperBound = metric.getUpperBound();
             double lowerBound = metric.getLowerBound();
             int size = metric.getDataPoints().size();
-            String lastDate;
-            String todayDate;
-            if (size >= 1) {
-                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("YYYY-MM-dd");
+            // Initialize dates to be not equal in case there are no data points
+            String lastDate = "neq";
+            String todayDate = "neq2";
+
+            if (size >= 1) { // Check if list is not empty, compare last entry date with today's date if not empty
+                DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 lastDate = metric.getDataPoints().get(size - 1).getDate().substring(0, 10);
                 todayDate = LocalDate.now().format(myFormatObj);
-            } else {
-                todayDate = "neq";
-                lastDate = "neq2";
             }
             if ((lowerBound <= value) && (upperBound >= value) && (!todayDate.equals(lastDate))) {
+                // Check if value is within bounds and if today's date is not equal to last entry date
+                // Add data point
                 DataPoint newEntry = new DataPoint(value);
-                metric.addDataPoint(newEntry);
+                this.metricStorage.addDataPoint(metricName, newEntry);
 
                 return presenter.prepareSuccessView(responseModel);
             } else {
                 return presenter.prepareFailView("Failed to add datapoint, invalid value");
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return presenter.prepareFailView("Metric does not exist");
         }
     }
