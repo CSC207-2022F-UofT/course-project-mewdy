@@ -1,6 +1,5 @@
 package entities;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -46,16 +45,6 @@ public class Metric {
     public ArrayList<DataPoint> getDataPoints() {
         //this is a method for getting the list of DataPoints from an Entities.Metric
         return this.DATAPOINTS;
-    }
-
-    public boolean preexistingDataPoint(LocalDateTime date) {
-        //checks every DataPoint in this Metric to see if there already exists a DataPoint with this Date
-        for (DataPoint point : this.DATAPOINTS) {
-            if (point.getDate().equals(date)) {
-                return true;
-            }
-        }
-        return false;
     }
 
     public void addDataPoint(DataPoint entry) {

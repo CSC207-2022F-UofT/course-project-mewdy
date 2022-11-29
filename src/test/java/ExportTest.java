@@ -20,15 +20,17 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ExportTest {
     MetricStorage ms;
-    DataExportPresenterOutputBoundary presenter;
-    DataExportInputBoundary exporter;
     ArrayList<DataPoint> dataPoints;
+    DataExportInputBoundary exporter;
+    DataExportPresenterOutputBoundary presenter;
 
     @BeforeEach
     public void setUp() {
+        // Setup
         this.ms = new MetricStorage();
         this.presenter = new DataExportPresenter();
         this.exporter = new DataExporter(ms, presenter);
+        // Setup test metrics with dataPoints
         String[] metrics = {"play", "sleep", "work"};
         for (String name : metrics) {
             dataPoints = new ArrayList<>();
@@ -49,6 +51,8 @@ public class ExportTest {
     @Test //test export to folder that does not exist
     public void testDeleteMetrics() throws IOException {
         File f = new File("./new"); // Initialize folders so that they will delete after test
+        //test export to folder that does not exist
+        File f = new File("./new");
         f.deleteOnExit();
         File f2 = new File("./new/metrics");
         f2.deleteOnExit();
@@ -57,10 +61,12 @@ public class ExportTest {
         assertTrue(isEqual(this.ms, read(f2)));
     }
 
-
     private MetricStorage read(File files) throws IOException {
+        // Helper method to read from file to make sure exported data is correct
+        // Implementation is similar to Importer so if test passes then export data will be correct
         MetricStorage s = new MetricStorage();
 
+        // Get CSV files
         for (File file : Objects.requireNonNull(files.listFiles())) {
             if (!file.getName().contains(".csv")) continue;
             ArrayList<String> dates = new ArrayList<>();
@@ -70,6 +76,7 @@ public class ExportTest {
             String extension = fullFileName.substring(fullFileName.lastIndexOf(".") + 1);
             String filename = fullFileName.substring(0, fullFileName.lastIndexOf("."));
 
+            // Read from CSV file
             if (extension.equals("csv")) {
                 BufferedReader r = new BufferedReader(new FileReader(file));
                 String line = r.readLine();
@@ -84,6 +91,7 @@ public class ExportTest {
                 }
                 r.close();
             }
+            // Save import to metric storage for comparison in test
             createMetric(dates, data, upperBound, lowerBound, filename, s);
         }
         return s;
@@ -91,6 +99,7 @@ public class ExportTest {
 
     private void createMetric(
             ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, String name, MetricStorage s) {
+        // Helper method to create metrics from data
 
         ArrayList<DataPoint> dataPoints = new ArrayList<>();
         for (int i = 0; i < dates.size(); i++) {
@@ -100,6 +109,7 @@ public class ExportTest {
     }
 
     private boolean isEqual(MetricStorage s1, MetricStorage s2) {
+        // Helper method to compare two metric storages
         for (int i = 0; i < s1.getMetricList().size(); i++) {
             if (!s1.getMetricList().get(i).equals(s2.getMetricList().get(i))) return false;
         }
