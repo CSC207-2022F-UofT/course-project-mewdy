@@ -1,19 +1,18 @@
 package screens;
 
+import controllers.MetricSumController;
 import entities.Metric;
 import entities.MetricStorageInterface;
-import controllers.MetricSumController;
-import presenters.MetricSumViewModel;
 import org.knowm.xchart.XYChart;
+import presenters.MetricSumViewModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import java.util.ArrayList;
 
-public class ChooseMetricSumScreen extends JPanel implements ActionListener, Refreshable{
+public class ChooseMetricSumScreen extends JPanel implements ActionListener, Refreshable {
 
     MetricStorageInterface metricStorage;
     MetricSumController metricSumController;
@@ -22,7 +21,7 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
     JButton backButton;
 
     public ChooseMetricSumScreen(MetricStorageInterface metricStorageInterface,
-                                 MetricSumController metricSumController, CardLayout cardLayout, JPanel screens){
+                                 MetricSumController metricSumController, CardLayout cardLayout, JPanel screens) {
         this.metricStorage = metricStorageInterface;
         this.metricSumController = metricSumController;
         this.cardLayout = cardLayout;
@@ -36,10 +35,10 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         // Add buttons for every Metric in MetricStorage.
         JPanel buttons = new JPanel();
         ArrayList<Metric> metricList = metricStorage.getMetricList();
-        for (Metric m: metricList){
+        for (Metric m : metricList) {
             JButton metricButton = new JButton(m.getName());
             buttons.add(metricButton);
-            metricButton.addActionListener( this);
+            metricButton.addActionListener(this);
             metricButton.setActionCommand(m.getName());
         }
 
@@ -53,24 +52,23 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
     }
 
     //React to button press to summarize chosen Metric.
-    public void actionPerformed(ActionEvent evt){
-        if (evt.getSource() == backButton){
+    public void actionPerformed(ActionEvent evt) {
+        if (evt.getSource() == backButton) {
             cardLayout.show(screens, "home");
-        }
-        else {
+        } else {
             try {
                 MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
                 String averageAndTrend = viewModel.getMetricAverageAndSize();
                 XYChart chart = viewModel.getChart();
                 new MetricSummaryScreen(averageAndTrend, chart);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+            } catch (NullPointerException | DataSummaryFailed e) {
+                JOptionPane.showMessageDialog(this , e.getMessage());
             }
         }
     }
 
     @Override
-    public void refresh(){
+    public void refresh() {
         this.removeAll();
 
         JLabel title = new JLabel("Metric Summary");
@@ -79,10 +77,10 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         // Add buttons for every Metric in MetricStorage.
         JPanel buttons = new JPanel();
         ArrayList<Metric> metricList = metricStorage.getMetricList();
-        for (Metric m: metricList){
+        for (Metric m : metricList) {
             JButton metricButton = new JButton(m.getName());
             buttons.add(metricButton);
-            metricButton.addActionListener( this);
+            metricButton.addActionListener(this);
             metricButton.setActionCommand(m.getName());
         }
         backButton = new JButton("Back");

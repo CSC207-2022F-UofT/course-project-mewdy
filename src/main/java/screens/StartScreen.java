@@ -8,7 +8,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.util.Arrays;
 import java.util.Objects;
 
 public class StartScreen extends JPanel implements ActionListener {
@@ -17,7 +16,7 @@ public class StartScreen extends JPanel implements ActionListener {
     JPanel screens;
     DataImportController dataImportController;
 
-    public StartScreen(CardLayout cardLayout, JPanel screens, DataImportController dataImportController){
+    public StartScreen(CardLayout cardLayout, JPanel screens, DataImportController dataImportController) {
 
         this.cardlayout = cardLayout;
         this.screens = screens;
@@ -46,11 +45,11 @@ public class StartScreen extends JPanel implements ActionListener {
     }
 
     // React to button click
-    public void actionPerformed(ActionEvent evt){
-        if (Objects.equals(evt.getActionCommand(), "New")){
+    public void actionPerformed(ActionEvent evt) {
+        if (Objects.equals(evt.getActionCommand(), "New")) {
             cardlayout.show(screens, "home");
         }
-        if (evt.getActionCommand().equals("Import")){
+        if (evt.getActionCommand().equals("Import")) {
             JFileChooser importFileChooser = new JFileChooser();
             importFileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
@@ -65,9 +64,9 @@ public class StartScreen extends JPanel implements ActionListener {
                 } else {
                     JOptionPane.showMessageDialog(this, "Success!");
                     cardlayout.show(screens, "home");
-                    }
                 }
             }
         }
     }
+}
 

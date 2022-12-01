@@ -5,6 +5,6 @@ import models.DataLoggerResponseModel;
 
 public interface DataLoggerInputBoundary {
 
-    DataLoggerResponseModel logDataPoint(DataLoggerRequestModel requestModel) throws Exception;
+    DataLoggerResponseModel logDataPoint(DataLoggerRequestModel requestModel);
 
 }

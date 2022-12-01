@@ -12,16 +12,14 @@ import entities.DataPoint;
 import entities.Metric;
 import models.MetricDelRequestModel;
 import models.MetricDelResponseModel;
-import use_cases.MetricDelInputBoundary;
-import use_cases.MetricDelOutputBoundary;
-import use_cases.MetricDeleter;
+import presenters.MetricDelOutputBoundary;
 import presenters.MetricDelPresenter;
-import presenters.MetricDeleterFailed;
+import screens.MetricDeleterFailed;
 
 class MetricDeleterTest {
 
     @Test
-    public void testMetricDeleterSuccess() throws Exception {
+    public void testMetricDeleterSuccess() {
 
         //Initializes a presenter
         MetricDelOutputBoundary metricDelPresenter = new MetricDelPresenter();
@@ -60,7 +58,7 @@ class MetricDeleterTest {
     }
 
     @Test
-    public void testMetricDeleterFailure() throws Exception {
+    public void testMetricDeleterFailure() {
         //Initializes a presenter
         MetricDelOutputBoundary metricDelPresenter = new MetricDelPresenter();
 

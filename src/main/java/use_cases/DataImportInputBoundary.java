@@ -5,7 +5,6 @@ import models.ImportResponseModel;
 
 public interface DataImportInputBoundary {
 
-    ImportResponseModel read();
     ImportResponseModel readFromNewFile(ImportRequestModel req);
 
 }

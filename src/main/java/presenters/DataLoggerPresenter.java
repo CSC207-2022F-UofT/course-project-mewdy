@@ -1,10 +1,19 @@
 package presenters;
 
-import use_cases.DataLoggerOutputBoundary;
 import models.DataLoggerResponseModel;
+
+/**
+ * Subclass of DataLoggerOutputBoundary
+ */
 
 public class DataLoggerPresenter implements DataLoggerOutputBoundary{
 
+    /**
+     * prepareSuccesView for the succesview
+     *
+     * @param responseModel represents the response model
+     * @return DataLoggerResponseModel
+     */
     @Override
     public DataLoggerResponseModel prepareSuccessView(DataLoggerResponseModel responseModel) {
         Double value = responseModel.getValue();
@@ -13,6 +22,12 @@ public class DataLoggerPresenter implements DataLoggerOutputBoundary{
         return new DataLoggerResponseModel(message);
     }
 
+    /**
+     * prepareFailView returns the failure view
+     *
+     * @param error represents the error messagae
+     * @return DataLoggerResponseModel
+     */
     @Override
     public DataLoggerResponseModel prepareFailView(String error) {
         return new DataLoggerResponseModel(error);

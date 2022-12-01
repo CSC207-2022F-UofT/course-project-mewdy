@@ -7,50 +7,57 @@ import models.ImportRequestModel;
 import models.ImportResponseModel;
 import presenters.DataImportPresenterOutputBoundary;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Objects;
 
 public class DataImporter implements DataImportInputBoundary {
-
-    private File folder;
-    private MetricStorageInterface storage;
+    /**
+     * Import UseCase
+     * Imports data from csv files to a metric storage
+     */
+    private final MetricStorageInterface storage;
     private final DataImportPresenterOutputBoundary presenter;
 
-    public DataImporter(MetricStorageInterface storage, DataImportPresenterOutputBoundary presenter){
-        this.folder = storage.getPath();
+    public DataImporter(MetricStorageInterface storage, DataImportPresenterOutputBoundary presenter) {
         this.storage = storage;
         this.presenter = presenter;
-
     }
 
     @Override
-    public ImportResponseModel readFromNewFile(ImportRequestModel req){
-        this.folder = new File(req.getPath());
-        this.storage.setPath(this.folder);
+    public ImportResponseModel readFromNewFile(ImportRequestModel req) {
+        this.storage.setPath(new File(req.getPath()));
         return read();
     }
-    
-    @Override
-    public ImportResponseModel read() {
+
+    private ImportResponseModel read() { // Reads csv files from the folder and adds them to the metric storage
         try {
-            for (File file : Objects.requireNonNull(this.folder.listFiles())) {
+            for (File file : Objects.requireNonNull(this.storage.getPath().listFiles())) {
                 ArrayList<String> dates = new ArrayList<>();
                 ArrayList<Double> data = new ArrayList<>();
                 double upperBound = 0, lowerBound = 0;
+
+                // Read file
                 String fullFileName = file.getName();
                 String filename = fullFileName.substring(0, fullFileName.lastIndexOf("."));
 
+                // Filter csv files
                 if (fullFileName.endsWith(".csv")) {
                     BufferedReader r = new BufferedReader(new FileReader(file));
                     String line = r.readLine();
                     if (line == null) {
                         continue; // skip file if empty
                     } else {
+                        // Read header if file is not empty
                         String[] header = line.split(",");
                         upperBound = Double.parseDouble(header[2]);
                         lowerBound = Double.parseDouble(header[3]);
                     }
+                    // Read data
                     String row;
                     while ((row = r.readLine()) != null) {
                         String[] col = row.split(",");
@@ -60,11 +67,10 @@ public class DataImporter implements DataImportInputBoundary {
                     r.close();
                 }
                 createMetric(dates, data, upperBound, lowerBound, filename);
-                storage.save(); //State is replicated from storage
+                storage.save(); // State should be identical from last save
             }
         } catch (RuntimeException | IOException e) {
-            System.out.println(e.getMessage());//DEBUG
-            return presenter.prepareFailView("File either does not exist or does not have access.");
+            return presenter.prepareFailView("Folder either does not contain csv files or does not have access.");
         } catch (ParseException e) {
             return presenter.prepareFailView("Bad data.");
         }
@@ -73,11 +79,13 @@ public class DataImporter implements DataImportInputBoundary {
 
     private void createMetric(
             ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, String name) throws ParseException {
-
-            ArrayList<DataPoint> dataPoints = new ArrayList<>();
-            for (int i = 0; i < dates.size(); i++) {
-                 dataPoints.add(new DataPoint(dates.get(i), data.get(i)));
-            }
-            storage.addMetric(new Metric(name, dataPoints, ub, lb));
+        // Create a temporary ArrayList to store the DataPoints to be added to the Metric
+        ArrayList<DataPoint> dataPoints = new ArrayList<>();
+        for (int i = 0; i < dates.size(); i++) {
+            dataPoints.add(new DataPoint(dates.get(i), data.get(i)));
+        }
+        // Create a new Metric with the given name, upper and lower bounds, and the DataPoints
+        // adds Metric to Storage
+        storage.addMetric(new Metric(name, dataPoints, ub, lb));
     }
 }

@@ -4,6 +4,7 @@ import entities.Metric;
 import entities.MetricStorageInterface;
 import models.MetricDelRequestModel;
 import models.MetricDelResponseModel;
+import presenters.MetricDelOutputBoundary;
 
 public class MetricDeleter implements MetricDelInputBoundary {
 
@@ -23,17 +24,16 @@ public class MetricDeleter implements MetricDelInputBoundary {
 
         //Trys to delete the selected metric
         try {
-            //This is executed if the selected metric is in the metric storage
+            // Get metric to delete throws NullPointerException if metric does not exist
             Metric metricToDel = this.metricStorage.getMetric(metricName);
+
+            // Remove metric from metricStorage and store the result for the presenter
             int numDataPoints = metricToDel.getDataPoints().size();
-            for (int i = 0; i < this.metricStorage.getMetricList().size(); i++) {
-                if (this.metricStorage.getMetricList().get(i).getName().equals(metricName)) {
-                    this.metricStorage.getMetricList().remove(i);
-                }
-            }
+            this.metricStorage.removeMetric(metricToDel);
             MetricDelResponseModel responseModel = new MetricDelResponseModel(metricName, numDataPoints);
+
             return presenter.prepareSuccessView(responseModel);
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             //This is executed if the selected metric is not in metric storage.
             return presenter.prepareMetricDelFail("[" + metricName + "] " + "not found in metric storage!");
         }
