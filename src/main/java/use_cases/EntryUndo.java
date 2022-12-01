@@ -1,6 +1,5 @@
 package use_cases;
 
-import entities.MetricStorage;
 import entities.DataPoint;
 import entities.MetricStorageInterface;
 import models.EntryUndoRequestModel;

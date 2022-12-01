@@ -3,22 +3,9 @@ package entities;
 import java.io.File;
 import java.util.ArrayList;
 
-/**
- * Interface for MetricStorage
- */
 public interface MetricStorageInterface {
-    /**
-     * setPath sets the path where MetricStorage is stored
-     *
-     * @param path represents the path to the file
-     */
     void setPath(File path);
 
-    /**
-     * addMetric adds a metric to the MetricStorage
-     *
-     * @param metric represents the metric to be added to the MetricStorage
-     */
     void addMetric(Metric metric);
     void removeMetric(Metric metric);
 

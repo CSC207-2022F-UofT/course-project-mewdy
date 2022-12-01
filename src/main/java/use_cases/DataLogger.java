@@ -43,7 +43,6 @@ public class DataLogger implements DataLoggerInputBoundary{
                 DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                 lastDate = metric.getDataPoints().get(size - 1).getDate().substring(0, 10);
                 todayDate = LocalDate.now().format(myFormatObj);
-
             }
             if ((lowerBound <= value) && (upperBound >= value) && (!todayDate.equals(lastDate))) {
                 // Check if value is within bounds and if today's date is not equal to last entry date
