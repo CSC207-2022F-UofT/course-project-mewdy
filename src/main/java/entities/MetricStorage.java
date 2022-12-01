@@ -21,7 +21,7 @@ public class MetricStorage implements MetricStorageInterface{
     public MetricStorage(){
         this.METRICLIST = new ArrayList<>();
         this.location = new File("./metrics");
-        this.saved = false;
+        this.saved = true; // if storage is empty, nothing to save
     }
     /**
      * setPath sets the location of the MetricStorage
@@ -30,6 +30,7 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public void setPath(File path) {
+        // Sets the path to the file where the metrics will be saved
         String folder = path.getPath();
         if (!(folder.endsWith(File.separator + "metrics")||folder.endsWith(File.separator + "metrics/")))
             folder += File.separator + "metrics";
@@ -44,9 +45,16 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public void addMetric(Metric metric) {
-        //this method adds an Entities.Metric to the end of the metricList
+        // this method adds Metric to the MetricStorage list and sorts the list
         this.METRICLIST.add(metric);
-        Collections.sort(this.METRICLIST, new MetricComparator());
+        this.METRICLIST.sort(new MetricComparator());
+        this.saved = false;
+    }
+
+    @Override
+    public void removeMetric(Metric metric) {
+        // this method removes Metric from the MetricStorage list
+        this.METRICLIST.remove(metric);
         this.saved = false;
     }
 
@@ -58,10 +66,10 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public void addDataPoint(String metricName, DataPoint dataPoint) {
-        //this method inserts an Entities.DataPoint into an Entities.Metric specified by name
-        //this method will not rename the metricName contained in the dataPoint class, that responsibility
-        //should lie within wherever the Entities.DataPoint is constructed
-        for (Metric metric: this.METRICLIST) {
+        // this method inserts an Entities.DataPoint into an Entities.Metric specified by name
+        // this method will not rename the metricName contained in the dataPoint class, that responsibility
+        // should lie within wherever the Entities.DataPoint is constructed
+        for (Metric metric : this.METRICLIST) {
             if (Objects.equals(metric.getName(), metricName)) {
                 metric.addDataPoint(dataPoint);
                 break;
@@ -111,14 +119,14 @@ public class MetricStorage implements MetricStorageInterface{
      * @return the metric with the name metricName
      */
     @Override
-    public Metric getMetric(String metricName) throws Exception {
-        for (Metric metric:this.METRICLIST) {
+    public Metric getMetric(String metricName) throws NullPointerException {
+        for (Metric metric : this.METRICLIST) {
             if (metric.getName().equalsIgnoreCase(metricName)) {
                 return metric;
             }
 
         }
-        throw new Exception("No Metric found with name: " + metricName);
+        throw new NullPointerException("No Metric found with name: " + metricName);
     }
 
     /**

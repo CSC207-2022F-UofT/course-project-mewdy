@@ -21,22 +21,24 @@ public class EntryUndo implements EntryUndoInputBoundary{
 
     public EntryUndoResponseModel deleteDatapoint(EntryUndoRequestModel requestModel){
         String metricName = requestModel.getMetricName();
-        try{
-            ArrayList<DataPoint> deletedMetric = this.metricStorage.getDataPointList(metricName);
-            try{
-                DataPoint deletedData = deletedMetric.get(deletedMetric.size() - 1);
-            }catch (Exception e) {
-                return presenter.prepareFailView("Metric can't undo - " + metricName
-                        + " contains fewer than 1 data point");}
+
+        ArrayList<DataPoint> deletedMetric = this.metricStorage.getDataPointList(metricName);
+        try {
             DataPoint deletedData = deletedMetric.get(deletedMetric.size() - 1);
-            this.metricStorage.removeDataPoint(metricName);
+            // Throws an IndexOutOfBoundsException if the metric is empty
+
+            this.metricStorage.removeDataPoint(metricName); // Remove data point from metric
+
+            // Prepare response model with values from deleted data point
             double value = deletedData.getValue();
             String date = deletedData.getDate();
             EntryUndoResponseModel responseModel = new EntryUndoResponseModel(value, date, metricName);
-            return presenter.prepareSuccessView(responseModel);
-            } catch (Exception e) {
-            return presenter.prepareFailView("Unknown Error");
-            }
 
+            return presenter.prepareSuccessView(responseModel);
+
+        } catch (IndexOutOfBoundsException e) {
+            return presenter.prepareFailView("Metric can't undo action becuase - " + metricName
+                    + " contains fewer than 1 data point");
+        }
     }
 }

@@ -7,10 +7,11 @@ import use_cases.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.text.ParseException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class Main {
-    public static void main(String[] args) throws ParseException {
+    public static void main(String[] args) {
 
         // Create metric storage
         MetricStorageInterface metricStorage = new MetricStorage();
@@ -54,9 +55,11 @@ public class Main {
 
         // Initialize UI components
         JFrame application = new JFrame("Mewdy");
-        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        application.setSize(800,300);
+
+        application.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        application.setSize(800, 300);
         application.setResizable(false);
+
 
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
@@ -82,6 +85,25 @@ public class Main {
         application.add(screens);
         cardLayout.show(screens, "start");
         application.setVisible(true);
+
+        // Confirm exit if files are unsaved
+        application.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                if (dataExportController.getSaveStatus()) {
+                    application.dispose();
+                } else {
+                    int confirmed = JOptionPane.showConfirmDialog(
+                            application, "Are you sure you want to exit the program with unsaved changes?",
+                            "Exit Program",
+                            JOptionPane.YES_NO_OPTION);
+
+                    if (confirmed == JOptionPane.YES_OPTION) {
+                        application.dispose();
+                    }
+                }
+            }
+        });
 
     }
 }

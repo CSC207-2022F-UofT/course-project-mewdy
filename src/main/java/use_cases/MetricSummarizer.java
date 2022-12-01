@@ -48,7 +48,7 @@ public class MetricSummarizer implements MetricSumInputBoundary {
             return presenter.prepareSuccessView(responseModel);
         } catch (DataSummaryFailed dataSummaryFailed) {
             return presenter.prepareDataSumFail(dataSummaryFailed.getMessage());
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             return presenter.prepareDataSumFail(metricName + " not found in metric storage!");
         }
     }

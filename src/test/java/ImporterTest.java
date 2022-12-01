@@ -25,12 +25,14 @@ class ImporterTest {
 
     @BeforeEach
     void setUp() {
+        // Setup
         storage = new MetricStorage();
         storage.setPath(new File("./test data/metrics"));
         presenter = new DataImportPresenter();
         importReq = new ImportRequestModel("./test data/metrics");
         importer = new DataImporter(storage, presenter);
 
+        // Setup test dataPoints
         preMadeStorage = new MetricStorage();
         ArrayList<DataPoint> dataPoints = new ArrayList<>();
         dataPoints.add(new DataPoint("2022-11-11 12:47:18", 1));
@@ -43,38 +45,35 @@ class ImporterTest {
         dataPoints.add(new DataPoint("2022-11-19 12:47:18", 1));
         dataPoints.add(new DataPoint("2022-11-20 12:47:18", 1));
 
-        preMadeStorage.addMetric(new Metric("focus", dataPoints, 10,1));
-        preMadeStorage.addMetric(new Metric("sleep", dataPoints, 24,0));
-        preMadeStorage.addMetric(new Metric("testmetric", dataPoints, 10,1));
-        preMadeStorage.addMetric(new Metric("work", dataPoints, 10,1));
+        // Setup test Metrics
+        preMadeStorage.addMetric(new Metric("focus", dataPoints, 10, 1));
+        preMadeStorage.addMetric(new Metric("sleep", dataPoints, 24, 0));
+        preMadeStorage.addMetric(new Metric("testmetric", dataPoints, 10, 1));
+        preMadeStorage.addMetric(new Metric("work", dataPoints, 10, 1));
     }
 
     @Test
-    void read() {
-        importer.read();
-        //printMetrics(storage);
-        //printMetrics(preMadeStorage);
-        assertTrue(isEqual(storage, preMadeStorage));
-    }
-
-    @Test
-    void readFromNewFile() {
+    void readFromNewFile() { // Test Reading from new directory
         importer.readFromNewFile(importReq);
+        //printMetrics(storage); //DEBUG
+        //printMetrics(preMadeStorage); //DEBUG
         assertTrue(isEqual(storage, preMadeStorage));
     }
 
     private boolean isEqual(MetricStorageInterface s1, MetricStorageInterface s2) {
+        // Helper function for comparing Storage Interfaces
         for (int i = 0; i < s1.getMetricList().size(); i++) {
             if (!s1.getMetricList().get(i).equals(s2.getMetricList().get(i))) return false;
         }
         return true;
     }
 
-    private void printMetrics(MetricStorageInterface storage){
-        for (Metric metric:
+    private void printMetrics(MetricStorageInterface storage) {
+        // Helper function for printing Storage Interface to console
+        for (Metric metric :
                 storage.getMetricList()) {
             System.out.println(metric.getName() + " " + metric.getUpperBound() + " " + metric.getLowerBound());
-            for (DataPoint dp:
+            for (DataPoint dp :
                     metric.getDataPoints()) {
                 System.out.println(dp.getDate() + ", " + dp.getValue());
             }
