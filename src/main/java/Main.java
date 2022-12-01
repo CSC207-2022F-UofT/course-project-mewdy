@@ -2,10 +2,7 @@ import controllers.*;
 import entities.MetricStorage;
 import entities.MetricStorageInterface;
 import presenters.*;
-import screens.ChooseMetricSumScreen;
-import screens.DataLogChooseScreen;
-import screens.HomeScreen;
-import screens.StartScreen;
+import screens.*;
 import use_cases.*;
 
 import javax.swing.*;
@@ -49,23 +46,30 @@ public class Main {
         AddMetricInputBoundary metricAdder = new MetricAdder(addMetricPresenter, metricStorage);
         AddMetricController addMetricController = new AddMetricController(metricAdder);
 
+        //Undo Entry Use Case
+        EntryUndoOutputBoundary undoEntryPresenter = new EntryUndoPresenter();
+        EntryUndoInputBoundary entryUndo = new EntryUndo(metricStorage,undoEntryPresenter);
+        EntryUndoController entryUndoController = new EntryUndoController(entryUndo);
+
 
         // Initialize UI components
         JFrame application = new JFrame("Mewdy");
         application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        application.setSize(800, 300);
+        application.setSize(800,300);
+        application.setResizable(false);
 
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);
 
 
+
         // Initialize screens
         JPanel startScreen = new StartScreen(cardLayout, screens, dataImportController);
-        JPanel homeScreen = new HomeScreen(cardLayout, screens, dataExportController);
+        JPanel homeScreen = new HomeScreen(cardLayout, screens, dataExportController, metricStorage);
         JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController, cardLayout,
                 screens);
         JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController,
-                metricDelController, addMetricController, cardLayout, screens);
+                metricDelController, addMetricController, entryUndoController, cardLayout, screens);
 
 
         screens.add(startScreen, "start");
