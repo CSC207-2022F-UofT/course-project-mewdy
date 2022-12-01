@@ -23,8 +23,6 @@ public class Metric {
      * @param lowerBound represents the lower bound of the metric
      */
     public Metric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound) {
-        //this is an Entities.Metric constructor that takes in an ArrayList of DataPoints in addition to the other
-        //instance variables
         if (name.equalsIgnoreCase("sleep")) {
             upperBound = 24;
             lowerBound = 0;
@@ -77,7 +75,6 @@ public class Metric {
      * @return a boolean value that indicates whether the data point exists
      */
     public boolean preexistingDataPoint(LocalDateTime date) {
-        //checks every DataPoint in this Metric to see if there already exists a DataPoint with this Date
         for (DataPoint point : this.DATAPOINTS) {
             if (point.getDate().equals(date)) {
                 return true;
@@ -99,7 +96,6 @@ public class Metric {
      * popDataPoint removes the most recent data point from the list of data points
      */
     public void popDataPoint() {
-        //this is a method for removing the most recently added Entities.DataPoint from the Entities.Metric
         this.DATAPOINTS.remove(DATAPOINTS.size() - 1);
     }
 
@@ -109,7 +105,6 @@ public class Metric {
      * @return the name of the metric
      */
     public String getName() {
-        //this is a getter method for the name variable from this Entities.Metric
         return this.NAME;
     }
 
@@ -119,7 +114,6 @@ public class Metric {
      * @return the upper bound of the metric
      */
     public double getUpperBound() {
-        //this is a getter method for the upperBound variable from this Entities.Metric
         return this.UPPOERBOUND;
     }
 

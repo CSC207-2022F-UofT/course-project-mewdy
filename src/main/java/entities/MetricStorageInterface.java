@@ -59,11 +59,6 @@ public interface MetricStorageInterface {
      */
     File getPath();
 
-    /**
-     * getSaveStatus returns the save status of the MetricStorage
-     *
-     * @return a boolean representing the save status of the MetricStorage
-     */
     Boolean getSaveStatus();
 
 }

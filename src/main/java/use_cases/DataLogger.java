@@ -54,7 +54,9 @@ public class DataLogger implements DataLoggerInputBoundary{
             } else {
                 return presenter.prepareFailView("Failed to add datapoint, invalid value");
             }
+
         } catch (NullPointerException e) {
+
             return presenter.prepareFailView("Metric does not exist");
         }
     }

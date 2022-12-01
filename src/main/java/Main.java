@@ -55,9 +55,11 @@ public class Main {
 
         // Initialize UI components
         JFrame application = new JFrame("Mewdy");
-        application.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        application.setSize(800,300);
+
+        application.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+        application.setSize(800, 300);
         application.setResizable(false);
+
 
         CardLayout cardLayout = new CardLayout();
         JPanel screens = new JPanel(cardLayout);

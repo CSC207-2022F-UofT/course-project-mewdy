@@ -20,6 +20,7 @@ public class EntryUndo implements EntryUndoInputBoundary{
 
     public EntryUndoResponseModel deleteDatapoint(EntryUndoRequestModel requestModel){
         String metricName = requestModel.getMetricName();
+
         ArrayList<DataPoint> deletedMetric = this.metricStorage.getDataPointList(metricName);
         try {
             DataPoint deletedData = deletedMetric.get(deletedMetric.size() - 1);
