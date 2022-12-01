@@ -4,13 +4,13 @@ import entities.DataPoint;
 import entities.Metric;
 import entities.MetricStorageInterface;
 import models.DataLoggerRequestModel;
-import models.DataLoggerResponseModel;
 import presenters.DataLoggerOutputBoundary;
+import models.DataLoggerResponseModel;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class DataLogger implements DataLoggerInputBoundary {
+public class DataLogger implements DataLoggerInputBoundary{
 
     final MetricStorageInterface metricStorage;
     final DataLoggerOutputBoundary presenter;

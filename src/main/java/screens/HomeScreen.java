@@ -1,6 +1,7 @@
 package screens;
 
 import controllers.DataExportController;
+import entities.MetricStorageInterface;
 import models.ExportResponseModel;
 
 import javax.swing.*;
@@ -20,13 +21,16 @@ public class HomeScreen extends JPanel implements ActionListener {
     JButton saveButton;
     JButton exportButton;
     JButton backButton;
+    MetricStorageInterface metricStorage;
 
 
-    public HomeScreen(CardLayout cardLayout, JPanel screens, DataExportController dataExportController) {
+    public HomeScreen(CardLayout cardLayout, JPanel screens, DataExportController dataExportController,
+                      MetricStorageInterface metricStorage) {
 
         this.cardLayout = cardLayout;
         this.screens = screens;
         this.dataExportController = dataExportController;
+        this.metricStorage = metricStorage;
 
         JLabel title = new JLabel("Home");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -35,7 +39,6 @@ public class HomeScreen extends JPanel implements ActionListener {
         summaryButton = new JButton("Summary");
         saveButton = new JButton("Save");
         exportButton = new JButton("Export");
-        JButton entryUndoButton = new JButton("Undo Entry");
         backButton = new JButton("Back");
 
         JPanel buttons = new JPanel();
@@ -43,13 +46,13 @@ public class HomeScreen extends JPanel implements ActionListener {
         buttons.add(summaryButton);
         buttons.add(saveButton);
         buttons.add(exportButton);
-        buttons.add(entryUndoButton);
         buttons.add(backButton);
 
         summaryButton.addActionListener(this);
         recordButton.addActionListener(this);
         backButton.addActionListener(this);
         exportButton.addActionListener(this);
+        saveButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -89,7 +92,14 @@ public class HomeScreen extends JPanel implements ActionListener {
         if (evt.getSource() == backButton) {
             cardLayout.previous(screens);
         }
-
+        if (evt.getSource() == saveButton){
+            ExportResponseModel responseModel = dataExportController.writeToNewFile(metricStorage.getPath().getAbsolutePath());
+            if (responseModel.getErrorMsg().length() > 1) {
+                JOptionPane.showMessageDialog(this, responseModel.getErrorMsg());
+            } else {
+                JOptionPane.showMessageDialog(this, "Success!");
+            }
+        }
     }
 
     private void refreshScreen(String screenName) {

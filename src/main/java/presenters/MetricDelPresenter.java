@@ -3,15 +3,29 @@ package presenters;
 import models.MetricDelResponseModel;
 import screens.MetricDeleterFailed;
 
+/**
+ * Presenter for the metric deleter use case that implements the output boundary interface.
+ */
+
 public class MetricDelPresenter implements MetricDelOutputBoundary {
 
-    //Returns the response model for the metric that was deleted
+    /**
+     * prepareSuccessView prepares a success view model for the metric deleter use case.
+     *
+     * @param responseModel represents the response model for the metric deletion.
+     * @return the success view model for the metric deleter use case.
+     */
     @Override
     public MetricDelResponseModel prepareSuccessView(MetricDelResponseModel responseModel) {
         return responseModel;
     }
 
-    //Throws a MetricDeleterFailed exception in the event that the selected metric can't be deleted
+    /**
+     * prepareMetricDeleterFail throws an MetricDeleterFailed excpetion when the metric cannot be deleted
+     *
+     * @param error represents the error message for the metric deletion.
+     * @return the failure view model for the metric deleter use case.
+     */
     @Override
     public MetricDelResponseModel prepareMetricDelFail(String error) {
         throw new MetricDeleterFailed(error);

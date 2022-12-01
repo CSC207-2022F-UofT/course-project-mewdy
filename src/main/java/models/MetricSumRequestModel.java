@@ -1,14 +1,27 @@
 package models;
 
+/**
+ * Class that represents the RequestModel for MetricSum
+ */
 public class MetricSumRequestModel {
 
     private String metricName;
 
-    public MetricSumRequestModel(String metricName) {
+    /**
+     * Constructor for MetricSumRequestModel
+     *
+     * @param metricName represents the name of the metric
+     */
+    public MetricSumRequestModel(String metricName){
         this.metricName = metricName;
     }
 
-    public String getMetricName() {
+    /**
+     * Getter for metricName
+     *
+     * @return the name of the metric
+     */
+    public String getMetricName(){
         return this.metricName;
     }
 }

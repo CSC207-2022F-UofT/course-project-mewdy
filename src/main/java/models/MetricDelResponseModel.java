@@ -1,22 +1,38 @@
 package models;
 
+/**
+ * Class that represents the ResponseModel for MetricDel
+ */
 public class MetricDelResponseModel {
 
     private String metricName;
     private int numDataPoints;
 
-    //Response model constructor
+    /**
+     * Constructor for MetricDelResponseModel
+     *
+     * @param metricName represents the name of the metric
+     * @param numDataPoints represents the number of data points deleted
+     */
     public MetricDelResponseModel(String metricName, int numDataPoints) {
         this.metricName = metricName;
         this.numDataPoints = numDataPoints;
     }
 
-    //Returns the name of the selected metric
+    /**
+     * Getter for metricName
+     *
+     * @return the name of the metric
+     */
     public String getMetricName() {
         return this.metricName;
     }
 
-    //Returns the number of data points that were associated with the selected metric
+    /**
+     * getNumDataPoints returns the number of data points associated with the selected metric
+     *
+     * @return the number of data points associated with the selected metric
+     */
     public int getNumDataPoints() {
         return this.numDataPoints;
     }

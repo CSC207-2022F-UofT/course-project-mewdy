@@ -1,20 +1,35 @@
 package models;
 
+/**
+ * Class that represents the RequestModel for MetricDel
+ */
 public class MetricDelRequestModel {
 
     private String metricName;
 
-    //Request model constructor
+    /**
+     * Constructor for MetricDelRequestModel
+     *
+     * @param metricName represents the name of the metric to be deleted
+     */
     public MetricDelRequestModel(String metricName) {
         this.metricName = metricName;
     }
 
-    //Returns the name of the selected metric
+    /**
+     * Getter for metricName
+     *
+     * @return the name of the metric to be deleted
+     */
     public String getMetricName() {
         return this.metricName;
     }
 
-    //Setter method for the metricName of the request model
+    /**
+     * Setter for metricName
+     *
+     * @param metricName represents the name of the metric to be changed
+     */
     public void setMetricName(String metricName) {
         this.metricName = metricName;
     }
