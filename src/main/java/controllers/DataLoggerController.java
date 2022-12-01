@@ -1,7 +1,6 @@
 package controllers;
 
 
-import screens.DataLogFailed;
 import models.DataLoggerResponseModel;
 import models.DataLoggerRequestModel;
 import use_cases.DataLoggerInputBoundary;
@@ -30,14 +29,8 @@ public class DataLoggerController{
      * @return DataLoggerResponseModel
      */
     public DataLoggerResponseModel logDataPoint(double value, String metricName) {
-        try {
-            DataLoggerRequestModel requestModel = new DataLoggerRequestModel(metricName, value);
-            return this.dataLogger.logDataPoint(requestModel);
-
-        } catch (Exception e) {
-            throw new DataLogFailed("Failed to add datapoint");
-        }
-
+        DataLoggerRequestModel requestModel = new DataLoggerRequestModel(metricName, value);
+        return this.dataLogger.logDataPoint(requestModel);
     }
 
 }

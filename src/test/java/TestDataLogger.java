@@ -72,7 +72,7 @@ public class TestDataLogger {
     }
 
     @Test
-    public void testLogDataPointOverwrite() throws Exception {
+    public void testLogDataPointOverwrite() {
         // makes sure that adding multiple datapoints on the same day doesn't add more
         storage.addMetric(new Metric("mood", 10, 0));
         for (int i = 1; i<=10;i++){
@@ -84,7 +84,7 @@ public class TestDataLogger {
     }
 
     @Test
-    public void testLogDataPointNoOverwrite2() throws Exception {
+    public void testLogDataPointNoOverwrite2() {
         // makes sure that datapoints added on the same day don't overwrite their values
         storage.addMetric(new Metric("mood", 10, 0));
         for (int i = 1; i<=10;i++){
@@ -95,7 +95,7 @@ public class TestDataLogger {
     }
 
     @Test
-    public void testLogDataPointOnLongList() throws Exception {
+    public void testLogDataPointOnLongList() {
         // makes sure that datapoints can be added while other datapoints are in the arraylist at other dates
         Metric mood = new Metric("mood", 10, 0);
         mood.addDataPoint(new DataPoint("2022-10-23 01:00:00", 3));
@@ -106,7 +106,7 @@ public class TestDataLogger {
     }
 
     @Test
-    public void testLogDataPointOnLongListValuesCorrect() throws Exception {
+    public void testLogDataPointOnLongListValuesCorrect() {
         // makes sure that datapoints values are consistent after adding datapoints on different days
         Metric mood = new Metric("mood", 10, 0);
         mood.addDataPoint(new DataPoint("2022-10-23 01:00:00", 3));
@@ -120,11 +120,11 @@ public class TestDataLogger {
     }
 
     @Test
-    public void testLogDataPointReallyLongList() throws Exception {
+    public void testLogDataPointReallyLongList() {
         // tests that adding many datapoints doesn't interfere with the usecase
         Metric mood = new Metric("mood", 10, 0);
-        for (Integer i = 1; i<=9;i++) {
-            mood.addDataPoint(new DataPoint("2022-11-0" + i.toString() + " 01:00:00", i));
+        for (int i = 1; i<=9; i++) {
+            mood.addDataPoint(new DataPoint("2022-11-0" + i + " 01:00:00", i));
         }
 
         storage.addMetric(mood);

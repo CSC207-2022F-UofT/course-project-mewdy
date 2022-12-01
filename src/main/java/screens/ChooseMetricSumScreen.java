@@ -61,8 +61,8 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
                 String averageAndTrend = viewModel.getMetricAverageAndSize();
                 XYChart chart = viewModel.getChart();
                 new MetricSummaryScreen(averageAndTrend, chart);
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(this, e.getMessage());
+            } catch (NullPointerException | DataSummaryFailed e) {
+                JOptionPane.showMessageDialog(this , e.getMessage());
             }
         }
     }

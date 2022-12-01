@@ -29,4 +29,8 @@ public class DataExportController {
         ExportRequestModel requestModel = new ExportRequestModel(path);
         return INPUTBOUNDARY.writeToNewFile(requestModel);
     }
+
+    public boolean getSaveStatus() {
+        return INPUTBOUNDARY.getSaveStatus();
+    }
 }

@@ -20,6 +20,7 @@ public interface MetricStorageInterface {
      * @param metric represents the metric to be added to the MetricStorage
      */
     void addMetric(Metric metric);
+    void removeMetric(Metric metric);
 
     /**
      * addDataPoint adds a data point to the MetricStorage
@@ -62,7 +63,7 @@ public interface MetricStorageInterface {
      * @param metricName represents name of the metric
      * @return the metric in the MetricStorage
      */
-    Metric getMetric(String metricName) throws Exception;
+    Metric getMetric(String metricName) throws NullPointerException;
 
     /**
      * getPath returns the path of the MetricStorage
@@ -71,11 +72,6 @@ public interface MetricStorageInterface {
      */
     File getPath();
 
-    /**
-     * getSaveStatus returns the save status of the MetricStorage
-     *
-     * @return a boolean representing the save status of the MetricStorage
-     */
     Boolean getSaveStatus();
 
 }
