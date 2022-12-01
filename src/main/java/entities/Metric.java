@@ -45,6 +45,7 @@ public class Metric {
      * @param lowerBound represents the lower bound of the metric
      */
     public Metric(String name, double upperBound, double lowerBound) {
+        //this is an overloaded Entities.Metric constructor for when we want to initialize a new empty Entities.Metric
         if (name.equalsIgnoreCase("sleep")) {
             upperBound = 24;
             lowerBound = 0;

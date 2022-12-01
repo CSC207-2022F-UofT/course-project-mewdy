@@ -65,7 +65,6 @@ public class Main {
         JPanel screens = new JPanel(cardLayout);
 
 
-
         // Initialize screens
         JPanel startScreen = new StartScreen(cardLayout, screens, dataImportController);
         JPanel homeScreen = new HomeScreen(cardLayout, screens, dataExportController, metricStorage);
