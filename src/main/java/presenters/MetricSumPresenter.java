@@ -1,8 +1,6 @@
 package presenters;
 
 import models.MetricSumResponseModel;
-import screens.DataSummaryFailed;
-
 import org.knowm.xchart.XYChart;
 import org.knowm.xchart.XYChartBuilder;
 import org.knowm.xchart.XYSeries;
@@ -10,6 +8,7 @@ import org.knowm.xchart.style.Styler;
 import org.knowm.xchart.style.colors.XChartSeriesColors;
 import org.knowm.xchart.style.lines.SeriesLines;
 import org.knowm.xchart.style.markers.SeriesMarkers;
+import screens.DataSummaryFailed;
 
 import java.awt.*;
 import java.math.RoundingMode;
@@ -20,12 +19,25 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+/**
+ * Presenter for the MetricSumView use case
+ */
 public class MetricSumPresenter implements MetricSumOutputBoundary {
 
-    public MetricSumPresenter(){}
+    /**
+     * Constructor for the MetricSumPresenter
+     */
+    public MetricSumPresenter() {
+    }
 
+    /**
+     * prepareSuccesView prepares the success view for the MetricSum use case
+     *
+     * @param responseModel represents the response model for the MetricSum use case
+     * @return the success view for the MetricSum use case
+     */
     @Override
-    public MetricSumViewModel prepareSuccessView(MetricSumResponseModel responseModel){
+    public MetricSumViewModel prepareSuccessView(MetricSumResponseModel responseModel) {
 
         //Create decimal formatter to round numbers to 2 decimal points.
         DecimalFormat df = new DecimalFormat("#.##");
@@ -44,11 +56,23 @@ public class MetricSumPresenter implements MetricSumOutputBoundary {
         return new MetricSumViewModel(chart, metricAverageAndSize);
     }
 
+    /**
+     * prepareDataSumFail prepares the fail view for the MetricSum use case
+     *
+     * @param error represents the error message
+     * @return the fail view for the MetricSum use case
+     */
     @Override
-    public MetricSumViewModel prepareDataSumFail(String error){
+    public MetricSumViewModel prepareDataSumFail(String error) {
         throw new DataSummaryFailed(error);
     }
 
+    /**
+     * createChart creates a chart using the data stored in the response model
+     *
+     * @param responseModel represents the response model for the MetricSum use case
+     * @return a chart based off of the data from the response model
+     */
     private XYChart createChart(MetricSumResponseModel responseModel) {
 
         XYChart chart = null;
@@ -83,13 +107,20 @@ public class MetricSumPresenter implements MetricSumOutputBoundary {
         return chart;
     }
 
+    /**
+     * formatDates formats the dates stored in the response model
+     *
+     * @param responseModel represents the response model for the MetricSum use case
+     * @return an ArrayList of formatted dates
+     * @throws ParseException if the date cannot be parsed
+     */
     private ArrayList<Date> formatDates(MetricSumResponseModel responseModel) throws ParseException {
         ArrayList<String> dates = responseModel.getTimePoints();
 
         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         ArrayList<Date> formattedDates = new ArrayList<>();
 
-        for (String d: dates){
+        for (String d : dates) {
             formattedDates.add(sdf.parse(d));
         }
         return formattedDates;
