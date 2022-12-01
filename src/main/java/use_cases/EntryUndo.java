@@ -1,7 +1,8 @@
 package use_cases;
 
-import entities.DataPoint;
 import entities.MetricStorage;
+import entities.DataPoint;
+import entities.MetricStorageInterface;
 import models.EntryUndoRequestModel;
 import models.EntryUndoResponseModel;
 import presenters.EntryUndoOutputBoundary;
@@ -9,17 +10,18 @@ import presenters.EntryUndoOutputBoundary;
 import java.util.ArrayList;
 
 
-public class EntryUndo implements EntryUndoInputBoundary {
-    private final MetricStorage metricStorage;
+public class EntryUndo implements EntryUndoInputBoundary{
+    private final MetricStorageInterface metricStorage;
     private final EntryUndoOutputBoundary presenter;
 
-    public EntryUndo(MetricStorage metricStorage, EntryUndoOutputBoundary presenter) {
+    public EntryUndo(MetricStorageInterface metricStorage, EntryUndoOutputBoundary presenter){
         this.metricStorage = metricStorage;
         this.presenter = presenter;
     }
 
-    public EntryUndoResponseModel deleteDatapoint(EntryUndoRequestModel requestModel) {
+    public EntryUndoResponseModel deleteDatapoint(EntryUndoRequestModel requestModel){
         String metricName = requestModel.getMetricName();
+
         ArrayList<DataPoint> deletedMetric = this.metricStorage.getDataPointList(metricName);
         try {
             DataPoint deletedData = deletedMetric.get(deletedMetric.size() - 1);
