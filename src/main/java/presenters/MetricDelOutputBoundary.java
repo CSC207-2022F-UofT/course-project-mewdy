@@ -6,7 +6,7 @@ import models.MetricDelResponseModel;
  * Interface for the presenter that handles the deletion of a metric.
  */
 
-public interface MetricDelOutputBoundary {
+public interface    MetricDelOutputBoundary {
 
     /**
      * prepareSuccessView returns the success view for the metric deletion.

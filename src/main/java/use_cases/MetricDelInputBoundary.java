@@ -4,5 +4,5 @@ import models.MetricDelRequestModel;
 import models.MetricDelResponseModel;
 
 public interface MetricDelInputBoundary {
-    MetricDelResponseModel create(MetricDelRequestModel requestModel);
+    MetricDelResponseModel metricDelete(MetricDelRequestModel requestModel);
 }
