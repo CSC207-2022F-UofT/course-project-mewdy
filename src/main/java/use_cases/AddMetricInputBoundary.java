@@ -12,5 +12,5 @@ public interface AddMetricInputBoundary {
      * @param requestModel contains the name, upper and lower bounds of the metric that wants to be added.
      * @return returns a response model
      */
-    AddMetricResponseModel addMetric(AddMetricRequestModel requestModel) throws Exception;
+    AddMetricResponseModel addMetric(AddMetricRequestModel requestModel);
 }

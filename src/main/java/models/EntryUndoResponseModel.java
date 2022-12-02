@@ -54,7 +54,7 @@ public class EntryUndoResponseModel {
      *
      * @return the metric of the entry
      */
-    public String getMetric() {
-        return metric;
-    }
+    public String getMetric() {return metric;}
+
+    public String getInformation() {return this.information;}
 }

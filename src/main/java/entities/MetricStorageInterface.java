@@ -3,23 +3,11 @@ package entities;
 import java.io.File;
 import java.util.ArrayList;
 
-/**
- * Interface for MetricStorage
- */
 public interface MetricStorageInterface {
-    /**
-     * setPath sets the path where MetricStorage is stored
-     *
-     * @param path represents the path to the file
-     */
     void setPath(File path);
 
-    /**
-     * addMetric adds a metric to the MetricStorage
-     *
-     * @param metric represents the metric to be added to the MetricStorage
-     */
     void addMetric(Metric metric);
+    void removeMetric(Metric metric);
 
     /**
      * addDataPoint adds a data point to the MetricStorage
@@ -62,7 +50,7 @@ public interface MetricStorageInterface {
      * @param metricName represents name of the metric
      * @return the metric in the MetricStorage
      */
-    Metric getMetric(String metricName) throws Exception;
+    Metric getMetric(String metricName) throws NullPointerException;
 
     /**
      * getPath returns the path of the MetricStorage
@@ -71,11 +59,6 @@ public interface MetricStorageInterface {
      */
     File getPath();
 
-    /**
-     * getSaveStatus returns the save status of the MetricStorage
-     *
-     * @return a boolean representing the save status of the MetricStorage
-     */
     Boolean getSaveStatus();
 
 }
