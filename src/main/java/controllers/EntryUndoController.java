@@ -25,12 +25,12 @@ public class EntryUndoController {
      * deleteLastEntry calls the use case interactor, EntryUndo to undo the last entry
      *
      * @param metricName represents the name of the metric to undo the last entry for
-     * @return EntryUndoResponseModel
+     * @return the response model for undoing the last entry
      */
     public EntryUndoResponseModel deleteLastEntry(String metricName){
         EntryUndoRequestModel requestModel = new EntryUndoRequestModel(metricName);
 
-        return this.entryUndo.deleteDatapoint(requestModel);
+        return this.entryUndo.deleteDataPoint(requestModel);
     }
 
 

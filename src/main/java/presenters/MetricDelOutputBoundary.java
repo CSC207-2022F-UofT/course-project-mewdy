@@ -3,7 +3,7 @@ package presenters;
 import models.MetricDelResponseModel;
 
 /**
- * Interface for the presenter that handles the deletion of a metric.
+ * Interface for MetricDelPresenter
  */
 
 public interface MetricDelOutputBoundary {

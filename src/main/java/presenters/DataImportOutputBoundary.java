@@ -2,7 +2,11 @@ package presenters;
 
 import models.ImportResponseModel;
 
-public interface DataImportPresenterOutputBoundary {
+/**
+ * Interface for DataImportPresenter
+ */
+
+public interface DataImportOutputBoundary {
 
     /**
      * prepareSuccessView returns the success view

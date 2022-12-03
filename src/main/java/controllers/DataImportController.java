@@ -20,7 +20,7 @@ public class DataImportController {
     }
 
     /**
-     * Calls the use case interactor, DataImport to import data from a file path
+     * readFromNewFile calls the use case interactor, DataImport to import data from a file path
      *
      * @param path represents the path to the file to be imported
      * @return the response model for the DataImport use case

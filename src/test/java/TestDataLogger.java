@@ -14,7 +14,7 @@ import use_cases.DataLoggerInputBoundary;
 
 import java.util.ArrayList;
 
-
+//Tests for the DataLogger use case
 public class TestDataLogger {
     MetricStorageInterface storage;
     DataLoggerInputBoundary dataLogger;
@@ -28,33 +28,35 @@ public class TestDataLogger {
         controller = new DataLoggerController(dataLogger);
     }
 
+    //Tests the case where there is no metric to add datapoints to
     @Test
     public void testLogDataPointMissingMetric() {
-        // tests the case where there is no metric to add datapoints to
         String message = controller.logDataPoint(7, "mood").getMessage();
         assertEquals("Metric does not exist", message);
     }
 
+    //Tests the case where the incorrect metric name is used as input
     @Test
     public void testLogDataPointMissingMetricName() {
-        // tests the case where the incorrect metric name is used as input
+
         storage.addMetric(new Metric("mood", 10, 0));
         String message = controller.logDataPoint(7, "meals eaten").getMessage();
         assertEquals("Metric does not exist", message);
     }
 
+    //Tests the successful addition of a datapoint to a metric
     @Test
     public void testLogDataPointSuccess() {
-        // tests a successful additon of a datapoint
+
         storage.addMetric(new Metric("mood", 10, 0));
         String message = controller.logDataPoint(7, "mood").getMessage();
         String expectedMsg = "Successfully added datapoint with value 7.0 to metric mood";
         assertEquals(expectedMsg, message);
     }
 
+    //Tests adding datapoints to the correct metric with multiple metrics in the storage
     @Test
     public void testLogDataPointMultipleMetrics() {
-        // tests adding datapoint to one of multiple metrics
         storage.addMetric(new Metric("mood", 10, 0));
         storage.addMetric(new Metric("meals eaten", 5, 0));
         String message = controller.logDataPoint(3, "meals eaten").getMessage();
@@ -64,16 +66,17 @@ public class TestDataLogger {
 
     @Test
     public void testInvalidValue() {
-        // tests that an invalid value (a value beyond the upperlower bounds) cannot be added
+        // Tests that an invalid value (a value beyond the upperlower bounds) cannot be added
         storage.addMetric(new Metric("mood", 10, 0));
         String message = controller.logDataPoint(-1, "mood").getMessage();
         String expectedMsg = "Failed to add datapoint, invalid value";
         assertEquals(expectedMsg, message);
     }
 
+    // Tests that you cannot add multiple datapoints on the same day
     @Test
     public void testLogDataPointOverwrite() {
-        // makes sure that adding multiple datapoints on the same day doesn't add more
+        // Makes sure that adding multiple datapoints on the same day doesn't add more
         storage.addMetric(new Metric("mood", 10, 0));
         for (int i = 1; i<=10;i++){
             controller.logDataPoint(i, "mood");
@@ -83,9 +86,9 @@ public class TestDataLogger {
         assertEquals(1, length);
     }
 
+    // Tests that adding new datapoints to a day with existing datapoints do not overwrite the existing datapoint
     @Test
     public void testLogDataPointNoOverwrite2() {
-        // makes sure that datapoints added on the same day don't overwrite their values
         storage.addMetric(new Metric("mood", 10, 0));
         for (int i = 1; i<=10;i++){
             controller.logDataPoint(i, "mood");
@@ -94,9 +97,9 @@ public class TestDataLogger {
         assertEquals(1, value);
     }
 
+    // Tests that datapoints can be added while there are other datapoints in the metric at other dates
     @Test
     public void testLogDataPointOnLongList() {
-        // makes sure that datapoints can be added while other datapoints are in the arraylist at other dates
         Metric mood = new Metric("mood", 10, 0);
         mood.addDataPoint(new DataPoint("2022-10-23 01:00:00", 3));
         storage.addMetric(mood);
@@ -105,9 +108,9 @@ public class TestDataLogger {
         assertEquals(2, length);
     }
 
+    // Tests that the datapoint values are consistent after adding datapoints on different days
     @Test
     public void testLogDataPointOnLongListValuesCorrect() {
-        // makes sure that datapoints values are consistent after adding datapoints on different days
         Metric mood = new Metric("mood", 10, 0);
         mood.addDataPoint(new DataPoint("2022-10-23 01:00:00", 3));
         storage.addMetric(mood);
@@ -119,9 +122,9 @@ public class TestDataLogger {
         assertEquals(4, second);
     }
 
+    // Tests that adding many datapoints does not interfere with the use case
     @Test
     public void testLogDataPointReallyLongList() {
-        // tests that adding many datapoints doesn't interfere with the usecase
         Metric mood = new Metric("mood", 10, 0);
         for (int i = 1; i<=9; i++) {
             mood.addDataPoint(new DataPoint("2022-11-0" + i + " 01:00:00", i));

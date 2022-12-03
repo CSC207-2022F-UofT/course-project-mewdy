@@ -5,39 +5,60 @@ import entities.Metric;
 import entities.MetricStorageInterface;
 import models.ExportRequestModel;
 import models.ExportResponseModel;
-import presenters.DataExportPresenterOutputBoundary;
+import presenters.DataExportOutputBoundary;
 
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * Class that represents the DataExporter use case that is responsible for exporting data to a csv file
+ */
+
 public class DataExporter implements DataExportInputBoundary {
-    /**
-     * Export UseCase
-     * Saves data to a metrics folder with corresponding metric csv files
-     */
 
     private MetricStorageInterface storage;
-    private final DataExportPresenterOutputBoundary presenter;
+    private final DataExportOutputBoundary presenter;
 
-
-    public DataExporter(MetricStorageInterface metricStorage, DataExportPresenterOutputBoundary presenter) {
+    /**
+     * Constructor for DataExporter
+     *
+     * @param metricStorage represents the metric storage that the use case will interact with
+     * @param presenter represents the presenter that will present the output
+     */
+    public DataExporter(MetricStorageInterface metricStorage, DataExportOutputBoundary presenter) {
         this.storage = metricStorage;
         this.presenter = presenter;
     }
 
+    /**
+     * writeToNewFile writes data from the metric storage to a csv file
+     *
+     * @param req represents the request model for the DataExport use case
+     * @return the response model for the DataExport use case
+     */
     @Override
     public ExportResponseModel writeToNewFile(ExportRequestModel req) {
         this.storage.setPath(new File(req.getPath())); // Set MetricStorage path to the path in the request
         return write();
     }
 
+    /**
+     * Getter for the save status of the metric storage
+     *
+     * @return a boolean representing the save status of the metric storage
+     */
     @Override
     public boolean getSaveStatus() {
         return this.storage.getSaveStatus();
     }
 
+    /**
+     * write writes data from the metric storage to a csv file
+     *
+     * @return the response model for the DataExport use case
+     */
     private ExportResponseModel write() {
 
         BufferedWriter writer;
@@ -74,6 +95,11 @@ public class DataExporter implements DataExportInputBoundary {
         return presenter.prepareSuccessView();
     }
 
+    /**
+     * cleanUp removes deleted Metrics from the folder
+     *
+     * @param storage represents the metric storage
+     */
     private void cleanUp(MetricStorageInterface storage) {
         // Delete removed metrics from the metrics folder
         File[] files = this.storage.getPath().listFiles();

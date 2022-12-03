@@ -3,9 +3,9 @@ package presenters;
 import models.ExportResponseModel;
 
 /**
- * Subclass of DataExportPresenterOutputBoundary
+ * Class that represents the Presenter class for DataExport use case and implements DataExportPresenterOutputBoundary
  */
-public class DataExportPresenter implements DataExportPresenterOutputBoundary{
+public class DataExportPresenter implements DataExportOutputBoundary {
     /**
      * prepareSuccessView returns a new ExportResponseModel with an empty string
      *
@@ -24,7 +24,6 @@ public class DataExportPresenter implements DataExportPresenterOutputBoundary{
      */
     @Override
     public ExportResponseModel prepareFailView(String msg) {
-        System.out.println(msg);//DEBUG
         return new ExportResponseModel(msg);
     }
 }

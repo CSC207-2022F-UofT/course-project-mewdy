@@ -6,7 +6,7 @@ import models.ImportResponseModel;
 /**
  * Subclass of DataImportPresenterOutputBoundary
  */
-public class DataImportPresenter implements DataImportPresenterOutputBoundary {
+public class DataImportPresenter implements DataImportOutputBoundary {
 
     /**
      * prepareSuccessView returns the success view

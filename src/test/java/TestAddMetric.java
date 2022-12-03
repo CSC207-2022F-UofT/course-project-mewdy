@@ -9,15 +9,16 @@ import presenters.AddMetricPresenter;
 import use_cases.AddMetricInputBoundary;
 import use_cases.MetricAdder;
 
-
+//Tests for the MetricAdder use case
 public class TestAddMetric {
 
+    // Tests to see if imports are working
     @Test
     public void testTests() {
         assertEquals(1,1);
     }
 
-
+    // Tests to see if the MetricAdder can add a metric to a storage
     @Test
     public void testAddMetricData() {
         MetricStorageInterface metricStorage = new MetricStorage();
@@ -30,6 +31,7 @@ public class TestAddMetric {
         assertTrue(expectedStorage.getMetricList().get(0).equals(metricStorage.getMetricList().get(0)));
     }
 
+    // Tests to see if MetricAdder will prevent adding a metric that already exists
     @Test
     public void testAddMetricWithPreexistingMetric() {
         MetricStorageInterface metricStorage = new MetricStorage();
@@ -45,6 +47,8 @@ public class TestAddMetric {
         assertTrue(expectedStorage.getMetricList().get(0).equals(metricStorage.getMetricList().get(0)));
         assertTrue(expectedStorage.getMetricList().get(1).equals(metricStorage.getMetricList().get(1)));
     }
+
+    // Tests to see if the AddMetricPresenter can return the correct success response
     @Test
     public void testAddMetricPresenterSuccess() {
         MetricStorageInterface metricStorage = new MetricStorage();
@@ -55,6 +59,8 @@ public class TestAddMetric {
         String expectedMessage = "Metric with the name test was added successfully!";
         assertEquals(expectedMessage, actualMessage);
     }
+
+    // Tests to see if the AddMetricPresenter can return the correct fail response
     @Test
     public void testAddMetricPresenterFailure() {
         MetricStorageInterface metricStorage = new MetricStorage();

@@ -1,7 +1,5 @@
 package models;
 
-import entities.MetricStorage;
-
 /**
  * Class that represents the RequestModel for Import
  */

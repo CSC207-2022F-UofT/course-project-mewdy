@@ -10,21 +10,34 @@ import models.DataLoggerResponseModel;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Class that represents the DataLogger use case that is responsible for logging data points
+ */
+
 public class DataLogger implements DataLoggerInputBoundary{
 
     final MetricStorageInterface metricStorage;
     final DataLoggerOutputBoundary presenter;
 
+    /**
+     * Constructor for the DataLogger use case
+     *
+     * @param metricStorage represents the metric storage that the use case will interact with
+     * @param presenter represents the presenter that will present the output
+     */
     public DataLogger(MetricStorageInterface metricStorage, DataLoggerOutputBoundary presenter) {
         this.metricStorage = metricStorage;
         this.presenter = presenter;
     }
 
+    /**
+     * logDataPoint adds a datapoint to a given metric in the metric storage
+     * An error message is returned if the metric name or input values are invalid
+     *
+     * @param requestModel contains the information of the datapoint to be logged
+     * @return the response model that contains the information of the datapoint that was logged
+     */
     public DataLoggerResponseModel logDataPoint(DataLoggerRequestModel requestModel) {
-        //this is the DataLogger.DataLogger use case interactor which takes a metricName, value for the DataPoint,
-        //and the metricStorage object that we are adding to.
-        //this throws an exception whenever the metric name is invalid or whenever the
-        //input value is beyond the range of the metric.
         String metricName = requestModel.getMetricName();
         double value = requestModel.getValue();
         DataLoggerResponseModel responseModel = new DataLoggerResponseModel("Successfully added datapoint",

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+// Tests for the EntryUndo use case
 class EntryUndoTest{
     Metric metric;
     MetricStorage preMadeStorage;
@@ -22,7 +23,7 @@ class EntryUndoTest{
     EntryUndoController entryUndoController;
 
     @BeforeEach
-    void setUp() throws ParseException {
+    void setUp() {
     metric = new Metric("sleep", 24, 0);
     DataPoint testDataA =  new DataPoint("2022-11-16 12:47:18", 1);
     DataPoint testDataB =  new DataPoint("2022-11-17 12:47:18", 2);
@@ -49,13 +50,11 @@ class EntryUndoTest{
     entryUndoController = new EntryUndoController(entryUndo);
     }
 
+    //Test for undoing an entry
     @Test
     void undo() {
         entryUndoController.deleteLastEntry("sleep");
         assertTrue(isEqual(metricStorage, preMadeStorage));
-
-
-
     }
     private boolean isEqual(MetricStorage s1, MetricStorage s2) {
         for (int i = 0; i < s1.getMetricList().size(); i++) {

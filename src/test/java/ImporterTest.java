@@ -6,7 +6,7 @@ import models.ImportRequestModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import presenters.DataImportPresenter;
-import presenters.DataImportPresenterOutputBoundary;
+import presenters.DataImportOutputBoundary;
 import use_cases.DataImportInputBoundary;
 import use_cases.DataImporter;
 
@@ -19,7 +19,7 @@ class ImporterTest {
     MetricStorageInterface preMadeStorage;
     MetricStorageInterface storage;
 
-    DataImportPresenterOutputBoundary presenter;
+    DataImportOutputBoundary presenter;
     DataImportInputBoundary importer;
     ImportRequestModel importReq;
 

@@ -19,6 +19,7 @@ import use_cases.MetricSummarizer;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+//Tests for the MetricSumUseCase
 public class TestMetricSumUseCase {
 
     MetricSumInputBoundary metricSummarizer;

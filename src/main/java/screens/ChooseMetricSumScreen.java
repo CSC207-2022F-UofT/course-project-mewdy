@@ -12,6 +12,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Subclass of JPanel that displays the screen for choosing a metric to sum and implements
+ * both the ActionListener and MetricStorageInterface interfaces.
+ */
 public class ChooseMetricSumScreen extends JPanel implements ActionListener, Refreshable {
 
     MetricStorageInterface metricStorage;
@@ -20,6 +24,14 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
     JPanel screens;
     JButton backButton;
 
+    /**
+     * Constructor for the ChooseMetricSumScreen
+     *
+     * @param metricStorageInterface represents the metric storage interface
+     * @param metricSumController represents the metric sum controller
+     * @param cardLayout represents the card layout
+     * @param screens represents the screens
+     */
     public ChooseMetricSumScreen(MetricStorageInterface metricStorageInterface,
                                  MetricSumController metricSumController, CardLayout cardLayout, JPanel screens) {
         this.metricStorage = metricStorageInterface;
@@ -52,6 +64,12 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
     }
 
     //React to button press to summarize chosen Metric.
+
+    /**
+     * actionPerformed reacts to button press to summarize chosen Metric
+     *
+     * @param evt represents the event to be processed
+     */
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == backButton) {
             cardLayout.show(screens, "home");
@@ -67,6 +85,9 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         }
     }
 
+    /**
+     * refresh refreshes the screen
+     */
     @Override
     public void refresh() {
         this.removeAll();

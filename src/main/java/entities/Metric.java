@@ -73,6 +73,8 @@ public class Metric {
      * @param date represents the date of the data point
      * @return a boolean value that indicates whether the data point exists
      */
+    // preexistingDataPoint is never used? Should we remove this method??
+    //ASDASDASDASDASDASDASDASDASDASDASDASDASDASD
     public boolean preexistingDataPoint(LocalDateTime date) {
         for (DataPoint point : this.DATAPOINTS) {
             if (point.getDate().equals(date)) {
@@ -118,10 +120,10 @@ public class Metric {
 
     /**
      * getLowerBound returns the lower bound of the metric
+     *
      * @return the lower bound of the metric
      */
     public double getLowerBound() {
-        //this is a getter method for the lowerBound variable from this Entities.Metric
         return this.LOWERBOUND;
     }
 

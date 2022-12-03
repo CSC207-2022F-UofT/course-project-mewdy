@@ -20,10 +20,10 @@ public class MetricDelController {
     }
 
     /**
-     * ????????? Why is the method called create when this is the metric deleter use case?
+     * deleteMetric calls the use case interactor, MetricDeleter to delete a metric
      *
      * @param metricName represents the name of the metric to be deleted
-     * @return MetricDelResponseModel
+     * @return the response model for deleting a metric
      */
     public MetricDelResponseModel create(String metricName) {
         MetricDelRequestModel requestModel = new MetricDelRequestModel(metricName);

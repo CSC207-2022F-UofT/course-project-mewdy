@@ -1,5 +1,3 @@
-package use_cases;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,9 +13,13 @@ import models.MetricDelResponseModel;
 import presenters.MetricDelOutputBoundary;
 import presenters.MetricDelPresenter;
 import screens.MetricDeleterFailed;
+import use_cases.MetricDelInputBoundary;
+import use_cases.MetricDeleter;
 
+// Tests for MetricDeleter use case
 class MetricDeleterTest {
 
+    // Tests whether the use case can delete a metric from the metric storage
     @Test
     public void testMetricDeleterSuccess() {
 
@@ -57,6 +59,7 @@ class MetricDeleterTest {
         assertEquals(expected.getNumDataPoints(), actual.getNumDataPoints());
     }
 
+    // Tests that the view is called when the metric fails to delete
     @Test
     public void testMetricDeleterFailure() {
         //Initializes a presenter
