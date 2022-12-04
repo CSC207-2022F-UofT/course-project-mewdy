@@ -10,12 +10,42 @@ import java.util.Objects;
 public class Metric {
     private final String NAME;
     private final ArrayList<DataPoint> DATAPOINTS;
-    private final double UPPOERBOUND;
+    private final double UPPERBOUND;
     private final double LOWERBOUND;
+    private double GOAL;
+    private boolean HASGOAL;
 
 
     /**
-     * Constructor for the Metric class
+     * Constructor for the Metric class for import use case
+     *
+     * @param name represents the name of the metric
+     * @param dataPointList represents the list of data points
+     * @param upperBound represents the upper bound of the metric
+     * @param lowerBound represents the lower bound of the metric
+     * @param hasGoal 1 if metric has goal (true), 0 if metric does not have goal (false)
+     * @param goal represents goal of metric
+     */
+    public Metric(String name, ArrayList<DataPoint> dataPointList, double upperBound, double lowerBound,
+                  int hasGoal, double goal) {
+        if (name.equalsIgnoreCase("sleep")) {
+            upperBound = 24;
+            lowerBound = 0;
+        } else if (name.equalsIgnoreCase("mood")) {
+            upperBound = 10;
+            lowerBound = 0;
+        }
+
+        this.NAME = name;
+        this.DATAPOINTS = dataPointList;
+        this.UPPERBOUND = upperBound;
+        this.LOWERBOUND = lowerBound;
+        if (hasGoal == 1) { this.GOAL = goal; this.HASGOAL = true; }
+        else {this.HASGOAL = false;}
+    }
+
+    /**
+     * Overloaded Constructor for the Metric class
      *
      * @param name represents the name of the metric
      * @param dataPointList represents the list of data points
@@ -33,7 +63,7 @@ public class Metric {
 
         this.NAME = name;
         this.DATAPOINTS = dataPointList;
-        this.UPPOERBOUND = upperBound;
+        this.UPPERBOUND = upperBound;
         this.LOWERBOUND = lowerBound;
     }
 
@@ -55,7 +85,7 @@ public class Metric {
         }
         this.NAME = name;
         this.DATAPOINTS = new ArrayList<>();
-        this.UPPOERBOUND = upperBound;
+        this.UPPERBOUND = upperBound;
         this.LOWERBOUND = lowerBound;
     }
 
@@ -114,7 +144,7 @@ public class Metric {
      * @return the upper bound of the metric
      */
     public double getUpperBound() {
-        return this.UPPOERBOUND;
+        return this.UPPERBOUND;
     }
 
     /**
@@ -122,9 +152,17 @@ public class Metric {
      * @return the lower bound of the metric
      */
     public double getLowerBound() {
-        //this is a getter method for the lowerBound variable from this Entities.Metric
         return this.LOWERBOUND;
     }
+
+    public double getGoal(){ return this.GOAL; }
+
+    public void setGoal(double goal){
+        this.GOAL = goal;
+        this.HASGOAL = true;
+    }
+
+    public boolean getGoalStatus() { return this.HASGOAL; }
 
     /**
      * equals checks if two metrics are equal
@@ -135,7 +173,7 @@ public class Metric {
     public boolean equals(Metric metric) {
         if (Objects.equals(metric.getName(), this.NAME)
                 && metric.getLowerBound() == this.LOWERBOUND
-                && metric.getUpperBound() == this.UPPOERBOUND) {
+                && metric.getUpperBound() == this.UPPERBOUND) {
             for (int i = 0; i < this.DATAPOINTS.size(); i++) {
                 if (!metric.getDataPoints().get(i).equals(this.DATAPOINTS.get(i))) return false;
             }

@@ -37,7 +37,7 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
         this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
 
-        // Add buttons for every Metric in MetricStorage.
+        // Add tabs for every Metric in MetricStorage.
         ArrayList<Metric> metricList = metricStorage.getMetricList();
         for (Metric m: metricList){
             String metricName = m.getName();
@@ -54,7 +54,7 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
         }
 
         this.add("Add Metric", new AddMetricScreen(metricStorage, addMetricController,
-                DataLogChooseScreen.this));
+                DataLogChooseScreen.this, cardLayout, screens));
 
 
     }
@@ -65,7 +65,6 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
 
         this.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
 
-        // Add buttons for every Metric in MetricStorage.
         ArrayList<Metric> metricList = metricStorage.getMetricList();
         for (Metric m: metricList){
             String metricName = m.getName();
@@ -80,10 +79,11 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
         }
 
         this.add("Add Metric", new AddMetricScreen(metricStorage, addMetricController,
-                DataLogChooseScreen.this));
+                DataLogChooseScreen.this, cardLayout, screens));
 
         this.revalidate();
         this.repaint();
     }
+
 
 }

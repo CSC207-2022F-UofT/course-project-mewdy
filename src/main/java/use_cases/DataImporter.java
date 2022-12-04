@@ -39,7 +39,8 @@ public class DataImporter implements DataImportInputBoundary {
             for (File file : Objects.requireNonNull(this.storage.getPath().listFiles())) {
                 ArrayList<String> dates = new ArrayList<>();
                 ArrayList<Double> data = new ArrayList<>();
-                double upperBound = 0, lowerBound = 0;
+                double upperBound = 0, lowerBound = 0, goal = 0;
+                int hasGoal = 0;
 
                 // Read file
                 String fullFileName = file.getName();
@@ -56,6 +57,8 @@ public class DataImporter implements DataImportInputBoundary {
                         String[] header = line.split(",");
                         upperBound = Double.parseDouble(header[2]);
                         lowerBound = Double.parseDouble(header[3]);
+                        hasGoal = Integer.parseInt(header[4]);
+                        goal = Double.parseDouble(header[5]);
                     }
                     // Read data
                     String row;
@@ -66,7 +69,7 @@ public class DataImporter implements DataImportInputBoundary {
                     }
                     r.close();
                 }
-                createMetric(dates, data, upperBound, lowerBound, filename);
+                createMetric(dates, data, upperBound, lowerBound, hasGoal, goal, filename);
                 storage.save(); // State should be identical from last save
             }
         } catch (RuntimeException | IOException e) {
@@ -78,7 +81,8 @@ public class DataImporter implements DataImportInputBoundary {
     }
 
     private void createMetric(
-            ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, String name) throws ParseException {
+            ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, int hasGoal, double goal,
+            String name) throws ParseException {
         // Create a temporary ArrayList to store the DataPoints to be added to the Metric
         ArrayList<DataPoint> dataPoints = new ArrayList<>();
         for (int i = 0; i < dates.size(); i++) {
@@ -86,6 +90,6 @@ public class DataImporter implements DataImportInputBoundary {
         }
         // Create a new Metric with the given name, upper and lower bounds, and the DataPoints
         // adds Metric to Storage
-        storage.addMetric(new Metric(name, dataPoints, ub, lb));
+        storage.addMetric(new Metric(name, dataPoints, ub, lb, hasGoal, goal));
     }
 }

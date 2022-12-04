@@ -9,17 +9,18 @@ import org.knowm.xchart.XYChart;
 public class MetricSumViewModel {
 
     XYChart chart;
-    String metricAverageAndSize;
+    String metricStatistics;
+    String goalStat;
 
     /**
      * Constructor for the metric sum view model
      *
      * @param chart represents the chart to be displayed
-     * @param metricAverageAndSize represents the metric average and size
+     * @param statistics represents the metric average and size
      */
-    public MetricSumViewModel(XYChart chart, String metricAverageAndSize) {
+    public MetricSumViewModel(XYChart chart, String statistics) {
         this.chart = chart;
-        this.metricAverageAndSize = metricAverageAndSize;
+        this.metricStatistics = statistics;
     }
 
     /**
@@ -36,7 +37,12 @@ public class MetricSumViewModel {
      *
      * @return the metric average and size
      */
-    public String getMetricAverageAndSize() {
-        return metricAverageAndSize;
+    public String getMetricStatistics() {
+        return metricStatistics;
     }
+    public void setMetricStatistics(String metricStatistics) { this.metricStatistics = metricStatistics; }
+
+    public void setGoalStat(String stat) { goalStat = stat; }
+
+    public String getGoalStat() { return goalStat; }
 }

@@ -21,12 +21,16 @@ public class AddMetricScreen extends JPanel implements ActionListener {
     AddMetricController addMetricController;
     final Refreshable tabbedPane;
     JButton backButton;
+    CardLayout cardLayout;
+    JPanel screens;
 
     public AddMetricScreen(MetricStorageInterface metricStorage, AddMetricController addMetricController,
-                           Refreshable tabbedPane){
+                           Refreshable tabbedPane, CardLayout cardLayout, JPanel screens){
         this.metricStorage = metricStorage;
         this.addMetricController = addMetricController;
         this.tabbedPane = tabbedPane;
+        this.cardLayout = cardLayout;
+        this.screens = screens;
 
         JLabel title = new JLabel("Create a Metric to track");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -76,10 +80,14 @@ public class AddMetricScreen extends JPanel implements ActionListener {
 
         backButton = new JButton("Back");
         backButton.addActionListener(this);
+        this.add(backButton);
 
     }
 
     public void actionPerformed(ActionEvent evt){
+        if (evt.getSource() == backButton){
+            cardLayout.show(screens, "home");
+        }
         if (evt.getSource() == createButton){
             try {
                 AddMetricResponseModel responseModel = addMetricController.addMetric(nameInput.getText(),

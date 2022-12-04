@@ -13,8 +13,8 @@ import java.util.ArrayList;
 
 public class MetricSummarizer implements MetricSumInputBoundary {
 
-    private MetricStorageInterface metricStorage;
-    private MetricSumOutputBoundary presenter;
+    private final MetricStorageInterface metricStorage;
+    private final MetricSumOutputBoundary presenter;
 
     public MetricSummarizer(MetricStorageInterface metricStorage, MetricSumOutputBoundary presenter) {
         this.metricStorage = metricStorage;
@@ -68,4 +68,5 @@ public class MetricSummarizer implements MetricSumInputBoundary {
     private int calculateMetricSize(ArrayList<DataPoint> dataPoints) {
         return dataPoints.size();
     }
+
 }
