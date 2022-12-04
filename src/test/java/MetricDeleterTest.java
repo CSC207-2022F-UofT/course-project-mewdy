@@ -1,5 +1,3 @@
-package use_cases;
-
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,6 +13,8 @@ import models.MetricDelResponseModel;
 import presenters.MetricDelOutputBoundary;
 import presenters.MetricDelPresenter;
 import screens.MetricDeleterFailed;
+import use_cases.MetricDelInputBoundary;
+import use_cases.MetricDeleter;
 
 class MetricDeleterTest {
 
