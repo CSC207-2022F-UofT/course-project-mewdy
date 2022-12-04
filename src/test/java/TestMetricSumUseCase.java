@@ -75,7 +75,7 @@ public class TestMetricSumUseCase {
 
         Throwable exception = assertThrows(DataSummaryFailed.class, () ->
                 metricSummarizer.getMetricSummary(requestModel));
-        assertEquals("Metric summary unavailable - empty contains fewer than 7 data points.",
+        assertEquals("Metric summary unavailable - empty contains 0 data points",
                 exception.getMessage());
     }
 
