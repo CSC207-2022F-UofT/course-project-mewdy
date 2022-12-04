@@ -35,7 +35,14 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         JLabel title = new JLabel("Metric Summary");
         title.setFont(new Font(null, Font.BOLD, 20));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(title);
 
+        if (metricStorage.getMetricList().size() == 0){
+            JLabel noMetricMessage = new JLabel("No metrics are being tracked. Go add some!");
+            noMetricMessage.setFont(new Font(null, Font.BOLD, 15));
+            noMetricMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
+            this.add(noMetricMessage);
+        }
         // Add buttons for every Metric in MetricStorage.
         JPanel buttons = new JPanel();
         ArrayList<Metric> metricList = metricStorage.getMetricList();
@@ -50,7 +57,6 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         backButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(title);
         this.add(buttons);
         this.add(backButton);
     }
@@ -94,9 +100,16 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         this.removeAll();
 
         JLabel title = new JLabel("Metric Summary");
-        title.setFont(new Font(null, Font.BOLD, 30));
+        title.setFont(new Font(null, Font.BOLD, 20));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(title);
 
+        if (metricStorage.getMetricList().size() == 0){
+            JLabel noMetricMessage = new JLabel("No metrics are being tracked. Go add some!");
+            noMetricMessage.setFont(new Font(null, Font.BOLD, 15));
+            noMetricMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
+            this.add(noMetricMessage);
+        }
         // Add buttons for every Metric in MetricStorage.
         JPanel buttons = new JPanel();
         ArrayList<Metric> metricList = metricStorage.getMetricList();
@@ -110,7 +123,6 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         backButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(title);
         this.add(buttons);
         this.add(backButton);
 

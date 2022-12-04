@@ -17,17 +17,10 @@ public class GoalSetter implements SetGoalInputBoundary{
 
     @Override
     public String setGoal(SetGoalRequestModel requestModel){
-        String metricName = requestModel.getMetricName();
-        Metric metric = metricStorage.getMetric(metricName);
-        double upperBound = metric.getUpperBound();
-        double lowerBound = metric.getLowerBound();
-        double goal = requestModel.getGoal();
 
-        if (goal >= lowerBound && goal <= upperBound){
-            metric.setGoal(requestModel.getGoal());
-
+        if (metricStorage.setMetricGoal(requestModel.getGoal(), requestModel.getMetricName())){
             return presenter.prepareSuccessMessage();
         }
-        else {return presenter.prepareFailMessage();}
+        return presenter.prepareFailMessage();
     }
 }

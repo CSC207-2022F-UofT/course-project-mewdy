@@ -69,7 +69,7 @@ public class SetGoalScreen extends JTabbedPane implements Refreshable, ActionLis
         ArrayList<Metric> metricList = metricStorage.getMetricList();
         // If there are no metrics in metric storage, go back.
         if (metricList.size() == 0){
-            JLabel emptyStorageMessage = new JLabel("Metric Storage is empty!");
+            JLabel emptyStorageMessage = new JLabel("No metrics are being tracked!");
             backButton = new JButton("Back");
             backButton.addActionListener(this);
             JPanel panel = new JPanel();
