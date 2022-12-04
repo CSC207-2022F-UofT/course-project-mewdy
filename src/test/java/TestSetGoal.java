@@ -35,7 +35,7 @@ public class TestSetGoal {
         double goal = metric.getGoal();
         assertEquals(2.0, goal);
         assertEquals("Metric Goal was successfully set. See how you are meeting your" +
-                " goal with the summary function!.", successMessage);
+                " goal with the summary function!", successMessage);
     }
 
     @Test
