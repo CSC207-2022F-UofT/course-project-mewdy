@@ -19,7 +19,7 @@ public class MetricDeleter implements MetricDelInputBoundary {
 
     //Following block of code is what is responsible for deleting a metric
     @Override
-    public MetricDelResponseModel create(MetricDelRequestModel requestModel) {
+    public MetricDelResponseModel metricDelete(MetricDelRequestModel requestModel) {
         String metricName = requestModel.getMetricName();
 
         //Trys to delete the selected metric
