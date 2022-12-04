@@ -27,9 +27,9 @@ public class MetricSummarizer implements MetricSumInputBoundary {
         try {
             Metric metricToSum = this.metricStorage.getMetric(metricName);
 
-            if (metricToSum.getDataPoints().size() < 7) {
+            if (metricToSum.getDataPoints().size() == 0) {
                 throw new DataSummaryFailed("Metric summary " +
-                        "unavailable - " + metricName + " contains fewer than 7 data points.");
+                        "unavailable - " + metricName + " contains 0 data points");
             }
 
             ArrayList<DataPoint> dataPoints = metricToSum.getDataPoints();
