@@ -25,11 +25,10 @@ public class Main {
         //Metric Summary Use Case
         MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
         MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
-        MetricSumController metricSumController = new MetricSumController(metricSummarizer);
-
         // Goal tracking decorator for metric summarizer
         MetricSumInputBoundary metricSummarizerWithGoal = new GoalTrackingDecorator(metricSummarizer, metricStorage);
-        MetricSumController metricSumWithGoalController = new MetricSumController(metricSummarizerWithGoal);
+
+        MetricSumController metricSumController = new MetricSumController(metricSummarizerWithGoal);
 
         //Data Logging Use Case
         DataLoggerOutputBoundary dataLoggerPresenter = new DataLoggerPresenter();
@@ -78,7 +77,7 @@ public class Main {
         JPanel startScreen = new StartScreen(cardLayout, screens, dataImportController);
         JPanel homeScreen = new HomeScreen(cardLayout, screens, dataExportController, metricStorage);
         JPanel chooseMetricSumScreen = new ChooseMetricSumScreen(metricStorage, metricSumController, cardLayout,
-                screens, metricSumWithGoalController);
+                screens);
         JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController,
                 metricDelController, addMetricController, entryUndoController, cardLayout, screens);
         JTabbedPane setGoalScreen = new SetGoalScreen(metricStorage, setGoalController, cardLayout, screens);

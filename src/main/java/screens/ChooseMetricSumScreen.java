@@ -16,19 +16,17 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
 
     MetricStorageInterface metricStorage;
     MetricSumController metricSumController;
-    MetricSumController metricSumWithGoalController;
     CardLayout cardLayout;
     JPanel screens;
     JButton backButton;
 
     public ChooseMetricSumScreen(MetricStorageInterface metricStorageInterface,
-                                 MetricSumController metricSumController, CardLayout cardLayout, JPanel screens,
-                                 MetricSumController metricSumWithGoalController) {
+                                 MetricSumController metricSumController, CardLayout cardLayout, JPanel screens) {
         this.metricStorage = metricStorageInterface;
         this.metricSumController = metricSumController;
         this.cardLayout = cardLayout;
         this.screens = screens;
-        this.metricSumWithGoalController = metricSumWithGoalController;
+
 
         this.setName("ChooseMetricSum");
 
@@ -53,7 +51,7 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
             metricButton.setActionCommand(m.getName());
         }
 
-        backButton = new JButton("Back");
+        backButton = new JButton("Home");
         backButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -66,33 +64,24 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         if (evt.getSource() == backButton) {
             cardLayout.show(screens, "home");
         } else {
-            if (checkHasGoal(evt.getActionCommand())){
-                try {
-                    MetricSumViewModel viewModel = metricSumWithGoalController.getMetricSummary(evt.getActionCommand());
-                    String averageAndTrend = viewModel.getMetricStatistics();
-                    String goalStat = viewModel.getGoalStat();
-                    XYChart chart = viewModel.getChart();
-                    new MetricSummaryScreen(averageAndTrend, chart, goalStat);
-                } catch (NullPointerException | DataSummaryFailed e) {
-                    JOptionPane.showMessageDialog(this , e.getMessage());
-                }
-            }
-            else {
-                try {
-                    MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
-                    String statistics = viewModel.getMetricStatistics();
-                    XYChart chart = viewModel.getChart();
-                    new MetricSummaryScreen(statistics, chart);
-                } catch (NullPointerException | DataSummaryFailed e) {
-                    JOptionPane.showMessageDialog(this, e.getMessage());
-                }
+            try {
+                MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
+                MetricSummaryScreen summaryScreen = constructSummary(viewModel);
+                summaryScreen.setVisible(true);
+            } catch (NullPointerException | DataSummaryFailed e) {
+                JOptionPane.showMessageDialog(this , e.getMessage());
             }
         }
     }
 
-    private boolean checkHasGoal(String metricName){
-        Metric metric = metricStorage.getMetric(metricName);
-        return metric.getGoalStatus();
+    private MetricSummaryScreen constructSummary(MetricSumViewModel viewModel){
+        String statistics = viewModel.getMetricStatistics();
+        XYChart chart = viewModel.getChart();
+        if (viewModel.getContainsGoalStat()){
+            String goalStat = viewModel.getGoalStat();
+            return new MetricSummaryScreen(statistics, chart, goalStat);
+        }
+        return new MetricSummaryScreen(statistics, chart);
     }
 
     @Override

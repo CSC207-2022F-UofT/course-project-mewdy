@@ -46,7 +46,7 @@ public class DataLogInputScreen extends JPanel implements ActionListener {
         recordButton.addActionListener(this);
         dataInput = new JTextField();
         dataInput.setPreferredSize(new Dimension(250,40));
-        backButton = new JButton("Back");
+        backButton = new JButton("Home");
         backButton.addActionListener(this);
         undoButton = new JButton("Undo");
         undoButton.addActionListener(this);

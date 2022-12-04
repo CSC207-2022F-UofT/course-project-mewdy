@@ -20,7 +20,9 @@ public class GoalTrackingDecorator extends MetricSummarizerDecorator{
     public MetricSumViewModel getMetricSummary(MetricSumRequestModel requestModel){
 
         MetricSumViewModel viewModel = metricSummarizer.getMetricSummary(requestModel);
-        addGoalTrackingStats(requestModel, viewModel);
+        if (checkHasGoal(requestModel.getMetricName())) {
+            addGoalTrackingStats(requestModel, viewModel);
+        }
         return viewModel;
     }
 
@@ -53,5 +55,10 @@ public class GoalTrackingDecorator extends MetricSummarizerDecorator{
         // Modify view model's metric stats to include goal
         viewModel.setMetricStatistics(viewModel.getMetricStatistics() + "; Goal: " + goal);
 
+    }
+
+    private boolean checkHasGoal(String metricName){
+        Metric metric = metricStorage.getMetric(metricName);
+        return metric.getGoalStatus();
     }
 }

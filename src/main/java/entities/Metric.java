@@ -12,8 +12,8 @@ public class Metric {
     private final ArrayList<DataPoint> DATAPOINTS;
     private final double UPPERBOUND;
     private final double LOWERBOUND;
-    private double GOAL;
-    private boolean HASGOAL;
+    private double goal;
+    private boolean hasGoal;
 
 
     /**
@@ -40,8 +40,9 @@ public class Metric {
         this.DATAPOINTS = dataPointList;
         this.UPPERBOUND = upperBound;
         this.LOWERBOUND = lowerBound;
-        if (hasGoal == 1) { this.GOAL = goal; this.HASGOAL = true; }
-        else {this.HASGOAL = false;}
+        if (hasGoal == 1) {
+            this.setGoal(goal);
+        }
     }
 
     /**
@@ -155,14 +156,14 @@ public class Metric {
         return this.LOWERBOUND;
     }
 
-    public double getGoal(){ return this.GOAL; }
+    public double getGoal(){ return this.goal; }
 
     public void setGoal(double goal){
-        this.GOAL = goal;
-        this.HASGOAL = true;
+        this.goal = goal;
+        this.hasGoal = true;
     }
 
-    public boolean getGoalStatus() { return this.HASGOAL; }
+    public boolean getGoalStatus() { return this.hasGoal; }
 
     /**
      * equals checks if two metrics are equal

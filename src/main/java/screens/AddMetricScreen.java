@@ -78,7 +78,7 @@ public class AddMetricScreen extends JPanel implements ActionListener {
         this.add(presetMetrics);
         this.add(customMetrics);
 
-        backButton = new JButton("Back");
+        backButton = new JButton("Home");
         backButton.addActionListener(this);
         this.add(backButton);
 

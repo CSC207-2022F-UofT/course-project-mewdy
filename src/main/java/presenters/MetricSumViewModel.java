@@ -11,6 +11,7 @@ public class MetricSumViewModel {
     XYChart chart;
     String metricStatistics;
     String goalStat;
+    boolean containsGoalStat;
 
     /**
      * Constructor for the metric sum view model
@@ -42,7 +43,12 @@ public class MetricSumViewModel {
     }
     public void setMetricStatistics(String metricStatistics) { this.metricStatistics = metricStatistics; }
 
-    public void setGoalStat(String stat) { goalStat = stat; }
+    public void setGoalStat(String stat) {
+        goalStat = stat;
+        containsGoalStat = true;
+    }
 
     public String getGoalStat() { return goalStat; }
+
+    public boolean getContainsGoalStat() { return containsGoalStat; }
 }

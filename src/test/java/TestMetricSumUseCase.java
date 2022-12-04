@@ -22,7 +22,6 @@ public class TestMetricSumUseCase {
     MetricSumInputBoundary metricSummarizer;
     MetricStorageInterface metricStorage;
     MetricSumOutputBoundary metricSumPresenter;
-    MetricSumController metricSumController;
 
     @BeforeEach
     public void setUp() throws ParseException {
