@@ -25,7 +25,10 @@ public class Main {
         //Metric Summary Use Case
         MetricSumOutputBoundary metricSumPresenter = new MetricSumPresenter();
         MetricSumInputBoundary metricSummarizer = new MetricSummarizer(metricStorage, metricSumPresenter);
-        MetricSumController metricSumController = new MetricSumController(metricSummarizer);
+        // Goal tracking decorator for metric summarizer
+        MetricSumInputBoundary metricSummarizerWithGoal = new GoalTrackingDecorator(metricSummarizer, metricStorage);
+
+        MetricSumController metricSumController = new MetricSumController(metricSummarizerWithGoal);
 
         //Data Logging Use Case
         DataLoggerOutputBoundary dataLoggerPresenter = new DataLoggerPresenter();
@@ -52,6 +55,11 @@ public class Main {
         EntryUndoInputBoundary entryUndo = new EntryUndo(metricStorage,undoEntryPresenter);
         EntryUndoController entryUndoController = new EntryUndoController(entryUndo);
 
+        //Set Goal Use Case
+        SetGoalOutputBoundary setGoalPresenter = new SetGoalPresenter();
+        SetGoalInputBoundary goalSetter = new GoalSetter(metricStorage, setGoalPresenter);
+        SetGoalController setGoalController = new SetGoalController(goalSetter);
+
 
         // Initialize UI components
         JFrame application = new JFrame("Mewdy");
@@ -72,12 +80,14 @@ public class Main {
                 screens);
         JTabbedPane dataLogChooseScreen = new DataLogChooseScreen(metricStorage, dataLoggerController,
                 metricDelController, addMetricController, entryUndoController, cardLayout, screens);
+        JTabbedPane setGoalScreen = new SetGoalScreen(metricStorage, setGoalController, cardLayout, screens);
 
 
         screens.add(startScreen, "start");
         screens.add(homeScreen, "home");
         screens.add(chooseMetricSumScreen, "chooseMetricSum");
         screens.add(dataLogChooseScreen, "dataLogChoose");
+        screens.add(setGoalScreen, "setGoal");
 
 
         // Build GUI
@@ -91,6 +101,7 @@ public class Main {
             public void windowClosing(WindowEvent e) {
                 if (dataExportController.getSaveStatus()) {
                     application.dispose();
+                    System.exit(0);
                 } else {
                     int confirmed = JOptionPane.showConfirmDialog(
                             application, "Are you sure you want to exit the program with unsaved changes?",
@@ -99,6 +110,7 @@ public class Main {
 
                     if (confirmed == JOptionPane.YES_OPTION) {
                         application.dispose();
+                        System.exit(0);
                     }
                 }
             }
