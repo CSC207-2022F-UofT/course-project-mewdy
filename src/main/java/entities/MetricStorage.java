@@ -94,7 +94,7 @@ public class MetricStorage implements MetricStorageInterface{
     }
 
     /**
-     * save saves the MetricStorage to the location
+     * save the MetricStorage to the location
      */
     @Override
     public void save() {
@@ -127,6 +127,27 @@ public class MetricStorage implements MetricStorageInterface{
 
         }
         throw new NullPointerException("No Metric found with name: " + metricName);
+    }
+
+    /**
+     * setMetricGoal returns true if goal is successfully set for metric. Goal needs to be within defined bounds
+     * of metric with metricName.
+     *
+     * @param goal is the goal to be set
+     * @param metricName is the name of metric for which we are setting the goal
+     * @return true if goal is successfully set, false if not
+     */
+    @Override
+    public boolean setMetricGoal(double goal, String metricName){
+        Metric metric = getMetric(metricName);
+        double upperBound = metric.getUpperBound();
+        double lowerBound = metric.getLowerBound();
+        if (goal >= lowerBound && goal <= upperBound) {
+            metric.setGoal(goal);
+            this.saved = false;
+            return true;
+        }
+        return false;
     }
 
     /**

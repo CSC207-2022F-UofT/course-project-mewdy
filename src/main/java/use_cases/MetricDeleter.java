@@ -33,7 +33,7 @@ public class MetricDeleter implements MetricDelInputBoundary {
      * @throws NullPointerException if the selected metric is not in the metric storage
      */
     @Override
-    public MetricDelResponseModel create(MetricDelRequestModel requestModel) {
+    public MetricDelResponseModel metricDelete(MetricDelRequestModel requestModel) {
         String metricName = requestModel.getMetricName();
 
         //Trys to delete the selected metric

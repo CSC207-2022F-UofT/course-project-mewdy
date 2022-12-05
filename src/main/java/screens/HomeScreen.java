@@ -23,7 +23,7 @@ public class HomeScreen extends JPanel implements ActionListener {
     JButton summaryButton;
     JButton saveButton;
     JButton exportButton;
-    JButton backButton;
+    JButton setGoalButton;
     MetricStorageInterface metricStorage;
 
     /**
@@ -43,26 +43,28 @@ public class HomeScreen extends JPanel implements ActionListener {
         this.metricStorage = metricStorage;
 
         JLabel title = new JLabel("Home");
+        title.setFont(new Font("Calibri", Font.BOLD, 30));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         recordButton = new JButton("Record");
         summaryButton = new JButton("Summary");
         saveButton = new JButton("Save");
         exportButton = new JButton("Export");
-        backButton = new JButton("Back");
+        setGoalButton = new JButton("Set Goal");
 
         JPanel buttons = new JPanel();
         buttons.add(recordButton);
         buttons.add(summaryButton);
+        buttons.add(setGoalButton);
         buttons.add(saveButton);
         buttons.add(exportButton);
-        buttons.add(backButton);
+
 
         summaryButton.addActionListener(this);
         recordButton.addActionListener(this);
-        backButton.addActionListener(this);
         exportButton.addActionListener(this);
         saveButton.addActionListener(this);
+        setGoalButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -85,6 +87,10 @@ public class HomeScreen extends JPanel implements ActionListener {
             refreshScreen("DataLogChoose");
             cardLayout.show(screens, "dataLogChoose");
         }
+        if (evt.getSource() == setGoalButton){
+            refreshScreen("SetGoal");
+            cardLayout.show(screens, "setGoal");
+        }
         if (evt.getSource() == exportButton) {
             //Set up file chooser
             JFileChooser exportFileChooser = new JFileChooser();
@@ -102,9 +108,6 @@ public class HomeScreen extends JPanel implements ActionListener {
                     JOptionPane.showMessageDialog(this, "Success!");
                 }
             }
-        }
-        if (evt.getSource() == backButton) {
-            cardLayout.previous(screens);
         }
         if (evt.getSource() == saveButton){
             ExportResponseModel responseModel = dataExportController.writeToNewFile(metricStorage.getPath().getAbsolutePath());

@@ -7,7 +7,7 @@ import use_cases.MetricSumInputBoundary;
 /**
  * Controller for the MetricSum use case
  */
-public class MetricSumController {
+public class MetricSumController{
 
     final MetricSumInputBoundary metricSummarizer;
 
@@ -19,6 +19,7 @@ public class MetricSumController {
     public MetricSumController(MetricSumInputBoundary metricSummarizer){
         this.metricSummarizer = metricSummarizer;
     }
+
 
     /**
      * getMetricSummary calls the use case interactor, MetricSum to get the summary of a metric

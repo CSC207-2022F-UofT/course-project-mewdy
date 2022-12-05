@@ -62,7 +62,7 @@ public class MetricTab extends JPanel {
                     "delete this metric? Any data stored will be lost.","Select an Option",
                     JOptionPane.YES_NO_OPTION);
             if (input == JOptionPane.YES_OPTION) {
-                MetricDelResponseModel responseModel = metricDelController.create(title);
+                MetricDelResponseModel responseModel = metricDelController.deleteMetric(title);
                 JOptionPane.showMessageDialog(this, responseModel.getMetricName() + " was deleted. " +
                         "It contained " + responseModel.getNumDataPoints() + " data points.");
                 int i = pane.indexOfTabComponent(MetricTab.this);

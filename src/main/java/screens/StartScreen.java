@@ -33,8 +33,13 @@ public class StartScreen extends JPanel implements ActionListener {
         this.dataImportController = dataImportController;
 
 
-        JLabel title = new JLabel("Start screen");
+        JLabel title = new JLabel("Mewdy");
+        title.setFont(new Font("Calibri", Font.BOLD, 50));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        JLabel subtitle = new JLabel("A configurable metric tracking program");
+        subtitle.setFont(new Font("Calibri", Font.BOLD, 18));
+        subtitle.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         JButton importButton = new JButton("Import");
         JButton newButton = new JButton("New");
@@ -51,6 +56,7 @@ public class StartScreen extends JPanel implements ActionListener {
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         this.add(title);
+        this.add(subtitle);
         this.add(buttons);
     }
 

@@ -72,7 +72,9 @@ public class DataExporter implements DataExportInputBoundary {
 
                 // Write header to file
                 writer = new BufferedWriter(new FileWriter(currentFile));
-                String header = String.format("Date,Datapoint,%s,%s", metric.getUpperBound(), metric.getLowerBound());
+                int hasGoalStatus = (metric.getGoalStatus()) ? 1:0;
+                String header = String.format("Date,Datapoint,%s,%s,%s,%s", metric.getUpperBound(),
+                        metric.getLowerBound(), hasGoalStatus, metric.getGoal());
                 writer.write(header);
                 writer.newLine();
 

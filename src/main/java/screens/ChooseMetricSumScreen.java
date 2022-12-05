@@ -12,10 +12,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-/**
- * Subclass of JPanel that displays the screen for choosing a metric to sum and implements
- * both the ActionListener and MetricStorageInterface interfaces.
- */
 public class ChooseMetricSumScreen extends JPanel implements ActionListener, Refreshable {
 
     MetricStorageInterface metricStorage;
@@ -24,14 +20,6 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
     JPanel screens;
     JButton backButton;
 
-    /**
-     * Constructor for the ChooseMetricSumScreen
-     *
-     * @param metricStorageInterface represents the metric storage interface
-     * @param metricSumController represents the metric sum controller
-     * @param cardLayout represents the card layout
-     * @param screens represents the screens
-     */
     public ChooseMetricSumScreen(MetricStorageInterface metricStorageInterface,
                                  MetricSumController metricSumController, CardLayout cardLayout, JPanel screens) {
         this.metricStorage = metricStorageInterface;
@@ -39,11 +27,20 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         this.cardLayout = cardLayout;
         this.screens = screens;
 
+
         this.setName("ChooseMetricSum");
 
         JLabel title = new JLabel("Metric Summary");
+        title.setFont(new Font(null, Font.BOLD, 20));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(title);
 
+        if (metricStorage.getMetricList().size() == 0){
+            JLabel noMetricMessage = new JLabel("No metrics are being tracked. Go add some!");
+            noMetricMessage.setFont(new Font(null, Font.BOLD, 15));
+            noMetricMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
+            this.add(noMetricMessage);
+        }
         // Add buttons for every Metric in MetricStorage.
         JPanel buttons = new JPanel();
         ArrayList<Metric> metricList = metricStorage.getMetricList();
@@ -54,47 +51,54 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
             metricButton.setActionCommand(m.getName());
         }
 
-        backButton = new JButton("Back");
+        backButton = new JButton("Home");
         backButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(title);
         this.add(buttons);
         this.add(backButton);
     }
 
     //React to button press to summarize chosen Metric.
-
-    /**
-     * actionPerformed reacts to button press to summarize chosen Metric
-     *
-     * @param evt represents the event to be processed
-     */
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == backButton) {
             cardLayout.show(screens, "home");
         } else {
             try {
                 MetricSumViewModel viewModel = metricSumController.getMetricSummary(evt.getActionCommand());
-                String averageAndTrend = viewModel.getMetricAverageAndSize();
-                XYChart chart = viewModel.getChart();
-                new MetricSummaryScreen(averageAndTrend, chart);
+                MetricSummaryScreen summaryScreen = constructSummary(viewModel);
+                summaryScreen.setVisible(true);
             } catch (NullPointerException | DataSummaryFailed e) {
                 JOptionPane.showMessageDialog(this , e.getMessage());
             }
         }
     }
 
-    /**
-     * refresh refreshes the screen
-     */
+    private MetricSummaryScreen constructSummary(MetricSumViewModel viewModel){
+        String statistics = viewModel.getMetricStatistics();
+        XYChart chart = viewModel.getChart();
+        if (viewModel.getContainsGoalStat()){
+            String goalStat = viewModel.getGoalStat();
+            return new MetricSummaryScreen(statistics, chart, goalStat);
+        }
+        return new MetricSummaryScreen(statistics, chart);
+    }
+
     @Override
     public void refresh() {
         this.removeAll();
 
         JLabel title = new JLabel("Metric Summary");
+        title.setFont(new Font(null, Font.BOLD, 20));
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(title);
 
+        if (metricStorage.getMetricList().size() == 0){
+            JLabel noMetricMessage = new JLabel("No metrics are being tracked. Go add some!");
+            noMetricMessage.setFont(new Font(null, Font.BOLD, 15));
+            noMetricMessage.setAlignmentX(Component.CENTER_ALIGNMENT);
+            this.add(noMetricMessage);
+        }
         // Add buttons for every Metric in MetricStorage.
         JPanel buttons = new JPanel();
         ArrayList<Metric> metricList = metricStorage.getMetricList();
@@ -108,7 +112,6 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         backButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.add(title);
         this.add(buttons);
         this.add(backButton);
 

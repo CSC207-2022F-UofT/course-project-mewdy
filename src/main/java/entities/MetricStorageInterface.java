@@ -45,10 +45,10 @@ public interface MetricStorageInterface {
     ArrayList<DataPoint> getDataPointList(String metricName);
 
     /**
-     * getMetric returns the metric in the MetricStorage and throws an exception if the metric does not exist
+     * getMetric returns the metric in the MetricStorage
      *
      * @param metricName represents name of the metric
-     * @return the metric in the MetricStorage or throws an exception if the metric does not exist
+     * @return the metric in the MetricStorage
      */
     Metric getMetric(String metricName) throws NullPointerException;
 
@@ -60,10 +60,15 @@ public interface MetricStorageInterface {
     File getPath();
 
     /**
-     * getSaveStatus returns the save status of the MetricStorage
+     * setMetricGoal returns true if goal is successfully set for metric. Goal needs to be within defined bounds
+     * of metric with metricName
      *
-     * @return the save status of the MetricStorage
+     * @param goal is the goal to be set
+     * @param metricName is the name of metric for which we are setting the goal
+     * @return true if goal is successfully set, false if not
      */
+    boolean setMetricGoal(double goal, String metricName);
+
     Boolean getSaveStatus();
 
 }

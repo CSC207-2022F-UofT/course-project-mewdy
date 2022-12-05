@@ -25,8 +25,8 @@ public class MetricDelController {
      * @param metricName represents the name of the metric to be deleted
      * @return the response model for deleting a metric
      */
-    public MetricDelResponseModel create(String metricName) {
+    public MetricDelResponseModel deleteMetric(String metricName) {
         MetricDelRequestModel requestModel = new MetricDelRequestModel(metricName);
-        return metricDeleter.create(requestModel);
+        return metricDeleter.metricDelete(requestModel);
     }
 }

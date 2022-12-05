@@ -17,8 +17,8 @@ import java.util.ArrayList;
 
 public class MetricSummarizer implements MetricSumInputBoundary {
 
-    private MetricStorageInterface metricStorage;
-    private MetricSumOutputBoundary presenter;
+    private final MetricStorageInterface metricStorage;
+    private final MetricSumOutputBoundary presenter;
 
     /**
      * Constructor for MetricSummarizer
@@ -45,9 +45,9 @@ public class MetricSummarizer implements MetricSumInputBoundary {
         try {
             Metric metricToSum = this.metricStorage.getMetric(metricName);
 
-            if (metricToSum.getDataPoints().size() < 7) {
+            if (metricToSum.getDataPoints().size() == 0) {
                 throw new DataSummaryFailed("Metric summary " +
-                        "unavailable - " + metricName + " contains fewer than 7 data points.");
+                        "unavailable - " + metricName + " contains 0 data points");
             }
 
             ArrayList<DataPoint> dataPoints = metricToSum.getDataPoints();
@@ -98,4 +98,5 @@ public class MetricSummarizer implements MetricSumInputBoundary {
     private int calculateMetricSize(ArrayList<DataPoint> dataPoints) {
         return dataPoints.size();
     }
+
 }
