@@ -37,7 +37,7 @@ public class ExportTest {
             for (int i = 0; i < 10; i++) {
                 dataPoints.add(new DataPoint(i));
             }
-            this.ms.addMetric(new Metric(name, dataPoints, 10, 0));
+            this.ms.addMetric(new Metric(name, dataPoints, 10, 0, 0,0));
         }
     }
 
@@ -103,7 +103,7 @@ public class ExportTest {
         for (int i = 0; i < dates.size(); i++) {
             dataPoints.add(new DataPoint(dates.get(i), data.get(i)));
         }
-        s.addMetric(new Metric(name, dataPoints, ub, lb));
+        s.addMetric(new Metric(name, dataPoints, ub, lb,0,0));
     }
 
     private boolean isEqual(MetricStorage s1, MetricStorage s2) {

@@ -59,6 +59,16 @@ public interface MetricStorageInterface {
      */
     File getPath();
 
+    /**
+     * setMetricGoal returns true if goal is successfully set for metric. Goal needs to be within defined bounds
+     * of metric with metricName
+     *
+     * @param goal is the goal to be set
+     * @param metricName is the name of metric for which we are setting the goal
+     * @return true if goal is successfully set, false if not
+     */
+    boolean setMetricGoal(double goal, String metricName);
+
     Boolean getSaveStatus();
 
 }

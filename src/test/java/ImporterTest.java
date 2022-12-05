@@ -46,10 +46,10 @@ class ImporterTest {
         dataPoints.add(new DataPoint("2022-11-20 12:47:18", 1));
 
         // Setup test Metrics
-        preMadeStorage.addMetric(new Metric("focus", dataPoints, 10, 1));
-        preMadeStorage.addMetric(new Metric("sleep", dataPoints, 24, 0));
-        preMadeStorage.addMetric(new Metric("testmetric", dataPoints, 10, 1));
-        preMadeStorage.addMetric(new Metric("work", dataPoints, 10, 1));
+        preMadeStorage.addMetric(new Metric("focus", dataPoints, 10, 1, 0, 0));
+        preMadeStorage.addMetric(new Metric("sleep", dataPoints, 24, 0, 0, 0));
+        preMadeStorage.addMetric(new Metric("testmetric", dataPoints, 10, 1, 0, 0));
+        preMadeStorage.addMetric(new Metric("work", dataPoints, 10, 1, 0, 0));
     }
 
     @Test
