@@ -1,15 +1,13 @@
 package models;
 
-import entities.MetricStorageInterface;
 
 /**
  * Class that represents the RequestModel for DataLogger
  */
 public class DataLoggerRequestModel {
 
-    private String metricName;
-    private double value;
-    private MetricStorageInterface storage;
+    private final String metricName;
+    private final double value;
 
     /**
      * Constructor for DataLoggerRequestModel

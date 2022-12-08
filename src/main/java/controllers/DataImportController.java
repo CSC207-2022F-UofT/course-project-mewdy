@@ -8,7 +8,7 @@ import use_cases.DataImportInputBoundary;
  * Controller for the DataImport use case
  */
 public class DataImportController {
-    private final DataImportInputBoundary INPUTBOUNDARY;
+    private final DataImportInputBoundary inputBoundary;
 
     /**
      * Constructor for the DataImportController
@@ -16,7 +16,7 @@ public class DataImportController {
      * @param inputBoundary The input boundary for the DataImport use case
      */
     public DataImportController(DataImportInputBoundary inputBoundary) {
-        this.INPUTBOUNDARY = inputBoundary;
+        this.inputBoundary = inputBoundary;
     }
 
     /**
@@ -28,6 +28,6 @@ public class DataImportController {
      public ImportResponseModel readFromNewFile(String path) {
          ImportRequestModel req = new ImportRequestModel(path);
 
-         return INPUTBOUNDARY.readFromNewFile(req);
+         return inputBoundary.readFromNewFile(req);
      }
 }

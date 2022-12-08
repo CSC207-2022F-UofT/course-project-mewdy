@@ -1,6 +1,5 @@
 package use_cases;
 
-import entities.Metric;
 import entities.MetricStorageInterface;
 import models.SetGoalRequestModel;
 import presenters.SetGoalOutputBoundary;

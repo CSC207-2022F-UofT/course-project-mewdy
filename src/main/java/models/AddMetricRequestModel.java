@@ -12,7 +12,6 @@ public class AddMetricRequestModel {
     private final String metricName;
     private final double upperBound;
     private final double lowerBound;
-    private ArrayList<DataPoint> dataPointList;
 
     /**
      * Constructor for AddMetricRequestModel
@@ -26,7 +25,6 @@ public class AddMetricRequestModel {
         this.metricName = metricName;
         this.upperBound = upperBound;
         this.lowerBound = lowerBound;
-        this.dataPointList = new ArrayList<>();
     }
 
     /**

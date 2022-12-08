@@ -36,7 +36,7 @@ public class MetricSummarizer implements MetricSumInputBoundary {
      *
      * @param requestModel represents the request model for the MetricSum use case
      * @return MetricSumViewModel represents the view model for the MetricSum use case
-     * @throws DataSummaryFailed if ????????????????????
+     * @throws DataSummaryFailed if chosen metric to summarize contains 0 data points
      * @throws NullPointerException if the metric is not found
      */
     @Override
@@ -86,8 +86,6 @@ public class MetricSummarizer implements MetricSumInputBoundary {
 
         return sum;
     }
-
-    //helper method to calculate number of datapoints stored in metric
 
     /**
      * calculateMetricSize is a helper method that calculates the number of datapoints stored in a given metric

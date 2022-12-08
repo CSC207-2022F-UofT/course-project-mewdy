@@ -10,7 +10,7 @@ import java.util.Objects;
  */
 public class MetricStorage implements MetricStorageInterface{
 
-    private final ArrayList<Metric> METRICLIST;
+    private final ArrayList<Metric> metriclist;
     private File location;
     private boolean saved;
 
@@ -18,7 +18,7 @@ public class MetricStorage implements MetricStorageInterface{
      * Constructor for MetricStorage
      */
     public MetricStorage(){
-        this.METRICLIST = new ArrayList<>();
+        this.metriclist = new ArrayList<>();
         this.location = new File("./metrics");
         this.saved = true; // if storage is empty, nothing to save
     }
@@ -32,7 +32,6 @@ public class MetricStorage implements MetricStorageInterface{
         String folder = path.getPath();
         if (!(folder.endsWith(File.separator + "metrics")||folder.endsWith(File.separator + "metrics/")))
             folder += File.separator + "metrics";
-        System.out.println(folder);
         this.location = new File(folder);
     }
 
@@ -43,8 +42,8 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public void addMetric(Metric metric) {
-        this.METRICLIST.add(metric);
-        this.METRICLIST.sort(new MetricComparator());
+        this.metriclist.add(metric);
+        this.metriclist.sort(new MetricComparator());
         this.saved = false;
     }
 
@@ -55,7 +54,7 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public void removeMetric(Metric metric) {
-        this.METRICLIST.remove(metric);
+        this.metriclist.remove(metric);
         this.saved = false;
     }
 
@@ -67,7 +66,7 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public void addDataPoint(String metricName, DataPoint dataPoint) {
-        for (Metric metric : this.METRICLIST) {
+        for (Metric metric : this.metriclist) {
             if (Objects.equals(metric.getName(), metricName)) {
                 metric.addDataPoint(dataPoint);
                 break;
@@ -84,7 +83,7 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public void removeDataPoint(String metricName) {
-        for (Metric metric: this.METRICLIST) {
+        for (Metric metric: this.metriclist) {
             if (Objects.equals(metric.getName(), metricName)) {
                 metric.popDataPoint();
                 break;
@@ -108,7 +107,7 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public ArrayList<Metric> getMetricList() {
-        return this.METRICLIST;
+        return this.metriclist;
     }
 
     /**
@@ -120,7 +119,7 @@ public class MetricStorage implements MetricStorageInterface{
      */
     @Override
     public Metric getMetric(String metricName) throws NullPointerException {
-        for (Metric metric : this.METRICLIST) {
+        for (Metric metric : this.metriclist) {
             if (metric.getName().equalsIgnoreCase(metricName)) {
                 return metric;
             }
@@ -178,7 +177,7 @@ public class MetricStorage implements MetricStorageInterface{
     @Override
     public ArrayList<DataPoint> getDataPointList(String metricName) {
         ArrayList<DataPoint> returnValue = null;
-        for (Metric metric : this.METRICLIST) {
+        for (Metric metric : this.metriclist) {
             if (Objects.equals(metric.getName(), metricName)) {
                 returnValue = metric.getDataPoints();
                 break;

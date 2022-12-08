@@ -26,7 +26,6 @@ public class DataImportPresenter implements DataImportOutputBoundary {
      */
     @Override
     public ImportResponseModel prepareFailView(String msg) {
-        System.out.println(msg);//DEBUG
         return new ImportResponseModel(msg);
     }
 

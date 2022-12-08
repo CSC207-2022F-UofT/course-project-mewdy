@@ -9,7 +9,7 @@ import models.DataLoggerResponseModel;
 public class DataLoggerPresenter implements DataLoggerOutputBoundary{
 
     /**
-     * prepareSuccesView for the succesview
+     * prepareSuccessView for the success view
      *
      * @param responseModel represents the response model
      * @return DataLoggerResponseModel

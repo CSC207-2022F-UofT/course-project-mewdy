@@ -85,3 +85,4 @@ Classes are organized into packages based on which component of Clean Architectu
 - Design pattern implemented to modify functionality of metric summarizer use case interactor. 
 - An abstract decorator implements the MetricSumInputBoundary 
 - A concrete decorator for goal tracking extends the abstract decorator class, giving the method getMetricSummary additional functionality when the chosen input metric is associated with a goal.
+- When metric summary is called on metrics associated with a goal, the GoalTrackingDecorator is called as the MetricSumInputBoundary.

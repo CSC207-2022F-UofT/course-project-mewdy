@@ -105,7 +105,7 @@ public class DataImporter implements DataImportInputBoundary {
      * @param ub represents the upper bound of the metric
      * @param lb represents the lower bound of the metric
      * @param name represents the name of the metric
-     * @throws ParseException if the date is not in the correct format?????????????idk if this is right
+     * @throws ParseException if the date is not in the correct format
      */
     private void createMetric(
             ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, int hasGoal, double goal,

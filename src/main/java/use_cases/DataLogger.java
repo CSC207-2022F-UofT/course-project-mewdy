@@ -64,8 +64,12 @@ public class DataLogger implements DataLoggerInputBoundary{
                 this.metricStorage.addDataPoint(metricName, newEntry);
 
                 return presenter.prepareSuccessView(responseModel);
+            } else if ((lowerBound <= value) && (upperBound >= value)) {
+                return presenter.prepareFailView("Failed to add datapoint, there is already logged data for" +
+                        " today!");
             } else {
-                return presenter.prepareFailView("Failed to add datapoint, invalid value");
+                return presenter.prepareFailView("Failed to add datapoint, invalid value - Please enter a " +
+                        "number within the bounds of the metric");
             }
 
         } catch (NullPointerException e) {

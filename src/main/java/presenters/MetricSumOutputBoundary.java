@@ -9,7 +9,7 @@ import models.MetricSumResponseModel;
 public interface MetricSumOutputBoundary {
 
     /**
-     * prepareSuccesView prepares the success view for the MetricSum use case
+     * prepareSuccessView prepares the success view for the MetricSum use case
      *
      * @param responseModel represents the response model for the MetricSum use case
      * @return the success view for the MetricSum use case

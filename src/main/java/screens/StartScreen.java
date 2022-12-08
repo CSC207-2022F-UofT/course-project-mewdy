@@ -23,7 +23,7 @@ public class StartScreen extends JPanel implements ActionListener {
      * Constructor for the StartScreen class
      *
      * @param cardLayout represents the CardLayout of the start screen
-     * @param screens represents the screen
+     * @param screens represents the JPanel that contains all the screens
      * @param dataImportController represents the DataImportController that is used to import data
      */
     public StartScreen(CardLayout cardLayout, JPanel screens, DataImportController dataImportController) {
