@@ -1,13 +1,12 @@
 package models;
 
 /**
- * Class that represents the ResponeModel for DataLogger
+ * Class that represents the ResponseModel for DataLogger
  */
 public class DataLoggerResponseModel{
 
     private final String metricName;
     private final double value;
-    private boolean success;
     private String message;
 
     /**

@@ -5,7 +5,7 @@ import entities.Metric;
 import entities.MetricStorageInterface;
 import models.ImportRequestModel;
 import models.ImportResponseModel;
-import presenters.DataImportPresenterOutputBoundary;
+import presenters.DataImportOutputBoundary;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,26 +15,43 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class DataImporter implements DataImportInputBoundary {
-    /**
-     * Import UseCase
-     * Imports data from csv files to a metric storage
-     */
-    private final MetricStorageInterface storage;
-    private final DataImportPresenterOutputBoundary presenter;
+/**
+ * Class that represents the DataImporter use case that is responsible for importing data from a csv file
+ */
 
-    public DataImporter(MetricStorageInterface storage, DataImportPresenterOutputBoundary presenter) {
+public class DataImporter implements DataImportInputBoundary {
+    private final MetricStorageInterface storage;
+    private final DataImportOutputBoundary presenter;
+
+    /**
+     * Constructor for DataImporter
+     *
+     * @param storage represents the metric storage that the use case will interact with
+     * @param presenter represents the presenter that will present the output
+     */
+    public DataImporter(MetricStorageInterface storage, DataImportOutputBoundary presenter) {
         this.storage = storage;
         this.presenter = presenter;
     }
 
+    /**
+     * readFromNewFile reads data from a csv file and adds it to the metric storage
+     *
+     * @param req represents the request model for the DataImport use case
+     * @return the response model for the DataImport use case
+     */
     @Override
     public ImportResponseModel readFromNewFile(ImportRequestModel req) {
         this.storage.setPath(new File(req.getPath()));
         return read();
     }
 
-    private ImportResponseModel read() { // Reads csv files from the folder and adds them to the metric storage
+    /**
+     * read reads data from a csv file and adds it to the metric storage
+     *
+     * @return the response model for the DataImport use case
+     */
+    private ImportResponseModel read() {
         try {
             for (File file : Objects.requireNonNull(this.storage.getPath().listFiles())) {
                 ArrayList<String> dates = new ArrayList<>();
@@ -80,6 +97,16 @@ public class DataImporter implements DataImportInputBoundary {
         return presenter.prepareSuccessView();
     }
 
+    /**
+     * createMetric creates a metric from the data read from the csv file
+     *
+     * @param dates represents the dates of the data points
+     * @param data represents the data read from the csv file
+     * @param ub represents the upper bound of the metric
+     * @param lb represents the lower bound of the metric
+     * @param name represents the name of the metric
+     * @throws ParseException if the date is not in the correct format?????????????idk if this is right
+     */
     private void createMetric(
             ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, int hasGoal, double goal,
             String name) throws ParseException {

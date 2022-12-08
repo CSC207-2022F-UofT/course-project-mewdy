@@ -14,6 +14,7 @@ public class EntryUndoPresenter implements EntryUndoOutputBoundary{
 
     /**
     * prepareSuccessView prepares the success view
+     *
     * @param responseModel represents the response model*
     * @return returns the EntryUndo response model
      */
@@ -27,6 +28,7 @@ public class EntryUndoPresenter implements EntryUndoOutputBoundary{
 
     /**
      * prepareErrorView prepares the error view for the EntryUndo usecase
+     *
      * @param msg represents the fail message
      * @return the fail view
      */

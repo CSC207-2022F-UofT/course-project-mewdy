@@ -6,12 +6,21 @@ import org.knowm.xchart.XYChart;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Subclass of JFrame that displays a chart of the metric summary
+ */
 public class MetricSummaryScreen extends JFrame {
 
     final String metricAvgAndSize;
     final XYChart chart;
     final String goalStat;
 
+    /**
+     * Constructor for the MetricSummaryScreen
+     *
+     * @param metricAvgAndSize represents the average and size of the metric
+     * @param chart represents the chart of the metric summary
+     */
     public MetricSummaryScreen(String metricAvgAndSize, XYChart chart) {
         this.metricAvgAndSize = metricAvgAndSize;
         this.chart = chart;

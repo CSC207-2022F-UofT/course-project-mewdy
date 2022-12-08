@@ -11,6 +11,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Subclass of JTabbedPane that displays the metrics that are currently being logged and implements Refreshable
+ */
 public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
 
     MetricStorageInterface metricStorage;
@@ -21,6 +24,17 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
     CardLayout cardLayout;
     JPanel screens;
 
+    /**
+     * Constructor for DataLogChooseScreen
+     *
+     * @param metricStorage represents the metric storage
+     * @param dataLoggerController represents the data logger controller
+     * @param metricDelController represents the metric delete controller
+     * @param addMetricController represents the add metric controller
+     * @param entryUndoController represents the entry undo controller
+     * @param cardLayout represents the card layout
+     * @param screens represents the screens
+     */
     public DataLogChooseScreen(MetricStorageInterface metricStorage, DataLoggerController dataLoggerController,
                                MetricDelController metricDelController, AddMetricController addMetricController,
                                EntryUndoController entryUndoController, CardLayout cardLayout, JPanel screens){
@@ -59,6 +73,9 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
 
     }
 
+    /**
+     * refresh refreshes the screen
+     */
     @Override
     public void refresh(){
         this.removeAll();

@@ -23,7 +23,7 @@ public class MetricDelController {
      * deleteMetric calls the use case interactor, MetricDeleter to delete a metric
      *
      * @param metricName represents the name of the metric to be deleted
-     * @return MetricDelResponseModel
+     * @return the response model for deleting a metric
      */
     public MetricDelResponseModel deleteMetric(String metricName) {
         MetricDelRequestModel requestModel = new MetricDelRequestModel(metricName);

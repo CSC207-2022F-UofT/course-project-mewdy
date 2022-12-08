@@ -22,12 +22,12 @@ public class AddMetricController {
     }
 
     /**
-     * Calls the use case interactor to add a metric
+     * addMetric calls the use case interactor, MetricAdder to add a metric
      *
      * @param metricName represents the name of the metric
      * @param upperBound represents the upper bound of the metric
      * @param lowerBound represents the lower bound of the metric
-     * @return is a AddMetricResponseModel
+     * @return the response model for adding a metric
      */
     public AddMetricResponseModel addMetric(String metricName, double upperBound, double lowerBound) {
         AddMetricRequestModel requestModel = new AddMetricRequestModel(metricName, upperBound, lowerBound);

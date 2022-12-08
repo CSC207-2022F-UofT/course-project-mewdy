@@ -18,7 +18,7 @@ public class Main {
 
         // Create necessary classes to run program
         //Import Use Case
-        DataImportPresenterOutputBoundary dataImportPresenter = new DataImportPresenter();
+        DataImportOutputBoundary dataImportPresenter = new DataImportPresenter();
         DataImportInputBoundary dataImporter = new DataImporter(metricStorage, dataImportPresenter);
         DataImportController dataImportController = new DataImportController(dataImporter);
 
@@ -36,7 +36,7 @@ public class Main {
         DataLoggerController dataLoggerController = new DataLoggerController(dataLogger);
 
         //Export Use Case
-        DataExportPresenterOutputBoundary dataExportPresenter = new DataExportPresenter();
+        DataExportOutputBoundary dataExportPresenter = new DataExportPresenter();
         DataExportInputBoundary dataExporter = new DataExporter(metricStorage, dataExportPresenter);
         DataExportController dataExportController = new DataExportController(dataExporter);
 
