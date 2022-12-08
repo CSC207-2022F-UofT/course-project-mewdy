@@ -7,8 +7,6 @@ public class DataLoggerResponseModel{
 
     private final String metricName;
     private final double value;
-    // this variable is never accessed?
-    private boolean success;
     private String message;
 
     /**
