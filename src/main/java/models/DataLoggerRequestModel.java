@@ -18,7 +18,6 @@ public class DataLoggerRequestModel {
      * @param value represents the value of the metric
      */
     public DataLoggerRequestModel(String metricName, double value){
-        // sends necessary values to the DataLogger use case
         this.metricName = metricName;
         this.value = value;
     }

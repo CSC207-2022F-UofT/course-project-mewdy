@@ -10,12 +10,22 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Objects;
 
+/**
+ * Subclass of JPanel that displays the StartScreen and implemets ActionListener
+ */
 public class StartScreen extends JPanel implements ActionListener {
 
     CardLayout cardlayout;
     JPanel screens;
     DataImportController dataImportController;
 
+    /**
+     * Constructor for the StartScreen class
+     *
+     * @param cardLayout represents the CardLayout of the start screen
+     * @param screens represents the screen
+     * @param dataImportController represents the DataImportController that is used to import data
+     */
     public StartScreen(CardLayout cardLayout, JPanel screens, DataImportController dataImportController) {
 
         this.cardlayout = cardLayout;
@@ -50,7 +60,11 @@ public class StartScreen extends JPanel implements ActionListener {
         this.add(buttons);
     }
 
-    // React to button click
+    /**
+     * actionPerformed is called when the event is triggered
+     *
+     * @param evt the event to be processed
+     */
     public void actionPerformed(ActionEvent evt) {
         if (Objects.equals(evt.getActionCommand(), "New")) {
             cardlayout.show(screens, "home");

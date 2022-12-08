@@ -9,6 +9,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Subclass of JPanel that displays the screen for adding a metric and implements the ActionListener interface
+ */
+
 public class AddMetricScreen extends JPanel implements ActionListener {
 
     MetricStorageInterface metricStorage;
@@ -24,6 +28,13 @@ public class AddMetricScreen extends JPanel implements ActionListener {
     CardLayout cardLayout;
     JPanel screens;
 
+    /**
+     * Constructor for the AddMetricScreen class
+     *
+     * @param metricStorage represents the metric storage object
+     * @param addMetricController represents the add metric controller object
+     * @param tabbedPane represents the tabbed pane object
+     */
     public AddMetricScreen(MetricStorageInterface metricStorage, AddMetricController addMetricController,
                            Refreshable tabbedPane, CardLayout cardLayout, JPanel screens){
         this.metricStorage = metricStorage;
@@ -84,6 +95,11 @@ public class AddMetricScreen extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * actionPerformed handles the action events for the buttons on the screen
+     *
+     * @param evt represents the event to be processed
+     */
     public void actionPerformed(ActionEvent evt){
         if (evt.getSource() == backButton){
             cardLayout.show(screens, "home");

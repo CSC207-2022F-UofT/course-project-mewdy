@@ -11,6 +11,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.Objects;
 
+/**
+ * Subclass of JPanel that represents the home screen of the application and implements the ActionListener interface.
+ */
 public class HomeScreen extends JPanel implements ActionListener {
 
     CardLayout cardLayout;
@@ -23,7 +26,14 @@ public class HomeScreen extends JPanel implements ActionListener {
     JButton setGoalButton;
     MetricStorageInterface metricStorage;
 
-
+    /**
+     * Constructor for the HomeScreen class.
+     *
+     * @param cardLayout represents the layout of the cards
+     * @param screens represents the JPanel screen
+     * @param dataExportController represents the data export controller that is used to export the data.
+     * @param metricStorage represents the metric storage object that is used to store the metrics.
+     */
     public HomeScreen(CardLayout cardLayout, JPanel screens, DataExportController dataExportController,
                       MetricStorageInterface metricStorage) {
 
@@ -63,7 +73,11 @@ public class HomeScreen extends JPanel implements ActionListener {
 
     }
 
-    //React to summary button click
+    /**
+     * actionPerformed is called when an action is performed on a button.
+     *
+     * @param evt represents the event to be processed
+     */
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == summaryButton) {
             refreshScreen("ChooseMetricSum");
@@ -105,6 +119,11 @@ public class HomeScreen extends JPanel implements ActionListener {
         }
     }
 
+    /**
+     * refreshScreen is called to refresh the screen.
+     *
+     * @param screenName represents the name of the screen to be refreshed.
+     */
     private void refreshScreen(String screenName) {
         for (Component c : screens.getComponents()) {
             if (c instanceof Refreshable && Objects.equals(c.getName(), screenName)) {

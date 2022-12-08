@@ -5,10 +5,12 @@ import models.AddMetricResponseModel;
 
 
 /**
- * AddMetricInputBoundary is the interface for the use case class
+ * Interface for the MetricAdder
  */
 public interface AddMetricInputBoundary {
     /**
+     * addMetric returns a response model with the metric name and additional information
+     *
      * @param requestModel contains the name, upper and lower bounds of the metric that wants to be added.
      * @return returns a response model
      */

@@ -2,9 +2,9 @@ package presenters;
 
 import models.ExportResponseModel;
 /**
- * Interface for output boundary for DataExport.
+ * Interface for DataExportPresenter
  */
-public interface DataExportPresenterOutputBoundary {
+public interface DataExportOutputBoundary {
 
     /**
      * Prepares the success view.

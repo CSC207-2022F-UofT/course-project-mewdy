@@ -23,9 +23,9 @@ public class EntryUndoResponseModel {
     }
 
     /**
-     * ??????????
+     * Getter for information
      *
-     * @param information rerpresents ??????????
+     * @param information represents the information of the entry
      */
     public EntryUndoResponseModel(String information){
         this.information = information;

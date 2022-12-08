@@ -16,6 +16,7 @@ public class MetricAdder implements AddMetricInputBoundary{
 
     /**
      * Constructor for MetricAdder
+     *
      * @param presenter is the presenter class
      * @param metricStorage is where the metrics are stored/accessed
      */
@@ -26,6 +27,7 @@ public class MetricAdder implements AddMetricInputBoundary{
     /**
      * Creates a new Metric with name and a upper and lower bound. All metrics intialized are assumed to have no
      * existing dataPoints.
+     *
      * @param name name of the metric
      * @param upperBound upperbound of the metric
      * @param lowerBound lowerbound of the metric
@@ -37,6 +39,8 @@ public class MetricAdder implements AddMetricInputBoundary{
     /**
      * addMetric adds a new metric into the metricStorage and checks whether or not the metric already exists.
      * If the metric already exists, then do not add the metric and return a failview.
+     * If the lower bound is greater than the upper then the metric is not added and a failview is returned.
+     *
      * @param requestModel contains the name, upper and lower bounds of the metric that wants to be added.
      * @return returns an AddMetricResponseModel
      */

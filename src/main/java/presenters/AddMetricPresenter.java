@@ -3,7 +3,7 @@ package presenters;
 import models.AddMetricResponseModel;
 
 /**
- * Subclass of AddMetricPresenterOutputBoundary
+ * Class that represents the Presenter class for MetricAdder use case and implements AddMetricOutputBoundary
  */
 
 public class AddMetricPresenter implements AddMetricOutputBoundary {

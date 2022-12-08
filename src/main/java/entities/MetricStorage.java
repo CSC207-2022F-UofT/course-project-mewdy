@@ -2,7 +2,6 @@ package entities;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Objects;
 
@@ -24,13 +23,12 @@ public class MetricStorage implements MetricStorageInterface{
         this.saved = true; // if storage is empty, nothing to save
     }
     /**
-     * setPath sets the location of the MetricStorage
+     * setPath sets the location of the MetricStorage -- location of where the metrics will be saved
      *
      * @param path represents the path to the file
      */
     @Override
     public void setPath(File path) {
-        // Sets the path to the file where the metrics will be saved
         String folder = path.getPath();
         if (!(folder.endsWith(File.separator + "metrics")||folder.endsWith(File.separator + "metrics/")))
             folder += File.separator + "metrics";
@@ -39,36 +37,36 @@ public class MetricStorage implements MetricStorageInterface{
     }
 
     /**
-     * addMetric adds a metric to the MetricStorage
+     * addMetric adds a metric to the MetricStorage and will sort the list of metrics
      *
      * @param metric represents the metric to be added
      */
     @Override
     public void addMetric(Metric metric) {
-        // this method adds Metric to the MetricStorage list and sorts the list
         this.METRICLIST.add(metric);
         this.METRICLIST.sort(new MetricComparator());
         this.saved = false;
     }
 
+    /**
+     * removeMetric removes a metric from the MetricStorage
+     *
+     * @param metric represents the metric to be removed
+     */
     @Override
     public void removeMetric(Metric metric) {
-        // this method removes Metric from the MetricStorage list
         this.METRICLIST.remove(metric);
         this.saved = false;
     }
 
     /**
-     * addDataPoint adds a dataPoint to the metric
+     * addDataPoint adds a dataPoint to the metric, specified by metricName
      *
      * @param metricName represents the name of the metric
      * @param dataPoint represents the dataPoint to be added
      */
     @Override
     public void addDataPoint(String metricName, DataPoint dataPoint) {
-        // this method inserts an Entities.DataPoint into an Entities.Metric specified by name
-        // this method will not rename the metricName contained in the dataPoint class, that responsibility
-        // should lie within wherever the Entities.DataPoint is constructed
         for (Metric metric : this.METRICLIST) {
             if (Objects.equals(metric.getName(), metricName)) {
                 metric.addDataPoint(dataPoint);
@@ -80,6 +78,7 @@ public class MetricStorage implements MetricStorageInterface{
 
     /**
      * removeDataPoint removes the most recent dataPoint from the metric
+     * this.saved will be set to false if the metric has been modified
      *
      * @param metricName represents the name of the metric
      */
@@ -114,6 +113,7 @@ public class MetricStorage implements MetricStorageInterface{
 
     /**
      * getMetric returns the metric with the given name
+     * If no metric has been found, a NullPointerException will be thrown
      *
      * @param metricName represents the name of the metric
      * @return the metric with the name metricName

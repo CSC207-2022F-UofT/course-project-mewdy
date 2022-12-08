@@ -22,10 +22,10 @@ public class MetricSumController{
 
 
     /**
-     * getMetricSummaray calls the use case interactor, MetricSum to get the summary of a metric
+     * getMetricSummary calls the use case interactor, MetricSum to get the summary of a metric
      *
      * @param metricName represents the name of the metric to be summarized
-     * @return MetricSumViewModel
+     * @return the response model for getting the summary of a metric
      */
     public MetricSumViewModel getMetricSummary(String metricName){
         MetricSumRequestModel requestModel = new MetricSumRequestModel(metricName);

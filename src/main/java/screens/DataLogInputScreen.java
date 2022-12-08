@@ -10,6 +10,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Subclass of JPanel that contains the input screen for the data logger and implements the ActionListener interface
+ */
 public class DataLogInputScreen extends JPanel implements ActionListener {
 
     String metricName;
@@ -23,6 +26,18 @@ public class DataLogInputScreen extends JPanel implements ActionListener {
     DataLoggerController dataLoggerController;
     CardLayout cardLayout;
     JPanel screens;
+
+    /**
+     * Constructor for the DataLogInputScreen class
+     *
+     * @param metricName represents the name of the metric
+     * @param upperBound represents the upper bound of the metric
+     * @param lowerBound represents the lower bound of the metric
+     * @param entryUndoController represents the controller for the entry undo feature
+     * @param dataLoggerController represents the controller for the data logger feature
+     * @param cardLayout represents the card layout of the main frame
+     * @param screens represents the JPanel that contains all the screens
+     */
 
     public DataLogInputScreen(String metricName, double upperBound, double lowerBound,
                               EntryUndoController entryUndoController, DataLoggerController dataLoggerController,
@@ -60,6 +75,11 @@ public class DataLogInputScreen extends JPanel implements ActionListener {
 
     }
 
+    /**
+     * actionPerformed method that handles the actions of the buttons
+     *
+     * @param evt the event to be processed
+     */
     public void actionPerformed(ActionEvent evt){
         if (evt.getSource() == backButton){
             cardLayout.show(screens, "home");

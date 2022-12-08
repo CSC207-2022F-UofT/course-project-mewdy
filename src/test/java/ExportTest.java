@@ -5,7 +5,7 @@ import models.ExportRequestModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import presenters.DataExportPresenter;
-import presenters.DataExportPresenterOutputBoundary;
+import presenters.DataExportOutputBoundary;
 import use_cases.DataExportInputBoundary;
 import use_cases.DataExporter;
 
@@ -18,11 +18,12 @@ import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+// Test for the DataExport use case
 public class ExportTest {
     MetricStorage ms;
     ArrayList<DataPoint> dataPoints;
     DataExportInputBoundary exporter;
-    DataExportPresenterOutputBoundary presenter;
+    DataExportOutputBoundary presenter;
 
     @BeforeEach
     public void setUp() {
@@ -41,14 +42,16 @@ public class ExportTest {
         }
     }
 
-    @Test //test export to folder that does not exist
+    //test export to folder that does not exist
+    @Test
     public void testExportToNewFile() throws IOException {
         File f = new File("./new/metrics");
         exporter.writeToNewFile(new ExportRequestModel("./new"));
         assertTrue(isEqual(this.ms, read(f)));
     }
 
-    @Test //test export to folder that does not exist
+    //test export to folder that does not exist
+    @Test
     public void testDeleteMetrics() throws IOException {
         File f = new File("./new"); // Initialize folders so that they will delete after test
         f.deleteOnExit();
@@ -59,9 +62,15 @@ public class ExportTest {
         assertTrue(isEqual(this.ms, read(f2)));
     }
 
+    /**
+     * read is a helper method that reads a file to make sure that the exported data is correct
+     * Implementation is similar to Importer so if test passes then export data will be correct
+     *
+     * @param files represents the file to be read
+     * @return a MetricStorage object that contains the data from the file
+     * @throws IOException if the file does not exist
+     */
     private MetricStorage read(File files) throws IOException {
-        // Helper method to read from file to make sure exported data is correct
-        // Implementation is similar to Importer so if test passes then export data will be correct
         MetricStorage s = new MetricStorage();
 
         // Get CSV files
@@ -95,9 +104,18 @@ public class ExportTest {
         return s;
     }
 
+    /**
+     * createMetric is a helper method that creates a metric from the data read from the file
+     *
+     * @param dates represents the dates of the data
+     * @param data represents the data
+     * @param ub represents the upper bound of the metric
+     * @param lb represents the lower bound of the metric
+     * @param name represents the name of the metric
+     * @param s represents the metric storage to add the metric to
+     */
     private void createMetric(
             ArrayList<String> dates, ArrayList<Double> data, double ub, double lb, String name, MetricStorage s) {
-        // Helper method to create metrics from data
 
         ArrayList<DataPoint> dataPoints = new ArrayList<>();
         for (int i = 0; i < dates.size(); i++) {
@@ -106,8 +124,14 @@ public class ExportTest {
         s.addMetric(new Metric(name, dataPoints, ub, lb,0,0));
     }
 
+    /**
+     * isEqual is a helper method that checks if two metric storages are equal
+     *
+     * @param s1 represents the first metric storage
+     * @param s2 represents the second metric storage
+     * @return true if the metric storages are equal, false otherwise
+     */
     private boolean isEqual(MetricStorage s1, MetricStorage s2) {
-        // Helper method to compare two metric storages
         for (int i = 0; i < s1.getMetricList().size(); i++) {
             if (!s1.getMetricList().get(i).equals(s2.getMetricList().get(i))) return false;
         }

@@ -26,7 +26,7 @@ public class DataLoggerController{
      *
      * @param value represents the value to be logged
      * @param metricName represents the name of the metric to be logged
-     * @return DataLoggerResponseModel
+     * @return the response model for logging a data point
      */
     public DataLoggerResponseModel logDataPoint(double value, String metricName) {
         DataLoggerRequestModel requestModel = new DataLoggerRequestModel(metricName, value);

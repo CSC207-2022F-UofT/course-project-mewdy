@@ -76,7 +76,6 @@ public class Metric {
      * @param lowerBound represents the lower bound of the metric
      */
     public Metric(String name, double upperBound, double lowerBound) {
-        //this is an overloaded Entities.Metric constructor for when we want to initialize a new empty Entities.Metric
         if (name.equalsIgnoreCase("sleep")) {
             upperBound = 24;
             lowerBound = 0;
@@ -105,6 +104,8 @@ public class Metric {
      * @param date represents the date of the data point
      * @return a boolean value that indicates whether the data point exists
      */
+    // preexistingDataPoint is never used? Should we remove this method??
+    //ASDASDASDASDASDASDASDASDASDASDASDASDASDASD
     public boolean preexistingDataPoint(LocalDateTime date) {
         for (DataPoint point : this.DATAPOINTS) {
             if (point.getDate().equals(date)) {
@@ -150,6 +151,7 @@ public class Metric {
 
     /**
      * getLowerBound returns the lower bound of the metric
+     *
      * @return the lower bound of the metric
      */
     public double getLowerBound() {

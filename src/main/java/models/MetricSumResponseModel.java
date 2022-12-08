@@ -16,6 +16,7 @@ public class MetricSumResponseModel {
 
     /**
      * Constructor for MetricSumResponseModel
+     *
      * @param timePoints represents the time points
      * @param datalist represents the data list
      * @param metricAverage represents the metric average
@@ -30,14 +31,39 @@ public class MetricSumResponseModel {
         this.metricSize = metricSize;
         this.metricName = metricName;
     }
-/** Getters and Setters */
+
+    /**
+     * Getter for timePoints
+     *
+     * @return the time points
+     */
     public ArrayList<String> getTimePoints(){return this.timePoints;}
 
+    /**
+     * Getter for datalist
+     *
+     * @return the data list
+     */
     public ArrayList<Double> getDatalist(){return this.datalist;}
 
+    /**
+     * Getter for metricAverage
+     *
+     * @return the metric average
+     */
     public double getMetricAverage(){return this.metricAverage;}
 
+    /**
+     * Getter for metricSize
+     *
+     * @return the metric size
+     */
     public int getMetricSize(){return this.metricSize;}
 
+    /**
+     * Getter for metricName
+     *
+     * @return the metric name
+     */
     public String getMetricName(){return this.metricName;}
 }

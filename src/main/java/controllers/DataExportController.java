@@ -23,7 +23,7 @@ public class DataExportController {
      * writeToNewFile calls the use case interactor, DataExporter to export data
      *
      * @param path represents the path to the file to be exported to
-     * @return returns the response model for exporting data
+     * @return the response model for exporting data
      */
     public ExportResponseModel writeToNewFile(String path){
         ExportRequestModel requestModel = new ExportRequestModel(path);
