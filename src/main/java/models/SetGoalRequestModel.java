@@ -10,6 +10,7 @@ public class SetGoalRequestModel {
 
     /**
      * Constructor method for SetGoalRequestModel
+     *
      * @param goal represents goal defined by user input
      * @param metricName represents metric that user wants to set goal for
      */
@@ -20,12 +21,14 @@ public class SetGoalRequestModel {
 
     /**
      * Getter for goal
+     *
      * @return  goal stored by the request model
      */
     public double getGoal(){return this.goal;}
 
     /**
      * Getter for metric name
+     *
      * @return  metric name string
      */
     public String getMetricName(){return this.metricName;}

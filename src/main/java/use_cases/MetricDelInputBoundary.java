@@ -9,6 +9,8 @@ import models.MetricDelResponseModel;
 public interface MetricDelInputBoundary {
 
     /**
+     * metricDelete represents the main method to be implemented by the use case interactor that will fulfill the
+     * delete metric use case function
      *
      * @param requestModel contains user input data. Stores name of metric to be deleted
      * @return MetricDelResponseModel which will contain a message depending on success or failure.

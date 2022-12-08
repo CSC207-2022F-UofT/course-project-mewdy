@@ -44,6 +44,7 @@ public class MetricSumViewModel {
 
     /**
      * Setter for metricStatistics. Allows GoalTrackingDecorator to modify view model output.
+     *
      * @param metricStatistics represents relevant statistics that will be used to construct metric summary
      */
     public void setMetricStatistics(String metricStatistics) { this.metricStatistics = metricStatistics; }
@@ -51,6 +52,7 @@ public class MetricSumViewModel {
     /**
      * Setter for goalStat. Allows GoalTrackingDecorator to set a goal tracking stat in the view model for additional
      * information to be given by metric summary when the chosen metric contains a goal.
+     *
      * @param stat a string that expresses the user's performance with respect to the metric's goal
      */
     public void setGoalStat(String stat) {

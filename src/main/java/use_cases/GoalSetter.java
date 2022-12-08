@@ -19,6 +19,7 @@ public class GoalSetter implements SetGoalInputBoundary{
 
     /**
      * Method for setting goal.
+     *
      * @param requestModel represents user data that is required to fulfill use case
      * @return a String whose content will differ depending on whether the goal was successfully set
      */
