@@ -89,10 +89,10 @@ public class DataImporter implements DataImportInputBoundary {
                 createMetric(dates, data, upperBound, lowerBound, hasGoal, goal, filename);
                 storage.save(); // State should be identical from last save
             }
-        } catch (RuntimeException | IOException e) {
+        } catch (IOException e) {
             return presenter.prepareFailView("Folder either does not contain csv files or does not have access.");
-        } catch (ParseException e) {
-            return presenter.prepareFailView("Bad data.");
+        } catch (RuntimeException | ParseException e) {
+            return presenter.prepareFailView("Failed to parse the data, please check the file and try again.");
         }
         return presenter.prepareSuccessView();
     }

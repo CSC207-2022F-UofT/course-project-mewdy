@@ -3,7 +3,7 @@
 Mewdy is a configurable metric tracking application.
 
 ## How to run:
-- run Main.java
+- run Main.java. Optionally, there is a downloadable jar file in the releases tab that can be run.
 - when the java swing window opens, click import. 
 - find the folder "test data" on your computer (it is located inside the test data folder within the directory for this project)
 - go inside it and select the "metrics" folder and press the 'open' button.
