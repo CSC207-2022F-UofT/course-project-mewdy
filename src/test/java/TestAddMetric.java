@@ -60,9 +60,10 @@ public class TestAddMetric {
         assertEquals(expectedMessage, actualMessage);
     }
 
-    // Tests to see if the AddMetricPresenter can return the correct fail response
+    // Tests to see if the AddMetricPresenter can return the correct fail response when there already is a metric with
+    // the same name
     @Test
-    public void testAddMetricPresenterFailure() {
+    public void testAddMetricPresenterFailureDuplicateMetric() {
         MetricStorageInterface metricStorage = new MetricStorage();
         AddMetricPresenter addMetricPresenter = new AddMetricPresenter();
         AddMetricInputBoundary addMetricInputBoundary = new MetricAdder(addMetricPresenter, metricStorage);
@@ -70,6 +71,33 @@ public class TestAddMetric {
         addMetricController.addMetric("test",10, 0);
         String actualMessage = addMetricController.addMetric("test", 10, 0).getMessage();
         String expectedMessage = "Metric already exists!";
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    // Tests fail case when input metric name contains numbers of symbols
+    @Test
+    public void testAddMetricPresenterFailureNonAlphabet() {
+        MetricStorageInterface metricStorage = new MetricStorage();
+        AddMetricPresenter addMetricPresenter = new AddMetricPresenter();
+        AddMetricInputBoundary addMetricInputBoundary = new MetricAdder(addMetricPresenter, metricStorage);
+        AddMetricController addMetricController = new AddMetricController(addMetricInputBoundary);
+        addMetricController.addMetric("test1?",10, 0);
+        String actualMessage = addMetricController.addMetric("test1?", 10, 0).getMessage();
+        String expectedMessage = "Metric names can only contain alphabet characters. " +
+                "Please enter a different name.";
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    // Tests fail case when input lower bound is greater than the input upper bound
+    @Test
+    public void testAddMetricPresenterFailureLowerBoundGreaterThanUpperBound() {
+        MetricStorageInterface metricStorage = new MetricStorage();
+        AddMetricPresenter addMetricPresenter = new AddMetricPresenter();
+        AddMetricInputBoundary addMetricInputBoundary = new MetricAdder(addMetricPresenter, metricStorage);
+        AddMetricController addMetricController = new AddMetricController(addMetricInputBoundary);
+        addMetricController.addMetric("test",1, 2);
+        String actualMessage = addMetricController.addMetric("test", 1, 2).getMessage();
+        String expectedMessage = "Lower bound cannot be greater than upper bound";
         assertEquals(expectedMessage, actualMessage);
     }
 }

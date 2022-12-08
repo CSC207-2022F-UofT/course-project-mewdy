@@ -59,7 +59,9 @@ Classes are organized into packages based on which component of Clean Architectu
 - testAddMetricData tests that adding a metric changes the values of Metric Storage correctly
 - testAddMetricWithPreexistingMetric tests that adding a metric to a storage with preexisting metrics functions properly (no overwrite)
 - testAddMetricPresenterSuccess tests that the presenter sends a success message that is correct
-- testAddMetricPresenterFailure tests that the presenter sends a failure message when unable to add a metric (a metric with that name already exists)
+- testAddMetricPresenterFailureDuplicateMetric tests that the presenter sends a failure message when unable to add a metric (a metric with that name already exists)
+- testAddMetricPresenterFailureNonAlphabet tests fail case when input metric name contains numbers and/or symbols
+- testAddMetricPresenterFailureLowerBoundGreaterThanUpperBound tests fail case when input lower bound is greater than the upper bound
 ### TestDataLogger
 - testLogDataPointMissingMetric tests the case where there is no metric to add datapoints to
 - testLogDataPointMissingMetricName tests the case where the incorrect metric name is used as input
