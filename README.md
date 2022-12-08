@@ -4,9 +4,10 @@ Mewdy is a configurable metric tracking application.
 
 ## How to run:
 - run Main.java
-- when the java swing window opens, click import
+- when the java swing window opens, click import. 
 - find the folder "test data" on your computer (it is located inside the test data folder within the directory for this project)
 - go inside it and select the "metrics" folder and press the 'open' button.
+- Other example data is also available at 'example metrics' and the same steps should be followed to import the data. Example metrics will contain a Mood metric that has more datapoints logged to see how the graph looks with more data.
 - if it says "success", then the program will take you to the home page.
 - you can [record] datapoints to metrics you choose. Pressing the X button next to each metric will delete them permanently (NOTE: the tabs do not render properly on MacOS). The program will prompt for user confirmation before deleting any metric.
 - you can add datapoints to each metric once per day
