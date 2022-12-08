@@ -74,6 +74,12 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
         }
     }
 
+    /**
+     * A helper method to extract data contained in the view model which is used to make the MetricSummaryScreen.
+     * @param viewModel represents view model from which this method extracts information to construct
+     *                  MetricSummaryScreen
+     * @return a new MetricSummary screen containing the relevant metric information to be displayed
+     */
     private MetricSummaryScreen constructSummary(MetricSumViewModel viewModel){
         String statistics = viewModel.getMetricStatistics();
         XYChart chart = viewModel.getChart();
@@ -108,7 +114,7 @@ public class ChooseMetricSumScreen extends JPanel implements ActionListener, Ref
             metricButton.addActionListener(this);
             metricButton.setActionCommand(m.getName());
         }
-        backButton = new JButton("Back");
+        backButton = new JButton("Home");
         backButton.addActionListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));

@@ -57,9 +57,13 @@ public class SetGoalTab extends JPanel implements ActionListener {
             cardLayout.show(screens, "home");
         }
         if (evt.getSource() == setGoalButton) {
-            double goal = Double.parseDouble(goalInput.getText());
-            String result = setGoalController.setGoal(goal, metricName);
-            JOptionPane.showMessageDialog(this, result);
+            try {
+                double goal = Double.parseDouble(goalInput.getText());
+                String result = setGoalController.setGoal(goal, metricName);
+                JOptionPane.showMessageDialog(this, result);
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Invalid input! Please enter a number");
+            }
         }
     }
 }

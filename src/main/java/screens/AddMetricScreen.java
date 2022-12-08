@@ -96,6 +96,8 @@ public class AddMetricScreen extends JPanel implements ActionListener {
                 this.tabbedPane.refresh();
             } catch (AddMetricFail error){
                 JOptionPane.showMessageDialog(this, error.getMessage());
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Invalid input! Please enter a number.");
             }
         }
         if (evt.getSource() == sleepButton){

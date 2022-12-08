@@ -8,6 +8,9 @@ import presenters.MetricSumViewModel;
 
 import java.util.ArrayList;
 
+/**
+ * A concrete decorator class that extends MetricSummarizerDecorator
+ */
 public class GoalTrackingDecorator extends MetricSummarizerDecorator{
 
     MetricStorageInterface metricStorage;

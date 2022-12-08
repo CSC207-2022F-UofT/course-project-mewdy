@@ -26,6 +26,10 @@ public class TestSetGoal {
 
     }
 
+    /**
+     * Test success case of set goal for when user gives number input that is between the lower and upper bounds defined
+     * by the metric.
+     */
     @Test
     public void testSetGoalSuccess(){
         Metric metric = new Metric("Sleep", 0, 24);
@@ -38,6 +42,11 @@ public class TestSetGoal {
                 " goal with the summary function!", successMessage);
     }
 
+    /**
+     * Test fail case of set goal for when user gives number input that is outside the permissive range defined by the
+     * upper and lower bounds of chosen metric. Scenario for non-numerical input is not considered since the user is not
+     * allowed to input anything that isn't a number.
+     */
     @Test
     public void testSetGoalFail(){
         Metric metric = new Metric("Sleep", 0, 24);
