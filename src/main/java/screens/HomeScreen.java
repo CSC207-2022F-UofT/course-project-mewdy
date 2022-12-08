@@ -91,7 +91,7 @@ public class HomeScreen extends JPanel implements ActionListener {
                 if (responseModel.getErrorMsg().length() > 1) {
                     JOptionPane.showMessageDialog(this, responseModel.getErrorMsg());
                 } else {
-                    JOptionPane.showMessageDialog(this, "Success!");
+                    JOptionPane.showMessageDialog(this, "Successfully exported to " + file.getAbsolutePath());
                 }
             }
         }
@@ -100,7 +100,7 @@ public class HomeScreen extends JPanel implements ActionListener {
             if (responseModel.getErrorMsg().length() > 1) {
                 JOptionPane.showMessageDialog(this, responseModel.getErrorMsg());
             } else {
-                JOptionPane.showMessageDialog(this, "Success!");
+                JOptionPane.showMessageDialog(this, "Saved to " + metricStorage.getPath().getAbsolutePath());
             }
         }
     }
