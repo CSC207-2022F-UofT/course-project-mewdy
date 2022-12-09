@@ -41,14 +41,32 @@ public class MetricSumViewModel {
     public String getMetricStatistics() {
         return metricStatistics;
     }
+
+    /**
+     * Setter for metricStatistics. Allows GoalTrackingDecorator to modify view model output.
+     *
+     * @param metricStatistics represents relevant statistics that will be used to construct metric summary
+     */
     public void setMetricStatistics(String metricStatistics) { this.metricStatistics = metricStatistics; }
 
+    /**
+     * Setter for goalStat. Allows GoalTrackingDecorator to set a goal tracking stat in the view model for additional
+     * information to be given by metric summary when the chosen metric contains a goal.
+     *
+     * @param stat a string that expresses the user's performance with respect to the metric's goal
+     */
     public void setGoalStat(String stat) {
         goalStat = stat;
         containsGoalStat = true;
     }
 
+    /**
+     * @return the goal stat stored in this view model which will be used by GoalTrackingDecorator
+     */
     public String getGoalStat() { return goalStat; }
 
+    /**
+     * @return true iff this view model contains a goal stat.
+     */
     public boolean getContainsGoalStat() { return containsGoalStat; }
 }

@@ -32,8 +32,8 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
      * @param metricDelController represents the metric delete controller
      * @param addMetricController represents the add metric controller
      * @param entryUndoController represents the entry undo controller
-     * @param cardLayout represents the card layout
-     * @param screens represents the screens
+     * @param cardLayout represents the card layout of the main frame
+     * @param screens represents the JPanel that contains all the screens
      */
     public DataLogChooseScreen(MetricStorageInterface metricStorage, DataLoggerController dataLoggerController,
                                MetricDelController metricDelController, AddMetricController addMetricController,
@@ -74,7 +74,7 @@ public class DataLogChooseScreen extends JTabbedPane implements Refreshable {
     }
 
     /**
-     * refresh refreshes the screen
+     * refreshes the screen
      */
     @Override
     public void refresh(){

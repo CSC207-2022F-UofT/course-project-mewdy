@@ -5,8 +5,8 @@ package models;
  */
 public class MetricDelResponseModel {
 
-    private String metricName;
-    private int numDataPoints;
+    private final String metricName;
+    private final int numDataPoints;
 
     /**
      * Constructor for MetricDelResponseModel

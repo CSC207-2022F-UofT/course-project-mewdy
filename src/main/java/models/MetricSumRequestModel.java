@@ -5,7 +5,7 @@ package models;
  */
 public class MetricSumRequestModel {
 
-    private String metricName;
+    private final String metricName;
 
     /**
      * Constructor for MetricSumRequestModel

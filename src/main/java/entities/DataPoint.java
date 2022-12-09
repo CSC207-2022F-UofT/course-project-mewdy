@@ -8,9 +8,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class DataPoint {
 
-    private final DateTimeFormatter FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-    private final double VALUE;
-    private final LocalDateTime DATE;
+    private final DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+    private final double value;
+    private final LocalDateTime date;
 
     /**
      * Constructor for the DataPoint class.
@@ -20,8 +20,8 @@ public class DataPoint {
      */
     public DataPoint(String date, double value) {
         LocalDateTime d = formatDate(date);
-        this.VALUE = value;
-        this.DATE = d;
+        this.value = value;
+        this.date = d;
     }
 
 
@@ -31,9 +31,9 @@ public class DataPoint {
      * @param value represents the value of the data point.
      */
     public DataPoint(double value) {
-        LocalDateTime date = formatDate(LocalDateTime.now().format(FORMAT));
-        this.VALUE = value;
-        this.DATE = date;
+        LocalDateTime date = formatDate(LocalDateTime.now().format(format));
+        this.value = value;
+        this.date = date;
     }
 
     /**
@@ -42,7 +42,7 @@ public class DataPoint {
      * @return the value of the data point.
      */
     public double getValue() {
-        return this.VALUE;
+        return this.value;
     }
 
     /**
@@ -51,7 +51,7 @@ public class DataPoint {
      * @return the date of the data point.
      */
     public String getDate() {
-        return this.DATE.format(FORMAT);
+        return this.date.format(format);
     }
 
     /**
@@ -61,7 +61,7 @@ public class DataPoint {
      * @return a boolean value representing whether the data point is equal to the data point being compared.
      */
     public boolean equals(DataPoint dp){
-        return this.DATE.format(FORMAT).equals(dp.getDate()) && this.VALUE == dp.getValue();
+        return this.date.format(format).equals(dp.getDate()) && this.value == dp.getValue();
     }
 
     /**
@@ -71,6 +71,6 @@ public class DataPoint {
      * @return the formatted date.
      */
     private LocalDateTime formatDate(String date) {
-        return LocalDateTime.parse(date, FORMAT);
+        return LocalDateTime.parse(date, format);
     }
 }

@@ -49,6 +49,10 @@ public class MetricAdder implements AddMetricInputBoundary{
         if (requestModel.getLowerBound() > requestModel.getUpperBound()) {
             return presenter.metricAddedFailureView("Lower bound cannot be greater than upper bound");
         }
+        if (!(requestModel.getMetricName().matches("[a-zA-Z]+"))){
+            return presenter.metricAddedFailureView("Metric names can only contain alphabet characters. " +
+                    "Please enter a different name.");
+        }
         for (Metric m : metricStorage.getMetricList()) {
             if (m.getName().equalsIgnoreCase(requestModel.getMetricName())) {
                 return presenter.metricAddedFailureView("Metric already exists!");

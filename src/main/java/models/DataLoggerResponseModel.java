@@ -7,7 +7,7 @@ public class DataLoggerResponseModel{
 
     private final String metricName;
     private final double value;
-    private String message;
+    private final String message;
 
     /**
      * Constructor for DataLoggerResponseModel

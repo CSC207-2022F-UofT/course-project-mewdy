@@ -28,19 +28,22 @@ public class SetGoalTab extends JPanel implements ActionListener {
         this.cardLayout = cardLayout;
         this.screens = screens;
 
+        //Create text to be displayed. Contains metric-specific information.
         JLabel title = new JLabel("Set goal for " + metricName);
         JLabel bounds = new JLabel("Upper Bound: " + upperBound + " Lower Bound: " +
                 lowerBound);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
         bounds.setAlignmentX(Component.CENTER_ALIGNMENT);
 
+        // Create buttons and textfields for user input
         setGoalButton = new JButton("Set Goal");
         setGoalButton.addActionListener(this);
         goalInput = new JTextField();
         goalInput.setPreferredSize(new Dimension(250,40));
-        backButton = new JButton("Back");
+        backButton = new JButton("Home");
         backButton.addActionListener(this);
 
+        // Add buttons and textfields to panel
         this.add(title);
         JPanel main = new JPanel();
         main.add(bounds);
@@ -52,14 +55,19 @@ public class SetGoalTab extends JPanel implements ActionListener {
 
     }
 
+    // React to button press of user
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() == backButton) {
             cardLayout.show(screens, "home");
         }
         if (evt.getSource() == setGoalButton) {
-            double goal = Double.parseDouble(goalInput.getText());
-            String result = setGoalController.setGoal(goal, metricName);
-            JOptionPane.showMessageDialog(this, result);
+            try {
+                double goal = Double.parseDouble(goalInput.getText());
+                String result = setGoalController.setGoal(goal, metricName);
+                JOptionPane.showMessageDialog(this, result);
+            } catch (NumberFormatException e){
+                JOptionPane.showMessageDialog(this, "Invalid input! Please enter a number");
+            }
         }
     }
 }

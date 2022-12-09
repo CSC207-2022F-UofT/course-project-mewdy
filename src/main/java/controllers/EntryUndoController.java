@@ -9,7 +9,7 @@ import use_cases.EntryUndoInputBoundary;
  */
 public class EntryUndoController {
 
-    private EntryUndoInputBoundary entryUndo;
+    private final EntryUndoInputBoundary entryUndo;
 
     /**
      * Constructor for the EntryUndoController

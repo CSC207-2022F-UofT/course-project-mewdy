@@ -5,7 +5,7 @@ package models;
  */
 public class EntryUndoRequestModel {
 
-    private String metricName;
+    private final String metricName;
 
     /**
      * Constructor for EntryUndoRequestModel

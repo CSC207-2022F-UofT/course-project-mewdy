@@ -69,7 +69,7 @@ public class TestDataLogger {
         // Tests that an invalid value (a value beyond the upperlower bounds) cannot be added
         storage.addMetric(new Metric("mood", 10, 0));
         String message = controller.logDataPoint(-1, "mood").getMessage();
-        String expectedMsg = "Failed to add datapoint, invalid value";
+        String expectedMsg = "Failed to add datapoint, invalid value - Please enter a number within the bounds of the metric";
         assertEquals(expectedMsg, message);
     }
 

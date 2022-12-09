@@ -1,6 +1,5 @@
 package entities;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -8,10 +7,10 @@ import java.util.Objects;
  * Class that represents the entity Metric
  */
 public class Metric {
-    private final String NAME;
-    private final ArrayList<DataPoint> DATAPOINTS;
-    private final double UPPERBOUND;
-    private final double LOWERBOUND;
+    private final String name;
+    private final ArrayList<DataPoint> dataPoints;
+    private final double upperbound;
+    private final double lowerbound;
     private double goal;
     private boolean hasGoal;
 
@@ -36,10 +35,10 @@ public class Metric {
             lowerBound = 0;
         }
 
-        this.NAME = name;
-        this.DATAPOINTS = dataPointList;
-        this.UPPERBOUND = upperBound;
-        this.LOWERBOUND = lowerBound;
+        this.name = name;
+        this.dataPoints = dataPointList;
+        this.upperbound = upperBound;
+        this.lowerbound = lowerBound;
         if (hasGoal == 1) {
             this.setGoal(goal);
         }
@@ -62,10 +61,10 @@ public class Metric {
             lowerBound = 0;
         }
 
-        this.NAME = name;
-        this.DATAPOINTS = dataPointList;
-        this.UPPERBOUND = upperBound;
-        this.LOWERBOUND = lowerBound;
+        this.name = name;
+        this.dataPoints = dataPointList;
+        this.upperbound = upperBound;
+        this.lowerbound = lowerBound;
     }
 
     /**
@@ -83,10 +82,10 @@ public class Metric {
             upperBound = 10;
             lowerBound = 0;
         }
-        this.NAME = name;
-        this.DATAPOINTS = new ArrayList<>();
-        this.UPPERBOUND = upperBound;
-        this.LOWERBOUND = lowerBound;
+        this.name = name;
+        this.dataPoints = new ArrayList<>();
+        this.upperbound = upperBound;
+        this.lowerbound = lowerBound;
     }
 
     /**
@@ -95,24 +94,7 @@ public class Metric {
      * @return an ArrayList of DataPoints
      */
     public ArrayList<DataPoint> getDataPoints() {
-        return this.DATAPOINTS;
-    }
-
-    /**
-     * preexistingDataPoint checks if a data point already exists
-     *
-     * @param date represents the date of the data point
-     * @return a boolean value that indicates whether the data point exists
-     */
-    // preexistingDataPoint is never used? Should we remove this method??
-    //ASDASDASDASDASDASDASDASDASDASDASDASDASDASD
-    public boolean preexistingDataPoint(LocalDateTime date) {
-        for (DataPoint point : this.DATAPOINTS) {
-            if (point.getDate().equals(date)) {
-                return true;
-            }
-        }
-        return false;
+        return this.dataPoints;
     }
 
     /**
@@ -121,14 +103,14 @@ public class Metric {
      * @param entry represents the entry of the data point
      */
     public void addDataPoint(DataPoint entry) {
-        this.DATAPOINTS.add(entry);
+        this.dataPoints.add(entry);
     }
 
     /**
      * popDataPoint removes the most recent data point from the list of data points
      */
     public void popDataPoint() {
-        this.DATAPOINTS.remove(DATAPOINTS.size() - 1);
+        this.dataPoints.remove(dataPoints.size() - 1);
     }
 
     /**
@@ -137,7 +119,7 @@ public class Metric {
      * @return the name of the metric
      */
     public String getName() {
-        return this.NAME;
+        return this.name;
     }
 
     /**
@@ -146,7 +128,7 @@ public class Metric {
      * @return the upper bound of the metric
      */
     public double getUpperBound() {
-        return this.UPPERBOUND;
+        return this.upperbound;
     }
 
     /**
@@ -155,16 +137,26 @@ public class Metric {
      * @return the lower bound of the metric
      */
     public double getLowerBound() {
-        return this.LOWERBOUND;
+        return this.lowerbound;
     }
 
+    /**
+     * @return the goal associated with this metric.
+     */
     public double getGoal(){ return this.goal; }
 
+    /**
+     * Setter method for goal tracking
+     * @param goal is goal value to associated with this metric
+     */
     public void setGoal(double goal){
         this.goal = goal;
         this.hasGoal = true;
     }
 
+    /**
+     * @return true iff this metric has a goal
+     */
     public boolean getGoalStatus() { return this.hasGoal; }
 
     /**
@@ -174,11 +166,11 @@ public class Metric {
      * @return a boolean value that indicates whether the two metrics are equal
      */
     public boolean equals(Metric metric) {
-        if (Objects.equals(metric.getName(), this.NAME)
-                && metric.getLowerBound() == this.LOWERBOUND
-                && metric.getUpperBound() == this.UPPERBOUND) {
-            for (int i = 0; i < this.DATAPOINTS.size(); i++) {
-                if (!metric.getDataPoints().get(i).equals(this.DATAPOINTS.get(i))) return false;
+        if (Objects.equals(metric.getName(), this.name)
+                && metric.getLowerBound() == this.lowerbound
+                && metric.getUpperBound() == this.upperbound) {
+            for (int i = 0; i < this.dataPoints.size(); i++) {
+                if (!metric.getDataPoints().get(i).equals(this.dataPoints.get(i))) return false;
             }
             return true;
         }

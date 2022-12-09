@@ -21,7 +21,7 @@ public class MetricDelPresenter implements MetricDelOutputBoundary {
     }
 
     /**
-     * prepareMetricDeleterFail throws an MetricDeleterFailed excpetion when the metric cannot be deleted
+     * prepareMetricDeleterFail throws an MetricDeleterFailed exception when the metric cannot be deleted
      *
      * @param error represents the error message for the metric deletion.
      * @return the failure view model for the metric deleter use case.

@@ -8,7 +8,7 @@ import use_cases.DataExportInputBoundary;
  * Controller class for DataExporter
  */
 public class DataExportController {
-    private final DataExportInputBoundary INPUTBOUNDARY;
+    private final DataExportInputBoundary inputBoundary;
 
     /**
      * Constructor for DataExportController
@@ -16,7 +16,7 @@ public class DataExportController {
      * @param inputBoundary represents the input boundary for exporting data
      */
     public DataExportController(DataExportInputBoundary inputBoundary) {
-        this.INPUTBOUNDARY = inputBoundary;
+        this.inputBoundary = inputBoundary;
     }
 
     /**
@@ -27,10 +27,10 @@ public class DataExportController {
      */
     public ExportResponseModel writeToNewFile(String path){
         ExportRequestModel requestModel = new ExportRequestModel(path);
-        return INPUTBOUNDARY.writeToNewFile(requestModel);
+        return inputBoundary.writeToNewFile(requestModel);
     }
 
     public boolean getSaveStatus() {
-        return INPUTBOUNDARY.getSaveStatus();
+        return inputBoundary.getSaveStatus();
     }
 }
